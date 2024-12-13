@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo semi-transparente */
+    backdrop-filter: blur(5px);
+    /* Aplica o efeito de desfoque */
+    z-index: 999;
+    /* Coloca acima do conteúdo principal */
+}
+
+.popup-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fcfaff;
+    padding: 20px;
+    border-radius: 12px;
+    z-index: 1000;    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 30%;
+    height: 25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    max-height: 100vh;
+    overflow-y: auto;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.content {
+    position: relative;
+    top: 5em;
+    right: 20px;
+}
+
+.popup-over .active {
+    display: block;
+}
+
+.popup-content h2 {
+    font-size: 32px;
+    position: relative;
+    left: 1em;
+    top: -2.5em;
+    font-family: 'Montserrat';
+    font-weight: 500;
+}
+
+.descricaoPopup {
+    font-size: 14px;
+    position: relative;
+    top: -5em;
+    left: 2.5em;
+    font-family: 'Open Sans';
+}
+
+.labelNomes {
+    font-weight: 600;
+    position: relative;
+    left: 2.5em;
+    top: -1.5em;
+    font-family: 'Open Sans';
+    font-size: 14px;
+}
+
+.popup-content input {
+    width: 35em;
+    height: 2.5em;
+    border: 2px solid #D8D5DD;
+    border-radius: 12px;
+    position: relative;
+    top: -1em;
+    left: 2.3em;
+    padding: 10px;
+}
+
+.botoesPopup {
+    position: relative;
+    top: -2em;
+}
+
+.popup-content button.fecharPop {
+    font-family: 'Open Sans';
+    background: #fcfaff;
+    color: #A466FF;
+    font-weight: 700;
+    border: 1px solid #A466FF;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    left: 1.8em;
+    top: 4em;
+}
+
+.popup-content button.fecharPop:hover {
+    background-color: #F0E5FF;
+}
+
+.popup-content button.enviarPop {
+    position: relative;
+    left: 15em;
+    top: 4em;
+    font-family: 'Open Sans';
+    font-weight: 700;
+    border-radius: 12px;
+}
+
+.popup-container {
+    transform: height 0.3s ease-in-out;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.inputNomes {
+    position: relative;
+    margin-bottom: 10px;
+    font-family: 'Open Sans';
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+.dropdown {
+    position: fixed;
+    top: 50%;
+    left: 30px;
+    right: 0;
+    background: #fcfaff;
+    border: 1px solid #F0E5FF;
+    border-radius: 12px;
+    box-shadow: 20px 30px 10px solid black;
+    max-width: 30em;
+    max-height: 110px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.dropdown li {
+    font-family: 'Open Sans';
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown li:hover {
+    background-color: #F0E5FF;
+}
+
+.tags-container {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 8px;
+    border: none;
+    background-color: none;
+    border-radius: 4px;
+}
+
+.tag {
+    margin: 0;
+    gap: 4px;
+    display: flex;
+    margin-left: 12px;
+    align-items: center;
+    background: #F0E5FF;
+    padding: 5px 8px;
+    border-radius: 20px;
+    font-size: 14px;
+    height: auto;  /* Ajusta automaticamente a altura */
+    white-space: nowrap;  /* Impede quebra de linha */
+    position: relative;
+    left: 20px;
+    font-family: 'Open Sans';
+}
+
+.tag .remove-btn {   
+    position: relative;
+    left: .2em;
+    background: none;
+    color: #A466FF;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid #A466FF;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tag .remover-btn:hover {
+    background-color: rgb(236, 32, 14);
+    color: wheat;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tag button {
+    margin-left: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions .cancel {
+    background: transparent;
+    border: 1px solid #A466FF;
+    padding: 10px 20px;
+    color: aquamarine;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.actions .send {
+    background: #A466FF;
+    color: #D8D5DD;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}

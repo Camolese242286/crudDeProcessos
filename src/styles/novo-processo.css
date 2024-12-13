@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.title-fixed h1{
+  position: fixed;
+  top: 0;
+  left: 3.25em;
+  width: 100%;
+  background-color: #fcfaff;
+  z-index: 1000;
+  padding: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  color: #6800FF;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  /*margin-left: 16em;
+  margin-top: 1.5em;
+  font-size: 32px;
+  font-weight: 600;
+  color: #6800FF;
+  width: 8em;
+  text-decoration: underline;
+  font-family: 'Montserrat';*/
+}
+
+.container {
+  margin-left: 12em;
+  margin-top: 8em;
+}
+
+.container-titulo .texto {
+  position: relative;
+  right: 15px;
+  font-size: 32px;
+  color: #A466FF;
+  font-weight: 500;
+  width: 85em;
+  border: none;
+  font-family: 'Montserrat';
+}
+
+.container-titulo input::placeholder {
+  color: #D2B2FF;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  font-family: 'Montserrat';
+}
+
+.container-titulo .descricao {
+  font-size: 18px;
+  font-weight: 500;
+  width: 50em;
+  margin-top: 1em;
+  margin-bottom: 3em;
+  border: none;
+  font-family: 'Open Sans';
+}
+
+.container-titulo textarea::placeholder {
+  font-weight: 400;
+  border: none;
+  outline: none;
+  font-family: 'Open Sans';
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid black;
+  outline: none;
+}
+
+.selectPrioridade {
+  position: relative;
+  right: 52em;
+  margin-top: 30px;
+  width: 27em;
+  height: 3em;
+  border: 1px solid #c3c1c1;
+  border-width: 2px;
+  border-radius: 12px;
+  font-family: 'Open Sans';
+}
+
+.opcoes-processo .selectOpcoes {
+  position: relative;
+  left: 30em;
+  width: 27em;
+  height: 3em;
+  top: -3em;
+  border: 1px solid #c3c1c1;
+  border-width: 2px;
+  border-radius: 12px;
+}
+
+.selectOpcoes {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  font-family: 'Open Sans';
+}
+
+.add-btn {
+  position: relative;
+  left: 52em;
+  width: 12em;
+  top: -6.2em;
+  background: #6800FF;
+  color: white;
+  font-weight: 400;
+  font-family: 'Open Sans';
+  padding: 10px 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.questoes-lista {
+  margin-top: 20px;
+}
+
+.textarea-questionario {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+}
+
+.upload-input {
+  margin-top: 8px;
+}
+
+.questoes-container {
+  font-family: 'Open Sans';
+  position: relative;
+  right: 15px;
+}
+
+.questao-item {
+  border: 1px solid #6800FF;
+  /* Cor da borda */
+  border-radius: 8px;
+  border-top: 10px solid #6800FF;
+  padding: 10px;
+  transition: all 0.3s ease;
+  /* Transição suave para mudanças de tamanho */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Alinha verticalmente */
+  gap: 8px;
+  /* Espaçamento entre os elementos internos */
+  width: 78%;
+  box-sizing: border-box;
+  margin-block: 25px;
+  margin-top: -10px;
+  background-color: #fcfaff;
+
+  /* Inclui o padding no tamanho total */
+  /*display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  margin-top: 3em;
+  border: 1px solid #8000FF;
+  border-top: 10px solid #8000FF;
+  border-radius: 5px;
+  padding: 10px;
+  height: 7em;
+  width: 75em;*/
+}
+
+.questao-conteudo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-left: 10px;
+  margin: 20px;
+}
+
+.questao-conteudo input {
+  padding: 8px 18px;
+  border: 1px solid rgb(204, 203, 203);
+  border-radius: 15px;
+  position: relative;
+  top: auto;
+  left: 10px;
+  width: 95%;
+}
+
+.numero-questao {
+  position: relative;
+  top: 3em;
+  font-size: 18px;
+  left: 5px;
+}
+
+.btn-delete {
+  width: 38px;
+  height: 38px;
+  color: #fff;
+  background-color: #6800FF;
+  border: none;
+  border-radius: 10px;
+  position: absolute;
+  top: .5em;
+  left: 78em;
+  cursor: pointer;
+}
+
+.icon {
+  position: relative;
+  top: -1px;
+  right: 2px;
+}
+
+.btn-botoes {
+  display: flex;
+  margin-top: 2em;  
+}
+
+.btn-botoes button {
+  width: 9em;
+  height: 3em;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-family: 'Open Sans';
+  font-weight: 500;
+}
+
+.btn-cancelar button {
+  background-color: #fff;
+  color: #6800FF;
+  border: 1px solid #6800FF;
+  position: relative;
+  left: 17.5em;
+  top: -4em;
+}
+
+.btn-cancelar button:hover {
+  background-color: #ececec;
+}
+
+.btn-salvar button {
+  position: relative;
+  left: 49em;
+  background-color: #fff;
+  color: #6800FF;
+  border: 1px solid #6800FF;
+}
+
+.btn-salvar button:hover {
+  background-color: #ececec;
+}
+
+.btn-salvar-enviar button {
+  position: relative;
+  left: 53.5em;
+  background-color: #6800FF;
+  color: #fff;
+}
+
+.btn-salvar-enviar button:hover {
+  background-color: #8839ff;
+}
+
+.upload-input input[type="file"] {
+  min-width: 25em;
+}
+
+.checklist-item input[type="text"] {
+  flex-grow: 1;
+  /*Faz o input ocupar o espaço disponível*/
+  margin-left: 8px;
+  max-width: 20em;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.btn-add-item {
+  width: 10em;
+  margin-top: 2em;
+  background-color: #6800FF;
+  color: #fcfaff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.btn-add-item:hover {
+  background-color: #7800cc;
+}
+
+.questao-item .checklist-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 11px;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+select {
+  width: 20em;
+  height: 2.5em;
+  border-radius: 10px;
+}
+
+.select-item {
+  margin-bottom: 15px;
+}
+
+/*.popup-overlay {
+  position: fixed;
+  top: 16em;
+  left: 38em;
+  width: 36em;
+  height: 22em;
+  background-color: #fcfaff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}*/
