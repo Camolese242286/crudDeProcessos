@@ -1,15 +1,12 @@
 import React from "react";
-
 import "../styles/Popup-excluir-processo.css";
 
 const ExcluirPopup = ({ title, mensagem, onConfirm, onCancel }) => {
   return (
     <div className="popup_delete">
       <div className="conteudo">
-        <div className="conteudo-msg">
-          <h3 className="titulo">{title}</h3>
-          <p className="mensagem">{mensagem}</p>
-        </div>
+        <h3 className="titulo">{title}</h3>
+        <p className="mensagem">{mensagem}</p>
         <div className="popup-excluir-botao">
           <button onClick={onConfirm} className="btn-confirmar">
             Excluir Processo

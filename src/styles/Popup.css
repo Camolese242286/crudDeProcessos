@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+/* Estilos para o fundo desfocado */
 .blurPopup {
     position: fixed;
     top: 0;
@@ -14,68 +12,74 @@
     z-index: 1000;
 }
 
-/*.popup {
-    position: fixed;
-    left: 38em;
-    background-color: #660fe9;
+/* Container principal do pop-up */
+.popupContainer {
+    width: 400px;
+    background-color: #FCFAFF;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 12px;
     text-align: center;
-    height: 16em;
-    border: 2px solid green;
-    border-radius: 35px;
-}*/
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-.sair {
-    font-size: 32px;
+/* Cabeçalho do pop-up */
+.popupHeader {
+    font-size: 24px;
     font-weight: 700;
     color: #6800FF;
     font-family: 'Montserrat';
-    position: relative;
-    right: 5.5em;
-    margin: 20px;
+    margin-bottom: 15px;
 }
 
-.aviso {
-    margin-right: 2em;
+/* Corpo do pop-up */
+.popupBody {
     font-size: 15px;
     font-family: 'Open Sans';
     font-weight: 500;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-.botao button { 
-    position: fixed;
-    margin-right: 4em;
-    width: 11em;
-    height: 3.5em;
+/* Rodapé com os botões */
+.popupFooter {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
 }
 
-.botao .cancelar {
+/* Estilo do botão de cancelar */
+.cancelButton {
     background-color: #FCFAFF;
     color: #6800FF;
     border: 1px solid #6800FF;
+    border-radius: 8px;
     font-family: 'Open Sans';
     font-weight: 600;
-    position: fixed;
-    left: 43em;
-    top: 32em;
-    height: 3.5em;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.botao .bSair {
-    color: #FCFAFF;
-    background-color: #6800FF;
-    font-family: 'Open Sans';
-    font-weight: 600;
-    position: fixed;
-    left: 58em; 
-    top: 32em;   
-}
-
-.botao .cancelar:hover {
+.cancelButton:hover {
     background-color: #F0E5FF;
 }
 
-.botao .bSair:hover {
+/* Estilo do botão de sair */
+.logoutButton {
+    color: #FCFAFF;
+    background-color: #6800FF;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Open Sans';
+    font-weight: 600;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logoutButton:hover {
     background-color: #A466FF;
 }

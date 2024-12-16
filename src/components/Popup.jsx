@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/Popup.css"
+import "../styles/Popup.css";
 
 const Popup = ({ onClose }) => {
     const navigate = useNavigate();
@@ -8,47 +8,28 @@ const Popup = ({ onClose }) => {
     const handleLogout = () => {
         onClose();
         navigate("/");
-    }
-
-    {/*}const handleCancel = () => {
-        onClose();
     };
-
-    const handleLogout = () => {
-        navigate('/');
-    };*/}
 
     return (
         <div className="blurPopup">
-            <div className="Popup"
-                style={{
-                    position: "fixed",
-                    left: "42em",
-                    width: "30em",
-                    backgroundColor: "#FCFAFF",
-                    padding: "20px",
-                    borderRadius: "8px",
-                    textAlign: "center",
-                    height: "14em",                    
-                    borderRadius: "35px",
-                }}
-            >
-            <div className="popUpExit">
-                <div className="sair">
-                    <div><p>Sair?</p></div>
+            <div className="popupContainer">
+                <div className="popupHeader">
+                    <p>Sair?</p>
                 </div>
-                <div className="aviso">
-                    <div><p>Tem certeza que deseja sair da plataforma LGDP Qintess</p></div>
+                <div className="popupBody">
+                    <p>Tem certeza que deseja sair da plataforma LGPD Qintess?</p>
                 </div>
-                <div className="botao">
-                    <button className="cancelar" onClick={onClose}>Cancelar</button>
-                    <button className="bSair" onClick={handleLogout}>Sair</button>
+                <div className="popupFooter">
+                    <button className="cancelButton" onClick={onClose}>
+                        Cancelar
+                    </button>
+                    <button className="logoutButton" onClick={handleLogout}>
+                        Sair
+                    </button>
                 </div>
             </div>
-
-        </div >
-        </div >
+        </div>
     );
-}
+};
 
 export default Popup;
