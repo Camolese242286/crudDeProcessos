@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Hook from "../Hook";
 import SearchWithArea from "../Area/SearchArea";
 
-import "./Nova-Area";
-
 import "../../styles/StyleArea/area.css";
 
 function Area() {
@@ -41,14 +39,13 @@ function Area() {
             areas={areas}
             setAreasFiltrados={setAreasFiltrados}
           />
-
           <div className="botao-area">
             <button onClick={handleNovaArea}>+ Nova Área</button>
           </div>
         </div>
 
         <div className="TableArea">
-          <table border="1">
+          <table>
             <thead>
               <tr className="table-names">
                 <th>Nome da área</th>
@@ -57,6 +54,9 @@ function Area() {
                 <th>Status</th>
               </tr>
             </thead>
+            <tbody>
+              {/* Aqui você pode mapear os dados filtrados */}
+            </tbody>
           </table>
         </div>
       </div>

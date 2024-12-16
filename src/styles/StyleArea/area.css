@@ -1,77 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap");
 
 .container-area {
-  margin-left: 120px; /* Respeita o menu lateral */
+  margin: 0 auto;
   padding: 20px;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
-.settings {
-    display: flex;
-    justify-content: space-around;
 
-}
 .title {
-    display: flex;
-}
-.title h2 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 1.8rem;
-  justify-content: start;
-  color: #6800FF;
   text-align: center;
 }
 
-.filters-area {
+.title h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 1.8rem;
+  color: #6800ff;
+}
+
+.settings {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
   gap: 15px;
+}
+
+.filters-area,
+.search,
+.botao-area {
+  display: flex;
   justify-content: center;
-  margin-top: 10px;
+  align-items: center;
+  flex: 1;
+  max-width: 200px;
+  height: 50px;
 }
 
 .slArea {
   width: 100%;
-  max-width: 300px;
   padding: 10px;
-  border: 1px solid #6800FF;
+  border: 1px solid #6800ff;
   border-radius: 5px;
-  color: #6800FF;
-}
-
-.botao-area {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  color: #6800ff;
 }
 
 .botao-area button {
   padding: 10px 20px;
-  background-color: #6800FF;
+  background-color: #6800ff;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
 }
-.botao-area button {
-  padding: 10px 20px;
-  background-color: #6800FF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-.input_search_area {
 
-}
 .botao-area button:hover {
-  background-color: #5700CC;
+  background-color: #5700cc;
 }
 
 .TableArea {
@@ -81,11 +69,10 @@
 
 .TableArea table {
   width: 100%;
-  max-width: 100%;
   border-collapse: collapse;
-  background-color: #F0E5FF;
-  color: #6800FF;
-  font-family: 'Open Sans', sans-serif;
+  background-color: #f0e5ff;
+  color: #6800ff;
+  font-family: "Open Sans", sans-serif;
 }
 
 .TableArea th,
@@ -97,7 +84,7 @@
 
 .TableArea .table-names th {
   font-weight: 600;
-  background-color: #D2B4FE;
+  background-color: #d2b4fe;
 }
 
 .TableArea th:first-child {
@@ -113,14 +100,19 @@
     font-size: 1.5rem;
   }
 
-  .slArea {
-    width: 100%;
-    max-width: 200px;
+  .settings {
+    display: flex;
+    flex-direction: column;
+    gap: 30;
+    align-items: center;
+  }
+
+  .slArea select{
+    width: 200%;
   }
 
   .botao-area button {
-    width: 100%;
-    max-width: 200px;
+    max-width: 100%;
   }
 
   .TableArea table {
