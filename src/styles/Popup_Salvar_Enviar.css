@@ -22,10 +22,10 @@
     transform: translate(-50%, -50%);
     background: #fcfaff;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 20px;
     z-index: 1000;    
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 30%;
+    min-width: 40%;
     height: 25em;
     display: flex;
     flex-direction: column;
@@ -39,6 +39,7 @@
 
 .content {
     position: relative;
+
     top: 5em;
     right: 20px;
 }
@@ -85,8 +86,7 @@
 }
 
 .botoesPopup {
-    position: relative;
-    top: -2em;
+    display: flex;
 }
 
 .popup-content button.fecharPop {
@@ -123,6 +123,7 @@
 
 .inputNomes {
     position: relative;
+    width: 300px;
     margin-bottom: 10px;
     font-family: 'Open Sans';
 }

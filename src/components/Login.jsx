@@ -68,11 +68,11 @@ function Login() {
             </div>
             <div className="h2p">
               <h2>Login</h2>
-              <p>Entre para acessar a plataforma LGPD da Qintess</p>
+              <p>Entre com sua conta Microdoft para acessar a plataforma LGPD da Qintess</p>
             </div>
             {/* Formulário de login */}
             <form className="input_login" onSubmit={handleLogin}>
-              <label>
+              {/* <label>
                 E-mail:
                 <input
                   type="email"
@@ -81,9 +81,9 @@ function Login() {
                   placeholder="exemplo@email.com"
                   required
                 />
-              </label>
+              </label> */}
 
-              <label>
+              {/* <label>
                 Senha:
                 <input
                   type="password"
@@ -92,12 +92,12 @@ function Login() {
                   placeholder="Min. 8 caracteres"
                   required
                 />
-              </label>
+              </label> */}
 
               {/* Exibição de erro, caso haja */}
               {error && <div className="error-message">{error}</div>}
 
-              <div className="options">
+              {/* <div className="options">
                 <label className="cl-checkbox">
                   <input type="checkbox" />
                   <span>Mantenha-me conectado</span>
@@ -105,14 +105,14 @@ function Login() {
                 <label>
                   <a href="http://www.google.com">Esqueci minha senha</a>
                 </label>
-              </div>
-              <div className="botoes">
-                {/* <button type="submit">ENTRAR</button> */}
-                <button type="button" onClick={handleMicrosoftLogin}>
-                  Login com Microsoft
-                </button>
-              </div>
+              </div> */}
             </form>
+            <div className="botoes">
+              {/* <button type="submit">ENTRAR</button> */}
+            </div>
+            <button className="botao_microsoft" type="button" onClick={handleMicrosoftLogin}>
+              Entrar
+            </button>
           </div>
         </div>
       </div>

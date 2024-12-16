@@ -1,192 +1,113 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-.content-title {
+.processos-container {
+    margin-left: 100px; /* Respeitando o menu lateral */
+    justify-content: center;
+    padding: 20px;
     display: flex;
-}
-
-.page {
-    font-size: 40px;
-    font-family: 'Montserrat' ;
-    font-weight: 600;
-    color: #6800FF;
-    position: relative;
+    width: 90vw;
+    flex-direction: column;
+    gap: 30px;
+    font-family: "Open Sans", sans-serif;
+  }
+  
+  .header h1 {
+    display: flex;
+    font-size: 2rem;
+    justify-content: start;
+    color: #6800ff;
     text-align: center;
-    left: 5em;
-    top: 1em;
-}
-
-/*.searchProcesso {
-    position: relative;
-    top: 5em;
-}*/
-
-.slProcessos {
-    position: relative;
-    left: 15em;
-    top: 7em;    
-    z-index: 10;
-    width: 25em;
-    height: 3em;
-    border: 1px solid #6800FF;
-    color: #6800FF;
-    font-family: 'Open Sans';
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.searchProcesso {
-    position: fixed;
-    width: 118em;
-    top: 7.5em;
-    left: 11em;
-    font-family: 'Open Sans';
-    font-weight: 500;
-}
-
-.icon-search {
-    position: fixed;
-    top: 14.8%;
-    left: 109em;
-    color: #6800FF;  
-}
-
-.TabelaProcesso table {
-    position: absolute;
-    left: 12em;
-    top: 25em;
-    width: 100em;
-    background-color: #FCFAFF;
-    color: #6800FF;
-    border-collapse: collapse;
-    border: none;
-    border-radius: 1px;
-    font-family: 'Open Sans';
-    font-weight: 400;
-}
-
-td {
-    padding: 4px;
-    border-bottom: 1px solid #ccc;
-    border-left: 0px solid black;
-}
-
-.Nomes-tabela th {
-    width: auto;
-    text-align: center;
-    font-size: 20px;
-    border-bottom: 1px solid #ccc;
-    background-color: #d2b4fe;
+  }
+  
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .slProcessos {
+    max-width: 300px;
     padding: 10px;
-    font-family: 'Open Sans';
-    font-weight: 700;
-}
-
-.Nomes-tabela .nomeProcesso {
-    width: 35em;
-}
-
-.Nomes-tabela .dtaCriacao {
-    width: 15em;
-}
-
-.botaoNovoProcesso button {
-    position: relative;
-    left: 79em;
-    top: 8em;
-    height: 50px;
-    width: 10em;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  .componente_Search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    justify-items: center;
+  }
+  .componente_Search input {
+    padding: 8px;
+    padding: 10px;
+    font-size: 14px;
+    width: 250px;
+    left: 88em;
+    border-radius: 5px;
+    top: 1em;
+    border: 1px solid #8000FF;
+    font-style: italic;
+  }
+  
+  .TabelaProcesso {
+    overflow-x: auto;
+  }
+  
+  .TabelaProcesso table {
+    min-width: 100%;
+    /* border-collapse: collapse; */
+    border-radius: 20px;
+    background: #fcfaff;
+    border-radius: 20px;
+    color: #6800ff;
+  }
+  
+  .TabelaProcesso th,
+  .TabelaProcesso td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    
+  }
+  
+  .TabelaProcesso th {
+    background-color: #d2b4fe;
     font-weight: bold;
-    font-size: 20px;
-    background-color: #6800FF;
-    font-family: 'Open Sans';
-    font-weight: 500;
-}
-
-.link-processo {
-    text-decoration: none;
-    color: #222222;    
-    cursor: pointer;
-}
-
-.link-processo:hover {
-    text-decoration: underline;
-    color: blue;
-    font-weight: 700;
-}
-
-.prioridade {
-    text-align: center;
-    color: #222222;
-}
-
-.menu-container {
-    position: relative;
-    width: 100%;
-}
-
-.menu-btn {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0.3s, opacity 0.3s;
-    position: relative;
-    left: 14em;
-    top: -1em;
-    background: red;
-    width: 0;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: black;   
-}
-
-.menu-opcoes {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0.3s, opacity 0.3s;
-    position: absolute;
-    top: -5em;
-    left: 17em;
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-}
-
-.menu-container:hover .menu-btn,
-.menu-container:hover .menu-opcoes {
-    visibility: visible;
-    opacity: 1;
-}
-
-.menu-opcoes button {
-    display: block;
-    width: 100%;
-    padding: 6px 10px;
+    
+  }
+  td.empty {
+    border: solid 2px;
+    border-radius: 5px;
+    
+  }
+  
+  .acoes button {
+    margin: 0 5px;
+    padding: 5px 10px;
     background: none;
-    color: black;
-    border: none;
+    border: 1px solid #6800ff;
+    border-radius: 4px;
     cursor: pointer;
-    text-align: left;
-    font-family: 'Open Sans';
-    font-weight: 400;
-    position: relative;
-    right: 20px;
-}
-
-.menu-opcoes button:hover {
-    background-color: #f0f0f0;
-    color: black;
-}
-
-.status {
-    width: 20em;
-    text-align: center;
-}
-
-.dataCriacao {
-    position: relative;
-    text-align: center;
-    top: 15px;
-    color: #222222;
-}
+  }
+  
+  .acoes button:hover {
+    background: #6800ff;
+    color: white;
+  }
+  .processos-container .botaoNovoProcesso button{
+    margin: 0 auto;
+    padding: 10px 10px;
+    background-color: #6800ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: small;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .botaoNovoProcesso button:hover {
+    background-color: #5700cc;
+  }
+  
