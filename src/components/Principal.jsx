@@ -1,14 +1,14 @@
 import React from "react";
-import Hook from "./Hook";
+import Menu from "./Menu";
 
 import "../styles/principal.css";
-import "../styles/hook.css";
+import "../styles/menu.css";
 
 const Principal = () => {
   return (
     <>
       <div className="index-container">
-        <Hook />
+        <Menu />
       </div>
       <div className="main-container">
         <div className="body_container">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Hook from "../Hook";
+import Menu from "../Menu";
 import styles from '../../styles/StyleArea/nova-area.css'
 function NovaArea() {
     const [nomeArea, setNomeArea] = useState("");
@@ -9,7 +9,7 @@ function NovaArea() {
     return (
         <>
             <div className="index-container">
-                <Hook />
+                <Menu />
             </div>
 
             <div className="title-area">

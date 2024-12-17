@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Hook from "./Hook";
+import Menu from "./Menu";
 import SearchWithDebounce from "./SearchProcesso";
 import ExcluirPopup from "./Popup-excluir-processo";
 
@@ -68,7 +68,7 @@ const Processos = () => {
 
   return (
     <div className="processos-container">
-      <Hook />
+      <Menu />
       <div className="header">
         <h1>Processos</h1>
       </div>

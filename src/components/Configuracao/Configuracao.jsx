@@ -2,13 +2,13 @@ import React from "react";
 
 import "../../styles/StyleConfiguracao/configuracao.css"
 
-import Hook from "../Hook"
+import Menu from "../Menu"
 
 const configuracao = () => {
     return (
         <>
             <div className="container-index">
-                <Hook />
+                <Menu />
             </div>
 
             <div className="title">

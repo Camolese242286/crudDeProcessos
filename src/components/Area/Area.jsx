@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Hook from "../Hook";
+import Menu from "../Menu";
 import SearchWithArea from "../Area/SearchArea";
 
 import "../../styles/StyleArea/area.css";
@@ -18,7 +18,7 @@ function Area() {
   return (
     <>
       <div>
-        <Hook />
+        <Menu />
       </div>
       <div className="container-area">
         <div className="title">

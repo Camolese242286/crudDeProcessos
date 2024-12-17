@@ -10,7 +10,7 @@ import {
 } from "phosphor-react";
 
 import Popup from "./Popup";
-import "../styles/hook.css";
+import "../styles/menu.css";
 
 import logo from "../images/logotipo.png";
 

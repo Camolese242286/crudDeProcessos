@@ -1,7 +1,7 @@
 import React from "react";
 
-import './Hook';
-import '../styles/hook.css';
+import './Menu';
+import '../styles/Menu.css';
 
 import './Popup';
 import '../styles/Popup.css';

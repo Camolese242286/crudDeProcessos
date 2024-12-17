@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import Hook from "./Hook";
+import Menu from "./Menu";
 import Popup from "./Popup";
 import "./Processos";
 import PopupSalvarEnviar from "./Popup_Salvar_Enviar";
@@ -211,7 +211,7 @@ function NovoProcesso() {
   return (
     <>
       <div className="index-container">
-        <Hook />
+        <Menu />
         <div className="title-fixed">
           <h1>Novo Processo</h1>
         </div>
