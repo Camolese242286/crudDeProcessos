@@ -9,7 +9,6 @@ import NovoProcesso from "./components/Novo-Processo";
 import Popup from "./components/Popup_Salvar_Enviar";
 import Questionario from "./components/Notificacao/notificacao"
 import NovaArea from "./components/Area/Nova-Area"
-import Configuracao from "./components/Configuracao/Configuracao"
 
 import Area from "./components/Area/Area"
 
@@ -45,7 +44,6 @@ function App() {
         <Route path="/area" element={<Area />} />
         <Route path="/questionario/:id" element={<Questionario />} />
         <Route path="/Nova-Area" element={<NovaArea />} />
-        <Route path="/configuracao" element={<Configuracao />} />
       </Routes>
     </>
   );
