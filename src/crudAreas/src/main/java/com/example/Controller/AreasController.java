@@ -2,7 +2,7 @@ package com.example.Controller;
 
 import java.util.List;
 import java.util.Optional;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +20,7 @@ import com.example.Areas.Service.AreasService;
 
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(value="areas")
 public class AreasController {
 
