@@ -94,6 +94,41 @@
 .TableArea th:last-child {
   border-top-right-radius: 10px;
 }
+/* Estilização do componente Search */
+.input-container {
+  position: relative;
+  display: inline-block;
+  border: solid 1px #6800ff;
+  border-radius: 15px;
+  padding: 3px;
+  width: 260px;
+}
+.input-container input {
+  padding-left: 5px; /* Espaço para o ícone */
+  height: 40px;
+  width: 250px;
+  box-sizing: border-box;
+  color: #6800ff;
+}
+.input-container input:focus {
+  outline: none; /* Remove o contorno padrão */
+  border: 1px solid #ccc; /* Adicione uma borda personalizada, se quiser */
+  border-radius: 15px;
+}
+
+.input-container .icon {
+  position: absolute;
+  right: 10px; /* Distância da borda direita */
+  top: 50%;
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  color: #6800ff;
+  pointer-events: none; /* Evita que o ícone interfira no input */
+}
+/* Estilização do componente Search na página Área */
+.search-area{
+  display: flex;
+  justify-content: end;
+}
 
 @media (max-width: 768px) {
   .title h2 {

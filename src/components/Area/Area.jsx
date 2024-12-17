@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Menu from "../Menu";
-import SearchWithArea from "../Area/SearchArea";
+import Search from "./Search";
 
 import "../../styles/StyleArea/area.css";
 
@@ -34,14 +34,16 @@ function Area() {
               <option value="Area 3">Área 3</option>
             </select>
           </div>
-          <SearchWithArea
-            className="search"
-            areas={areas}
-            setAreasFiltrados={setAreasFiltrados}
-          />
           <div className="botao-area">
             <button onClick={handleNovaArea}>+ Nova Área</button>
           </div>
+        </div>
+        <div className="search-area">
+          <Search
+            className="search"
+            areas={areas}
+            setAreasFiltrados={setAreasFiltrados}
+            />
         </div>
 
         <div className="TableArea">
@@ -54,9 +56,7 @@ function Area() {
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              {/* Aqui você pode mapear os dados filtrados */}
-            </tbody>
+            <tbody>{/* Aqui você pode mapear os dados filtrados */}</tbody>
           </table>
         </div>
       </div>

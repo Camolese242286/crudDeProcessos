@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 // import style from "@/components";
 import { IoSearch } from "react-icons/io5";
+import "../../styles/StyleArea/area.css";
 
-const SearchWithArea = ({ areas, setAreasFiltrados }) => {
+const Search = ({ areas, setAreasFiltrados }) => {
   const [query, setQuery] = useState("");
 
-  const handleSearchArea = (event) => {
+  const handleSearch = (event) => {
     const value = event.target.value.toLowerCase();
     setQuery(value);
 
@@ -22,31 +23,24 @@ const SearchWithArea = ({ areas, setAreasFiltrados }) => {
 
   return (
     <div>
-      <input
-        className="input_search_area"
+      {/* <input
+        className="input_container"
         type="text"
         placeholder={
           areas.length === 0 ? "Nenhuma área disponível" : "Buscar area..."
         }
         value={query}
-        onChange={handleSearchArea}
-        style={{
-          padding: "10px",
-          marginBottom: "20px",
-          fontSize: "14px",
-          width: "20%",
-          position: "fixed",
-          left: "90em",
-          borderRadius: "15px",
-          top: "11.5em",
-          border: "1px solid #8000FF",
-          fontStyle: "italic",
-        }}
+        onChange={handleSearch}
       />
-      <span className="icon-searchArea">
+      <span className="icon">
         <IoSearch size={25} />
-      </span>
+      </span> */}
+
+      <div class="input-container">
+        <input type="text" placeholder="Nenhuma área disponivel" />
+        <span class="icon"><IoSearch size={25} /></span>
+      </div>
     </div>
   );
 };
-export default SearchWithArea;
+export default Search;
