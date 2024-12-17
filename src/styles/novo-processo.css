@@ -1,6 +1,6 @@
 /* Ajuste no container principal */
 .index-container {
-  margin-left: 110px;
+  margin-left: 150px;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -69,10 +69,10 @@
   align-items: center;
   gap: 50px;
 }
-.options p{
+.options p {
   color: #6800ff;
 }
-.options select{
+.options select {
   width: 300px;
   color: #6800ff;
 }
@@ -137,7 +137,7 @@
   font-weight: 500;
   margin: 10px;
 }
-.botoes-salvar{
+.botoes-salvar {
   display: flex;
 }
 /* Ajustes nos botões de ação */
@@ -194,7 +194,7 @@
   border-radius: 15px;
   width: 100%;
 }
-.header-questao{
+.header-questao {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -202,13 +202,14 @@
   color: #6800ff;
 }
 .numero-questao {
+  display: flex;
 }
-.setas_excluir{
+.setas_excluir {
   display: flex;
   justify-content: space-between;
   width: 100px;
 }
-.icone-questao{
+.icone-questao {
   display: flex;
   justify-content: end;
   color: #6800ff;
@@ -218,7 +219,7 @@
   display: flex;
   gap: 30px;
 }
-.icone-excluir{
+.icone-excluir {
   display: flex;
   justify-content: end;
   color: #6800ff;
