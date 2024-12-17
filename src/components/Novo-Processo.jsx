@@ -20,7 +20,7 @@ function NovoProcesso() {
   const [questoesPorTipo, setQuestoesPorTipo] = useState({
     "Texto-aberto": [],
     "Upload-arquivo": [],
-    CheckList: [],
+    "CheckList": [],
     "Seletor-opcoes": [],
   });
   const [SelectedOption, setSelectedOption] = useState(""); //Armazena a opção selecionada

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Menu from "../Menu";
 import SearchWithArea from "../Area/SearchArea";
+
+import {PencilSimpleLine, Trash } from "phosphor-react"
 
 import "../../styles/StyleArea/area.css";
 
@@ -11,9 +13,29 @@ function Area() {
   const [areas, setAreas] = useState([]);
   const [areasFiltrados, setAreasFiltrados] = useState("");
 
+  //Excluir o id da area na tabela
+  const [idParaExcluir, setIdParaExcluir] = useState(null);
+
+  //Abrir outra página
   const handleNovaArea = () => {
     navigate("/Nova-Area");
   };
+
+  //Os campos serão salvos na tabela após preencher na "Nova-Area"
+  useEffect(() => {
+    const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
+    setAreas(areasSalvos);
+    setAreasFiltrados(areasSalvos);
+  }, []);
+
+  //Editar o campo da área
+  const handleEditarArea = (id) => {
+    navigate(`/editar-area/${id}`);
+  }
+
+  const handleExluirArea = (id) => {
+    setIdParaExcluir(id);
+  }
 
   return (
     <>
@@ -52,10 +74,33 @@ function Area() {
                 <th>Responsável</th>
                 <th># Sub-Áreas</th>
                 <th>Status</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
               {/* Aqui você pode mapear os dados filtrados */}
+              {areasFiltrados.length > 0 ? (
+                areasFiltrados.map((area) => (
+                  <tr key={area.id}>
+                    <td>{area.nome}</td>
+                    <td>{area.responsavel}</td>
+                    <td>0</td>
+                    <td>Ativo</td>
+                    <td className="acoes">
+                      <button onClick={() => handleEditarArea(area.id)}>
+                        <PencilSimpleLine size={18} />
+                      </button>
+                      <button onClick={() => handleExluirArea(area.id)}>
+                        <Trash size={18} />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4">Nenhuma área cadastrada</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
