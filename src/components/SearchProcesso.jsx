@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //import { debounce } from "lodash";
 
 import { IoSearch } from "react-icons/io5";
-
+import Search from "./Area/Search";
 import "../styles/processos.css";
 
 const SearchWithDebounce = ({ processos, setProcessosFiltrados }) => {
@@ -31,32 +31,14 @@ const SearchWithDebounce = ({ processos, setProcessosFiltrados }) => {
         placeholder={
           processos.length === 0
             ? "Nenhum processo disponível"
-            : "Buscar processo..."
+            : "Buscar..."
         }
         value={query}
         onChange={handleSearch}
-        // style={{
-        //   padding: "10px",
-        //   marginBottom: "20px",
-        //   fontSize: "14px",
-        //   width: "200px",
-        // //   position: "relative",
-        //   left: "88em",
-        //   borderRadius: "15px",
-        //   top: "1em",
-        //   border: "1px solid #8000FF",
-        //   fontStyle: "italic",
-        // }}
       />
       <span className="icon-search">
         <IoSearch size={25} />
       </span>
-
-      {/*}<ul>
-                {filteredData.map((item) => (
-                    <li key={item.id}>{item.name}</li>
-                ))}
-            </ul>*/}
     </div>
   );
 };

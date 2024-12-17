@@ -6,6 +6,7 @@ import SearchWithDebounce from "./SearchProcesso";
 import ExcluirPopup from "./Popup-excluir-processo";
 
 import { GoPencil, GoTrash } from "react-icons/go";
+import Buscador from "./Busca";
 
 const Processos = () => {
   const navigate = useNavigate();
@@ -84,7 +85,6 @@ const Processos = () => {
           <option value="Testando2">Testando 2</option>
           <option value="Testando3">Testando 3</option>
         </select>
-
         <SearchWithDebounce
           className="componente_Search"
           processos={processos}

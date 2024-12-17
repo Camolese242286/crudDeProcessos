@@ -37,7 +37,7 @@ const Search = ({ areas, setAreasFiltrados }) => {
       </span> */}
 
       <div class="input-container">
-        <input type="text" placeholder="Nenhuma área disponivel" />
+        <input type="text" placeholder="Buscar" />
         <span class="icon"><IoSearch size={25} /></span>
       </div>
     </div>

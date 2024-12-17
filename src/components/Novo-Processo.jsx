@@ -44,10 +44,10 @@ function NovoProcesso() {
       [SelectedOption]: [...questoes],
     };
 
-    /*const questoesCompletas = {
+    const questoesCompletas = {
       ...questoesPorTipo,
       [SelectedOption]: questoes,
-    }*/
+    }
 
     const novoProcesso = {
       id: id || Date.now(),
@@ -207,6 +207,29 @@ function NovoProcesso() {
       [SelectedOption]: questoesAtualizadas,
     }));
   };
+  // Função para mover questão para cima
+  const handleMoverQuestaoParaCima = (index) => {
+    if (index === 0) return; // Não faz nada se for o primeiro item
+
+    const questoesAtualizadas = [...questoes];
+    const temp = questoesAtualizadas[index - 1];
+    questoesAtualizadas[index - 1] = questoesAtualizadas[index];
+    questoesAtualizadas[index] = temp;
+
+    setQuestoes(questoesAtualizadas);
+  };
+
+  // Função para mover questão para baixo
+  const handleMoverQuestaoParaBaixo = (index) => {
+    if (index === questoes.length - 1) return; // Não faz nada se for o último item
+
+    const questoesAtualizadas = [...questoes];
+    const temp = questoesAtualizadas[index + 1];
+    questoesAtualizadas[index + 1] = questoesAtualizadas[index];
+    questoesAtualizadas[index] = temp;
+
+    setQuestoes(questoesAtualizadas);
+  };
 
   return (
     <>
@@ -274,7 +297,33 @@ function NovoProcesso() {
           <div className="questoes-container">
             {questoes.map((questao, index) => (
               <div key={questao.id} className="questao-item">
-                <div className="numero-questao">{index + 1}.</div>
+                <div className="header-questao">
+                  <div className="numero-questao">{index + 1}.</div>
+                  <div className="setas_excluir">
+                    <div className="setas-flex">
+                      <div
+                        className="icone-questao"
+                        onClick={() => handleMoverQuestaoParaCima(index)}
+                      >
+                        ↑
+                      </div>
+                      <div
+                        className="icone-questao"
+                        onClick={() => handleMoverQuestaoParaBaixo(index)}
+                      >
+                        ↓
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        className="icone-excluir"
+                        onClick={() => handleRemoverQuestao(questao.id)}
+                      >
+                        X
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="questao-conteudo">
                   <input
                     type="text"
@@ -413,22 +462,22 @@ function NovoProcesso() {
                 <button onClick={handleCancelarClick}>Cancelar</button>
               </div>
               <div className="botoes-salvar">
-              <div className="botao-salvar">
-                <button onClick={handleSalvarClick}>Salvar</button>
-              </div>
+                <div className="botao-salvar">
+                  <button onClick={handleSalvarClick}>Salvar</button>
+                </div>
 
-              <div className="botao-salvar-enviar">
-                <button onClick={handleAbrirPopup} className="salvar-enviar">
-                  Salvar e enviar
-                </button>
+                <div className="botao-salvar-enviar">
+                  <button onClick={handleAbrirPopup} className="salvar-enviar">
+                    Salvar e enviar
+                  </button>
 
-                <PopupSalvarEnviar
-                  visivel={popupVisivel}
-                  fecharPopup={handleFecharPopup}
-                  nomeProcesso={nomeProcesso}
-                  onEnviar={handleEnviarProcesso}
+                  <PopupSalvarEnviar
+                    visivel={popupVisivel}
+                    fecharPopup={handleFecharPopup}
+                    nomeProcesso={nomeProcesso}
+                    onEnviar={handleEnviarProcesso}
                   />
-                  </div>
+                </div>
               </div>
             </div>
           </div>
