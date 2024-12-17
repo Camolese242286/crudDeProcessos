@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { PencilLine, Trash } from "phosphor-react";
 import Menu from "./Menu";
 import SearchWithDebounce from "./SearchProcesso";
 import ExcluirPopup from "./Popup-excluir-processo";
+import { PencilLine, Trash } from "phosphor-react";
 
 // import { GoPencil, GoTrash } from "react-icons/go";
 

@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import Menu from "./Menu";
 import Popup from "./Popup";
 import "./Processos";
 import PopupSalvarEnviar from "./Popup_Salvar_Enviar";
-
 import { FaTrashAlt } from "react-icons/fa";
-
+import { ArrowSquareDown, ArrowSquareUp, Trash } from "phosphor-react";
 import "../styles/novo-processo.css";
 
 function NovoProcesso() {
@@ -20,7 +18,7 @@ function NovoProcesso() {
   const [questoesPorTipo, setQuestoesPorTipo] = useState({
     "Texto-aberto": [],
     "Upload-arquivo": [],
-    "CheckList": [],
+    CheckList: [],
     "Seletor-opcoes": [],
   });
   const [SelectedOption, setSelectedOption] = useState(""); //Armazena a opção selecionada
@@ -47,7 +45,7 @@ function NovoProcesso() {
     const questoesCompletas = {
       ...questoesPorTipo,
       [SelectedOption]: questoes,
-    }
+    };
 
     const novoProcesso = {
       id: id || Date.now(),
@@ -305,13 +303,13 @@ function NovoProcesso() {
                         className="icone-questao"
                         onClick={() => handleMoverQuestaoParaCima(index)}
                       >
-                        ↑
+                        <ArrowSquareUp />
                       </div>
                       <div
                         className="icone-questao"
                         onClick={() => handleMoverQuestaoParaBaixo(index)}
                       >
-                        ↓
+                        <ArrowSquareDown />
                       </div>
                     </div>
                     <div>
@@ -319,7 +317,7 @@ function NovoProcesso() {
                         className="icone-excluir"
                         onClick={() => handleRemoverQuestao(questao.id)}
                       >
-                        X
+                        <Trash />
                       </div>
                     </div>
                   </div>
