@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> 6f3a20cb51724f8bc1618fefb029fea48441bf58
 import { useNavigate } from "react-router-dom";
-
 import Menu from "../Menu";
-import SearchWithArea from "../Area/SearchArea";
+import Search from "./Search";
 
 import {PencilSimpleLine, Trash } from "phosphor-react"
 
@@ -10,8 +13,15 @@ import "../../styles/StyleArea/area.css";
 
 function Area() {
   const navigate = useNavigate();
-  const [areas, setAreas] = useState([]);
-  const [areasFiltrados, setAreasFiltrados] = useState("");
+  const [areas, setAreas] = useState([]); // Estado com a lista de áreas
+  const [areasFiltrados, setAreasFiltrados] = useState([]);
+
+  useEffect(() => {
+    // Carrega as áreas salvas no localStorage
+    const areasSalvas = JSON.parse(localStorage.getItem("areas")) || [];
+    setAreas(areasSalvas);
+    setAreasFiltrados(areasSalvas);
+  }, []);
 
   //Excluir o id da area na tabela
   const [idParaExcluir, setIdParaExcluir] = useState(null);
@@ -38,34 +48,37 @@ function Area() {
   }
 
   return (
-    <>
-      <div>
-        <Menu />
-      </div>
+    <div className="container-page">
       <div className="container-area">
+        <Menu />
         <div className="title">
           <h2>Áreas da Empresa</h2>
         </div>
 
         <div className="settings">
           <div className="filters-area">
-            <select className="slArea">
+            <select
+              className="slArea"
+              onChange={(e) => {
+                const filtro = e.target.value;
+                const filtrados = filtro
+                  ? areas.filter((area) => area.nome === filtro)
+                  : areas;
+                setAreasFiltrados(filtrados);
+              }}
+            >
               <option value="">Todas as áreas</option>
-              <option value="Area 1">Área 1</option>
-              <option value="Area 2">Área 2</option>
-              <option value="Area 3">Área 3</option>
+              {areas.map((area) => (
+                <option key={area.id} value={area.nome}>
+                  {area.nome}
+                </option>
+              ))}
             </select>
           </div>
-          <SearchWithArea
-            className="search"
-            areas={areas}
-            setAreasFiltrados={setAreasFiltrados}
-          />
           <div className="botao-area">
             <button onClick={handleNovaArea}>+ Nova Área</button>
           </div>
         </div>
-
         <div className="TableArea">
           <table>
             <thead>
@@ -78,6 +91,7 @@ function Area() {
               </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
               {/* Aqui você pode mapear os dados filtrados */}
               {areasFiltrados.length > 0 ? (
                 areasFiltrados.map((area) => (
@@ -101,11 +115,21 @@ function Area() {
                   <td colSpan="4">Nenhuma área cadastrada</td>
                 </tr>
               )}
+=======
+              {areasFiltrados.map((area) => (
+                <tr key={area.id}>
+                  <td>{area.nome}</td>
+                  <td>{area.responsavel}</td>
+                  <td>{area.subAreas}</td>
+                  <td>{area.status}</td>
+                </tr>
+              ))}
+>>>>>>> 6f3a20cb51724f8bc1618fefb029fea48441bf58
             </tbody>
           </table>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -54,11 +54,6 @@ const Sidebar = () => {
             <span>Área</span>
           </div>
 
-          <div className="menu-item" onClick={() => navigate("/configuracao")}>
-            <Gear size={22} />
-            <span>Configuração</span>
-          </div>
-
           <div
             className="menu-item notification"
             onClick={handleViewNotifications}

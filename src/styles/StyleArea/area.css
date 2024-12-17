@@ -1,13 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap");
 
-.container-area {
-  margin: 0 auto;
-  padding: 20px;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.container-page{
+  margin-left: 150px; /* Respeitando o menu lateral */
+  gap: 30px;
   font-family: "Open Sans", sans-serif;
+}
+.container-area {
+  display: flex;
+  justify-content: start;
+  padding: 20px;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .title {
@@ -93,6 +96,41 @@
 
 .TableArea th:last-child {
   border-top-right-radius: 10px;
+}
+/* Estilização do componente Search */
+.input-container {
+  position: relative;
+  display: inline-block;
+  border: solid 1px #6800ff;
+  border-radius: 15px;
+  padding: 3px;
+  width: 260px;
+}
+.input-container input {
+  padding-left: 5px; /* Espaço para o ícone */
+  height: 40px;
+  width: 250px;
+  box-sizing: border-box;
+  color: #6800ff;
+}
+.input-container input:focus {
+  outline: none; /* Remove o contorno padrão */
+  border: 1px solid #ccc; /* Adicione uma borda personalizada, se quiser */
+  border-radius: 15px;
+}
+
+.input-container .icon {
+  position: absolute;
+  right: 10px; /* Distância da borda direita */
+  top: 50%;
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  color: #6800ff;
+  pointer-events: none; /* Evita que o ícone interfira no input */
+}
+/* Estilização do componente Search na página Área */
+.search-area{
+  display: flex;
+  justify-content: end;
 }
 
 @media (max-width: 768px) {

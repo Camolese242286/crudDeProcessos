@@ -1,113 +1,116 @@
 .processos-container {
-    margin-left: 100px; /* Respeitando o menu lateral */
-    justify-content: center;
-    padding: 20px;
-    display: flex;
-    width: 90vw;
-    flex-direction: column;
-    gap: 30px;
-    font-family: "Open Sans", sans-serif;
-  }
-  
-  .header h1 {
-    display: flex;
-    font-size: 2rem;
-    justify-content: start;
-    color: #6800ff;
-    text-align: center;
-  }
-  
-  .filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .slProcessos {
-    max-width: 300px;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  .componente_Search{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    align-content: center;
-    justify-items: center;
-  }
-  .componente_Search input {
-    padding: 8px;
-    padding: 10px;
-    font-size: 14px;
-    width: 250px;
-    left: 88em;
-    border-radius: 5px;
-    top: 1em;
-    border: 1px solid #8000FF;
-    font-style: italic;
-  }
-  
-  .TabelaProcesso {
-    overflow-x: auto;
-  }
-  
-  .TabelaProcesso table {
-    min-width: 100%;
-    /* border-collapse: collapse; */
-    border-radius: 20px;
-    background: #fcfaff;
-    border-radius: 20px;
-    color: #6800ff;
-  }
-  
-  .TabelaProcesso th,
-  .TabelaProcesso td {
-    padding: 10px;
-    border: 1px solid #ccc;
-    
-  }
-  
-  .TabelaProcesso th {
-    background-color: #d2b4fe;
-    font-weight: bold;
-    
-  }
-  td.empty {
-    border: solid 2px;
-    border-radius: 5px;
-    
-  }
-  
-  .acoes button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    background: none;
-    border: 1px solid #6800ff;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .acoes button:hover {
-    background: #6800ff;
-    color: white;
-  }
-  .processos-container .botaoNovoProcesso button{
-    margin: 0 auto;
-    padding: 10px 10px;
-    background-color: #6800ff;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: small;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .botaoNovoProcesso button:hover {
-    background-color: #5700cc;
-  }
-  
+  margin-left: 150px; /* Respeitando o menu lateral */
+  justify-content: center;
+  padding: 20px;
+  display: flex;
+  width: 90vw;
+  flex-direction: column;
+  gap: 30px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.header h1 {
+  display: flex;
+  font-size: 2rem;
+  justify-content: start;
+  color: #6800ff;
+  text-align: center;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.slProcessos {
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+
+.TabelaProcesso {
+  overflow-x: auto;
+}
+
+.TabelaProcesso table {
+  min-width: 100%;
+  /* border-collapse: collapse; */
+  border-radius: 20px;
+  background: #fcfaff;
+  border-radius: 20px;
+  color: #6800ff;
+}
+
+.TabelaProcesso th,
+.TabelaProcesso td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.TabelaProcesso th {
+  background-color: #d2b4fe;
+  font-weight: bold;
+}
+td.empty {
+  border: solid 2px;
+  border-radius: 5px;
+}
+
+.acoes button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background: none;
+  border: 1px solid #6800ff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.componente_Search{
+  position: relative;
+  display: inline-block;
+  width: 250px;
+}
+.componente_Search input{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #6800ff;
+  border-radius: 15px;
+  outline: none;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+.componente_Search input:focus{
+  border: 1px solid #6800ff;
+  box-shadow: 0 0 10px #888;
+}
+.componente_Search .icon-search{
+  position: absolute;
+  right: 10px;
+  top: 20%;
+  color: #888;
+  font-size: 18px;
+  pointer-events: none;
+}
+.acoes button:hover {
+  background: #6800ff;
+  color: white;
+}
+.processos-container .botaoNovoProcesso button {
+  margin: 0 auto;
+  padding: 10px 10px;
+  background-color: #6800ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: small;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.botaoNovoProcesso button:hover {
+  background-color: #5700cc;
+}
