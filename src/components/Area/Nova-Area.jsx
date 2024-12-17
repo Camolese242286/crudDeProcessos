@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import Menu from "../Menu";
 
@@ -56,62 +55,6 @@ function NovaArea() {
         }
     }, [id]);
 
-    return (
-        <>
-            <div className="index-container">
-                <Menu />
-            </div>
-=======
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Menu from "../Menu";
-import "../../styles/StyleArea/nova-area.css";
-
-function NovaArea() {
-  const [nomeArea, setNomeArea] = useState("");
-  const [descricaoArea, setDescricaoArea] = useState("");
-  const [responsavel, setResponsavel] = useState("");
-  const navigate = useNavigate();
-
-  // Função para adicionar uma nova área
-  const handleAdicionarArea = () => {
-    // Validação dos campos obrigatórios
-    if (!nomeArea || !responsavel) {
-      alert("Por favor, preencha o nome da área e selecione um responsável.");
-      return;
-    }
->>>>>>> 6f3a20cb51724f8bc1618fefb029fea48441bf58
-
-    // Nova área que será adicionada
-    const novaArea = {
-      id: Date.now(), // Gera um ID único
-      nome: nomeArea,
-      descricao: descricaoArea,
-      responsavel: responsavel,
-      subAreas: 0, // Valor padrão
-      status: "Ativo", // Status padrão
-    };
-
-    // Recupera as áreas existentes do localStorage
-    const areasExistentes = JSON.parse(localStorage.getItem("areas")) || [];
-
-    // Adiciona a nova área
-    const novasAreas = [...areasExistentes, novaArea];
-    localStorage.setItem("areas", JSON.stringify(novasAreas));
-
-<<<<<<< HEAD
-                {/* Botão de Adicionar */}
-                <div className="btn-add-area">
-                    <button className="botao-area" onClick={handleSalvarArea}>Salvar</button>
-                </div>
-            </div>
-        </>
-    );
-=======
-    // Redireciona para a página de Áreas
-    navigate("/Area");
-  };
-
   return (
     <div className="container-principal">
       <div className="index-container">
@@ -156,14 +99,13 @@ function NovaArea() {
 
         {/* Botão de Adicionar */}
         <div className="btn-add-area">
-          <button className="botao-area" onClick={handleAdicionarArea}>
-            Adicionar Área
+          <button className="botao-area" onClick={handleSalvarArea}>
+             Salvar
           </button>
         </div>
       </div>
     </div>
   );
->>>>>>> 6f3a20cb51724f8bc1618fefb029fea48441bf58
 }
 
 export default NovaArea;

@@ -44,11 +44,8 @@ function App() {
         <Route path="/area" element={<Area />} />
         <Route path="/questionario/:id" element={<Questionario />} />
         <Route path="/Nova-Area" element={<NovaArea />} />
-<<<<<<< HEAD
         <Route path="/editar-area/:id" element={<NovaArea />} />
-        <Route path="/configuracao" element={<Configuracao />} />
-=======
->>>>>>> 6f3a20cb51724f8bc1618fefb029fea48441bf58
+        
       </Routes>
     </>
   );

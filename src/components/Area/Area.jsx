@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
-=======
-import React, { useEffect, useState } from "react";
->>>>>>> 6f3a20cb51724f8bc1618fefb029fea48441bf58
+
 import { useNavigate } from "react-router-dom";
 import Menu from "../Menu";
 import Search from "./Search";
@@ -91,7 +88,7 @@ function Area() {
               </tr>
             </thead>
             <tbody>
-<<<<<<< HEAD
+
               {/* Aqui você pode mapear os dados filtrados */}
               {areasFiltrados.length > 0 ? (
                 areasFiltrados.map((area) => (
@@ -115,7 +112,7 @@ function Area() {
                   <td colSpan="4">Nenhuma área cadastrada</td>
                 </tr>
               )}
-=======
+
               {areasFiltrados.map((area) => (
                 <tr key={area.id}>
                   <td>{area.nome}</td>
@@ -124,7 +121,7 @@ function Area() {
                   <td>{area.status}</td>
                 </tr>
               ))}
->>>>>>> 6f3a20cb51724f8bc1618fefb029fea48441bf58
+
             </tbody>
           </table>
         </div>
