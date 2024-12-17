@@ -99,6 +99,10 @@ td.empty {
   background: #6800ff;
   color: white;
 }
+.icones{
+  display: flex;
+  justify-content: center;
+}
 .processos-container .botaoNovoProcesso button {
   margin: 0 auto;
   padding: 10px 10px;

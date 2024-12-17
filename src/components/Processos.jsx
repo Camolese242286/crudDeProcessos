@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { PencilLine, Trash } from "phosphor-react";
 import Menu from "./Menu";
 import SearchWithDebounce from "./SearchProcesso";
 import ExcluirPopup from "./Popup-excluir-processo";
 
-import { GoPencil, GoTrash } from "react-icons/go";
-import Buscador from "./Busca";
+// import { GoPencil, GoTrash } from "react-icons/go";
 
 const Processos = () => {
   const navigate = useNavigate();
@@ -125,12 +124,14 @@ const Processos = () => {
                   </td>
                   <td>{formatDate(processo.dataCriacao)}</td>
                   <td className="acoes">
+                    <div className="icones">
                     <button onClick={() => handleEditar(processo.id)}>
-                      <GoPencil />
+                      <PencilLine/>
                     </button>
                     <button onClick={() => handleExcluir(processo.id)}>
-                      <GoTrash />
+                    <Trash/>
                     </button>
+                    </div>
                   </td>
                 </tr>
               ))
