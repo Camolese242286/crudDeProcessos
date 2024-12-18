@@ -7,10 +7,11 @@ import Processos from "./components/Processos";
 import NovoProcesso from "./components/Novo-Processo";
 // import Buscar from "./components/BuscarQuestao";
 import Popup from "./components/Popup_Salvar_Enviar";
-import Questionario from "./components/Notificacao/notificacao"
-import NovaArea from "./components/Area/Nova-Area"
+import Questionario from "./components/Notificacao/notificacao";
+import NovaArea from "./components/Area/Nova-Area";
+import StatusIndicator from "./components/StatusIndicator";
 
-import Area from "./components/Area/Area"
+import Area from "./components/Area/Area";
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -45,8 +46,9 @@ function App() {
         <Route path="/questionario/:id" element={<Questionario />} />
         <Route path="/Nova-Area" element={<NovaArea />} />
         <Route path="/editar-area/:id" element={<NovaArea />} />
-        
+        <Route path="/StatusIndicator" element={<Principal/>} />
       </Routes>
+      
     </>
   );
 }
