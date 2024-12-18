@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Menu from "../Menu";
 import Search from "./Search";
 
-import {PencilSimpleLine, Trash } from "phosphor-react"
+import ExcluirPopupArea from "./Popup-excluir-area";
+
+import { PencilSimpleLine, Trash } from "phosphor-react"
 
 import "../../styles/StyleArea/area.css";
 
@@ -20,9 +22,6 @@ function Area() {
     setAreasFiltrados(areasSalvas);
   }, []);
 
-  //Excluir o id da area na tabela
-  const [idParaExcluir, setIdParaExcluir] = useState(null);
-
   //Abrir outra página
   const handleNovaArea = () => {
     navigate("/Nova-Area");
@@ -35,13 +34,35 @@ function Area() {
     setAreasFiltrados(areasSalvos);
   }, []);
 
+  //Excluir o id da area na tabela
+  const [idParaExcluir, setIdParaExcluir] = useState(null);
+  const [popupExclusao, setpopupExclusao] = useState(false);
+
   //Editar o campo da área
   const handleEditarArea = (id) => {
     navigate(`/editar-area/${id}`);
   }
 
+  //Excluir o id da area
   const handleExluirArea = (id) => {
     setIdParaExcluir(id);
+    setpopupExclusao(true);
+  }
+
+  //Confirmar a exclusão do id 
+  const confirmarExclusaoArea = () => {
+    const novaAreas = areas.filter(
+      (area) => area.id !== idParaExcluir
+    );
+    setAreas(novaAreas);
+    setAreasFiltrados(novaAreas);
+    localStorage.setItem("area", JSON.stringify(novaAreas));
+    setpopupExclusao(false);
+  }
+
+  const cancelarExclusaoArea = () => {
+    setpopupExclusao(false);
+    setIdParaExcluir(null);
   }
 
   return (
@@ -113,14 +134,23 @@ function Area() {
                 </tr>
               )}
 
-              {areasFiltrados.map((area) => (
+              {popupExclusao && (
+                <ExcluirPopupArea
+                  titleArea= "Excluir área?"
+                  mensagem= "Essa ação não pode ser desfeita"
+                  onConfirm={confirmarExclusaoArea}
+                  onCancel={cancelarExclusaoArea}
+                />
+              )}
+
+              {/*}{areasFiltrados.map((area) => (
                 <tr key={area.id}>
                   <td>{area.nome}</td>
                   <td>{area.responsavel}</td>
                   <td>{area.subAreas}</td>
                   <td>{area.status}</td>
                 </tr>
-              ))}
+              ))}*/}
 
             </tbody>
           </table>
