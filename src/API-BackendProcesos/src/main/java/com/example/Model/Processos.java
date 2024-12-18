@@ -27,11 +27,7 @@ public class Processos {
 	@CreationTimestamp
 	private LocalDate createdDate;
 
-	/*
-    @PrePersist
-    protected void onCreate() {
-        setCreatedDate(LocalDate);
-    }*/
+	
 	public Long getId() {
 		return id;
 	}
