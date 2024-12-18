@@ -26,14 +26,14 @@ import com.example.companhias.Service.CompanhiasService;
 public class CompaniasController {
   @Autowired
 	private CompanhiasService service;
-	@GetMapping	(value="listar")
+	@GetMapping	
 	public List<Companhias> listartodos(){
 		return service.listartodos();
 	} 
     
 	
 	
-	@PostMapping(value="salvar")
+	@PostMapping
 	public Companhias salvar(@RequestBody Companhias companhias) {
 		return service.salvar(companhias);
 	}
@@ -44,7 +44,7 @@ public class CompaniasController {
 	
 	
 	
-	  @DeleteMapping(value="deletar")
+	  @DeleteMapping("/{id}")
 	    public ResponseEntity<Void> excluir(@RequestParam Long id){
 		  
 		  service.excluir(id);
