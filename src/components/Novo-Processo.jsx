@@ -14,14 +14,8 @@ function NovoProcesso() {
   const [nomeProcesso, setNomeProcesso] = useState("");
   const [descricao, setDescricao] = useState("");
   const [prioridades, setPrioridade] = useState("");
-  const [questoes, setQuestoes] = useState([]);
-  const [questoesPorTipo, setQuestoesPorTipo] = useState({
-    "Texto-aberto": [],
-    "Upload-arquivo": [],
-    CheckList: [],
-    "Seletor-opcoes": [],
-  });
-  const [SelectedOption, setSelectedOption] = useState(""); //Armazena a opção selecionada
+  const [questoes, setQuestoes] = useState([]); // Guardar todas as questões criadas
+  const [SelectedOption, setSelectedOption] = useState(""); // Tipo de questão selecionado
   const [popupVisivel, setPopupVisivel] = useState(false);
 
   const validarCampos = () => {
@@ -32,20 +26,8 @@ function NovoProcesso() {
     return true;
   };
 
-  // Preencher o nome do processo e da descrição
-  // Salvar os dados na tabela
   const handleSalvarClick = () => {
     if (!validarCampos()) return;
-
-    const questoesAtualizadas = {
-      ...questoesPorTipo,
-      [SelectedOption]: [...questoes],
-    };
-
-    const questoesCompletas = {
-      ...questoesPorTipo,
-      [SelectedOption]: questoes,
-    };
 
     const novoProcesso = {
       id: id || Date.now(),
@@ -53,12 +35,11 @@ function NovoProcesso() {
       descricao: descricao,
       prioridades: prioridades,
       dataCriacao: new Date().toISOString(),
-      questoesPorTipo: questoesAtualizadas, //Inclui todas as questões
+      questoes: [...questoes], // Salvar todas as questões, sem separar por tipo
     };
 
     const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
     const index = processosSalvos.findIndex((p) => p.id === novoProcesso.id);
-    //processosSalvos.push(novoProcesso);
 
     if (index >= 0) {
       processosSalvos[index] = novoProcesso;
@@ -67,7 +48,6 @@ function NovoProcesso() {
     }
 
     localStorage.setItem("processos", JSON.stringify(processosSalvos));
-    setQuestoesPorTipo(questoesAtualizadas);
     navigate("/processos");
   };
 
@@ -82,53 +62,37 @@ function NovoProcesso() {
 
   const handleEnviarProcesso = (responsaveis) => {
     console.log("Processo enviado para: ", responsaveis);
+    // Aqui pode ser adicionada a lógica de envio, dependendo da aplicação
+    handleSalvarClick(); // Salva antes de enviar
+    alert("Processo enviado!");
+    navigate("/processos");
+  };
+
+  const handleCancelarClick = () => {
+    navigate("/processos");
   };
 
   useEffect(() => {
     if (id) {
-      const processosSalvos =
-        JSON.parse(localStorage.getItem("processos")) || [];
+      const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
       const processo = processosSalvos.find((p) => p.id === Number(id));
 
       if (processo) {
         setNomeProcesso(processo.nome);
         setPrioridade(processo.prioridades);
         setDescricao(processo.descricao);
-
-        const primeiraOpcao =
-          Object.keys(processo.questoesPorTipo || {})[0] || "";
-        setSelectedOption(primeiraOpcao);
-        setQuestoes([...(processo.questoesPorTipo[primeiraOpcao] || [])]);
-        setQuestoesPorTipo(processo.questoesPorTipo || {});
-        //setSelectedOption(""); //Reseta a opção selecionada
-        //setQuestoes([]); //Inicializa com questões vazias até a troca de opção
+        setQuestoes(processo.questoes || []); // Carregar todas as questões
       }
     }
   }, [id]);
 
-  const handleCancelarClick = () => {
-    navigate("/processos");
-  };
-
-  //Salva as questões da opção atual antes de trocar
   const handleOptionChange = (e) => {
-    const novaOpcao = e.target.value;
-
-    setQuestoes((prev) => ({
-      ...prev,
-      [SelectedOption]: [...questoes], //Salva as questões da opção atual
-    }));
-
-    // Atualiza a opção selecionada
-    setSelectedOption(novaOpcao);
-
-    // Carrega as questões da nova opção ou iniciativa vazio
-    setQuestoes(questoesPorTipo[novaOpcao] || []);
+    setSelectedOption(e.target.value); // Atualiza o tipo de questão para nova questão
   };
 
   const handleAdicionarQuestao = () => {
     if (!SelectedOption) {
-      alert("Por favor, selecione uma opção antes de adicionar");
+      alert("Por favor, selecione um tipo de questão antes de adicionar");
       return;
     }
 
@@ -137,10 +101,9 @@ function NovoProcesso() {
       titulo: "",
       resposta: "",
       tipo: SelectedOption,
-      itens:
-        SelectedOption === "CheckList" ? [{ text: "", checked: false }] : [], //Inicializa itens para checklist
+      itens: SelectedOption === "CheckList" ? [{ text: "", checked: false }] : [], // Itens para CheckList
     };
-    //setQuestoes([...questoes, novaQuestao]); //Atualiza o estado local das questões
+
     setQuestoes((prev) => [...prev, novaQuestao]);
   };
 
@@ -155,7 +118,6 @@ function NovoProcesso() {
     setQuestoes(questoes.filter((questao) => questao.id !== id));
   };
 
-  // Adiciona um novo item no checklist
   const handleAdicionarItemChecklist = (id) => {
     const questoesAtualizadas = questoes.map((questao) =>
       questao.id === id
@@ -168,12 +130,11 @@ function NovoProcesso() {
     setQuestoes(questoesAtualizadas);
   };
 
-  //Atualiza um item específico do checklist
   const handleAtualizarChecklistText = (id, index, value) => {
     const questoesAtualizadas = questoes.map((questao) => {
       if (questao.id === id) {
         const novoItens = [...(questao.itens || [])];
-        novoItens[index] = { ...novoItens[index], text: value }; //Atualiza o valor do item no índice específico
+        novoItens[index] = { ...novoItens[index], text: value }; // Atualiza o texto do item
         return { ...questao, itens: novoItens };
       }
       return questao;
@@ -199,13 +160,8 @@ function NovoProcesso() {
     );
 
     setQuestoes(questoesAtualizadas);
-
-    setQuestoesPorTipo((prev) => ({
-      ...prev,
-      [SelectedOption]: questoesAtualizadas,
-    }));
   };
-  // Função para mover questão para cima
+
   const handleMoverQuestaoParaCima = (index) => {
     if (index === 0) return; // Não faz nada se for o primeiro item
 
@@ -217,7 +173,6 @@ function NovoProcesso() {
     setQuestoes(questoesAtualizadas);
   };
 
-  // Função para mover questão para baixo
   const handleMoverQuestaoParaBaixo = (index) => {
     if (index === questoes.length - 1) return; // Não faz nada se for o último item
 
@@ -230,258 +185,232 @@ function NovoProcesso() {
   };
 
   return (
-    <>
-      <div className="index-container">
-        <Menu />
-        <div className="title-fixed">
-          <h1>Novo Processo</h1>
+    <div className="container-novo-processo">
+      <Menu />
+      <div className="title-fixed">
+        <h1>Novo Processo</h1>
+      </div>
+
+      <div className="container-processo">
+        <div className="container-titulo">
+          <input
+            className="texto"
+            type="text"
+            placeholder="Insira aqui o nome do processo"
+            value={nomeProcesso}
+            onChange={(e) => setNomeProcesso(e.target.value)}
+          />
+          <div>
+            <textarea
+              className="descricao"
+              placeholder="Adicione uma descrição para esse processo"
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="options">
+          <div className="prioridade">
+            <p>Selecione a Prioridade</p>
+            <select
+              className="selectPrioridade"
+              value={prioridades}
+              onChange={(e) => setPrioridade(e.target.value)}
+            >
+              <option value="">Selecione...</option>
+              <option value="Alta">Alta</option>
+              <option value="Média">Média</option>
+              <option value="Baixa">Baixa</option>
+            </select>
+          </div>
+
+          {/* Opções */}
+          <div className="select-opcoes-questao">
+            <p>Selecione o tipo da Questão</p>
+            <select className="selectOpcoes" onChange={handleOptionChange}>
+              <option value="">Selecione...</option>
+              <option value="Texto-aberto">Texto Aberto</option>
+              <option value="Upload-arquivo">Upload de arquivo</option>
+              <option value="CheckList">Checklist</option>
+              <option value="Seletor-opcoes">Seletor de opções</option>
+            </select>
+          </div>
         </div>
 
-        <div className="container">
-          {/* Título e descrição */}
-          <div className="container-titulo">
-            <input
-              className="texto"
-              type="text"
-              placeholder="Insira aqui o nome do processo"
-              value={nomeProcesso}
-              onChange={(e) => setNomeProcesso(e.target.value)}
-            />
-            <div>
-              <textarea
-                className="descricao"
-                type="text"
-                placeholder="Adicione uma descrição para esse processo"
-                value={descricao}
-                onChange={(e) => setDescricao(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="options">
-            <div className="prioridade">
-              <p>Selecione a Prioridade</p>
-              <select
-                className="selectPrioridade"
-                value={prioridades}
-                onChange={(e) => setPrioridade(e.target.value)}
-              >
-                <option value="">Selecione...</option>
-                <option value="Alta">Alta</option>
-                <option value="Média">Média</option>
-                <option value="Baixa">Baixa</option>
-              </select>
-            </div>
+        {/* Botão para adicionar questão */}
+        <div className="btn-novaQuestao">
+          <button onClick={handleAdicionarQuestao} className="add-btn">
+            Adicionar Questão
+          </button>
+        </div>
 
-            {/* Opções */}
-            <div className="opcoes-processo">
-              <p>Selecione o tipo da Questão</p>
-              <select className="selectOpcoes" onChange={handleOptionChange}>
-                <option value="">Selecione...</option>
-                <option value="Texto-aberto">Texto Aberto</option>
-                <option value="Upload-arquivo">Upload de arquivo</option>
-                <option value="CheckList">Checklist</option>
-                <option value="Seletor-opcoes">Seletor de opções</option>
-              </select>
-            </div>
-          </div>
-          {/* Botão para adicionar questão */}
-          <div className="btn-novaQuestao">
-            <button onClick={handleAdicionarQuestao} className="add-btn">
-              Adicionar Questão
-            </button>
-          </div>
-
-          {/* Renderizar questões */}
-          <div className="questoes-container">
-            {questoes.map((questao, index) => (
-              <div key={questao.id} className="questao-item">
-                <div className="header-questao">
-                  <div className="numero-questao">{index + 1}.</div>
-                  <div className="setas_excluir">
-                    <div className="setas-flex">
-                      <div
-                        className="icone-questao"
-                        onClick={() => handleMoverQuestaoParaCima(index)}
-                      >
-                        <ArrowSquareUp />
-                      </div>
-                      <div
-                        className="icone-questao"
-                        onClick={() => handleMoverQuestaoParaBaixo(index)}
-                      >
-                        <ArrowSquareDown />
-                      </div>
+        {/* Renderizar todas as questões */}
+        <div className="questoes-container">
+          {questoes.map((questao, index) => (
+            <div key={questao.id} className="questao-item">
+              <div className="header-questao">
+                <div className="numero-questao">{index + 1}.</div>
+                <div className="setas_excluir">
+                  <div className="setas-flex">
+                    <div
+                      className="icone-questao"
+                      onClick={() => handleMoverQuestaoParaCima(index)}
+                    >
+                      <ArrowSquareUp />
                     </div>
-                    <div>
-                      <div
-                        className="icone-excluir"
-                        onClick={() => handleRemoverQuestao(questao.id)}
-                      >
-                        <Trash />
-                      </div>
+                    <div
+                      className="icone-questao"
+                      onClick={() => handleMoverQuestaoParaBaixo(index)}
+                    >
+                      <ArrowSquareDown />
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      className="icone-excluir"
+                      onClick={() => handleRemoverQuestao(questao.id)}
+                    >
+                      <Trash />
                     </div>
                   </div>
                 </div>
-                <div className="questao-conteudo">
+              </div>
+              <div className="questao-conteudo">
+                <input
+                  type="text"
+                  value={questao.titulo}
+                  onChange={(e) =>
+                    handleEditarQuestao(questao.id, { titulo: e.target.value })
+                  }
+                  placeholder="Título da pergunta do questionário"
+                />
+                {questao.tipo === "Texto-aberto" && (
                   <input
                     type="text"
-                    value={questao.titulo}
+                    value={questao.resposta}
                     onChange={(e) =>
-                      handleEditarQuestao(questao.id, {
-                        titulo: e.target.value,
-                      })
+                      handleEditarQuestao(questao.id, { resposta: e.target.value })
                     }
-                    placeholder="Título da pergunta do questionário"
+                    placeholder="Digite sua resposta"
                   />
-                  {questao.tipo === "Texto-aberto" && (
+                )}
+                <div className="upload-input">
+                  {questao.tipo === "Upload-arquivo" && (
                     <input
-                      type="text"
-                      value={questao.resposta}
+                      type="file"
                       onChange={(e) =>
-                        handleEditarQuestao(questao.id, {
-                          resposta: e.target.value,
-                        })
+                        handleEditarQuestao(
+                          questao.id,
+                          "resposta",
+                          e.target.files[0]?.name || ""
+                        )
                       }
-                      placeholder="Digite sua resposta"
                     />
                   )}
-
-                  <div className="upload-input">
-                    {questao.tipo === "Upload-arquivo" && (
-                      <input
-                        type="file"
-                        onChange={(e) =>
-                          handleEditarQuestao(
-                            questao.id,
-                            "resposta",
-                            e.target.files[0]?.name || ""
-                          )
-                        }
-                      />
-                    )}
+                </div>
+                {questao.tipo === "CheckList" && (
+                  <div className="checklist-container">
+                    {questao.itens?.map((item, idx) => (
+                      <div key={idx} className="checklist-item">
+                        <input
+                          type="checkbox"
+                          checked={item.checked || false}
+                          onChange={(e) => {
+                            const atualizado = [...questao.itens];
+                            atualizado[idx].checked = e.target.checked;
+                            handleAtualizarChecklistCheckbox(
+                              questao.id,
+                              idx,
+                              e.target.checked
+                            );
+                          }}
+                          style={{ width: "20px", height: "18px" }}
+                        />
+                        <input
+                          type="text"
+                          value={item.text || ""}
+                          onChange={(e) =>
+                            handleAtualizarChecklistText(
+                              questao.id,
+                              idx,
+                              e.target.value
+                            )
+                          }
+                          placeholder={`Item ${idx + 1}`}
+                        ></input>
+                      </div>
+                    ))}
+                    <button
+                      className="btn-add-item"
+                      onClick={() => handleAdicionarItemChecklist(questao.id)}
+                    >
+                      + Adicionar item
+                    </button>
                   </div>
+                )}
 
-                  {questao.tipo === "CheckList" && (
-                    <div className="checklist-container">
-                      {questao.itens?.map((item, idx) => (
-                        <div key={idx} className="checklist-item">
-                          <input
-                            type="checkbox"
-                            checked={item.checked || false} //Define o estado inicial
-                            onChange={(e) => {
-                              const atualizado = [...questao.itens];
-                              atualizado[idx].checked = e.target.checked; //Alterna o valor
-                              handleAtualizarChecklistCheckbox(
-                                questao.id,
-                                idx,
-                                e.target.checked
-                              );
-                            }}
-                            style={{ width: "20px", height: "18px" }}
-                          />
-                          <input
-                            type="text"
-                            value={item.text || ""}
-                            onChange={(e) =>
-                              handleAtualizarChecklistText(
-                                questao.id,
-                                idx,
-                                e.target.value
-                              )
-                            }
-                            placeholder={`Item ${idx + 1}`}
-                          ></input>
-                        </div>
-                      ))}
-
-                      <button
-                        className="btn-add-item"
-                        onClick={() => handleAdicionarItemChecklist(questao.id)}
-                      >
-                        + Adicionar item
-                      </button>
-                    </div>
-                  )}
-
-                  {questao.tipo === "Seletor-opcoes" && (
-                    <div className="select-container">
-                      {questao.itens?.map((item, idx) => (
-                        <div key={idx} className="select-item">
-                          <select
-                            value={item.value || ""}
-                            onChange={(e) => {
-                              const atualizado = [...questao.itens];
-                              atualizado[idx].value = e.target.value; //Atualiza o valor selecionado
-                              handleAtualizarQuestao(
-                                questao.id,
-                                "itens",
-                                atualizado
-                              );
-                            }}
-                          >
-                            <option value="">Selecione uma opção</option>
-                            <option value="Opção 1">Opção 1</option>
-                            <option value="Opção 2">Opção 2</option>
-                            <option value="Opção 3">Opção 3</option>
-                          </select>
-                        </div>
-                      ))}
-                      <button
-                        className="btn-add-item"
-                        onClick={() => {
-                          const atualizado = [...questao.itens, { value: "" }];
-                          handleAtualizarQuestao(
-                            questao.id,
-                            "itens",
-                            atualizado
-                          );
-                        }}
-                      >
-                        + Adicionar item
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {/* Botão de remover */}
-                <button
-                  className="btn-delete"
-                  onClick={() => handleRemoverQuestao(questao.id)}
-                >
-                  <div className="icon">
-                    <FaTrashAlt size={20} />
+                {questao.tipo === "Seletor-opcoes" && (
+                  <div className="select-container">
+                    {questao.itens?.map((item, idx) => (
+                      <div key={idx} className="select-item">
+                        <select
+                          value={item.value || ""}
+                          onChange={(e) => {
+                            const atualizado = [...questao.itens];
+                            atualizado[idx].value = e.target.value;
+                            handleAtualizarQuestao(questao.id, "itens", atualizado);
+                          }}
+                        >
+                          <option value="">Selecione uma opção</option>
+                          <option value="Opção 1">Opção 1</option>
+                          <option value="Opção 2">Opção 2</option>
+                          <option value="Opção 3">Opção 3</option>
+                        </select>
+                      </div>
+                    ))}
+                    <button
+                      className="btn-add-item"
+                      onClick={() => {
+                        const atualizado = [...questao.itens, { value: "" }];
+                        handleAtualizarQuestao(questao.id, "itens", atualizado);
+                      }}
+                    >
+                      + Adicionar item
+                    </button>
                   </div>
-                </button>
+                )}
               </div>
-            ))}
-            {/* Botões da Página */}
-            <div className="btn-botoes">
-              <div className="botao-cancelar">
-                <button onClick={handleCancelarClick}>Cancelar</button>
-              </div>
-              <div className="botoes-salvar">
-                <div className="botao-salvar">
-                  <button onClick={handleSalvarClick}>Salvar</button>
-                </div>
 
-                <div className="botao-salvar-enviar">
-                  <button onClick={handleAbrirPopup} className="salvar-enviar">
-                    Salvar e enviar
-                  </button>
-
-                  <PopupSalvarEnviar
-                    visivel={popupVisivel}
-                    fecharPopup={handleFecharPopup}
-                    nomeProcesso={nomeProcesso}
-                    onEnviar={handleEnviarProcesso}
-                  />
+              {/* Botão de remover */}
+              <button
+                className="btn-delete"
+                onClick={() => handleRemoverQuestao(questao.id)}
+              >
+                <div className="icon">
+                  <FaTrashAlt size={20} />
                 </div>
-              </div>
+              </button>
             </div>
-          </div>
+          ))}
+        </div>
+
+        {/* Botões de ação */}
+        <div className="botoes-actions">
+          <button onClick={handleCancelarClick} className="btn-cancelar-processo">
+            Cancelar
+          </button>
+          <button onClick={handleSalvarClick} className="btn-salvar-processo">
+            Salvar
+          </button>
+          <button
+            onClick={handleAbrirPopup}
+            className="btn-salvar-enviar"
+          >
+            Salvar e Enviar
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

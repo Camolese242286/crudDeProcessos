@@ -28,7 +28,12 @@ const Processos = () => {
 
   const handleEditar = (id) => {
     navigate(`/editar-processo/${id}`);
-  };
+    // Atualizar o estado com os dados atuais de processos salvos após a edição
+    const processosAtualizados = JSON.parse(localStorage.getItem("processos")) || [];
+    setProcessos(processosAtualizados);
+    setProcessosFiltrados(processosAtualizados); // Para garantir que os filtros também sejam aplicados corretamente
+};
+
 
   const handleExcluir = (id) => {
     setIdParaExcluir(id);
@@ -39,11 +44,12 @@ const Processos = () => {
     const novoProcessos = processos.filter(
       (processo) => processo.id !== idParaExcluir
     );
-    setProcessos(novoProcessos);
-    setProcessosFiltrados(novoProcessos);
-    localStorage.setItem("processos", JSON.stringify(novoProcessos));
+    setProcessos(novoProcessos); // Atualiza o estado local
+    setProcessosFiltrados(novoProcessos); // Atualiza os processos filtrados
+    localStorage.setItem("processos", JSON.stringify(novoProcessos)); // Atualiza o localStorage
     setMostrarPopup(false);
-  };
+};
+
 
   const cancelarExclusao = () => {
     setMostrarPopup(false);
@@ -125,12 +131,12 @@ const Processos = () => {
                   <td>{formatDate(processo.dataCriacao)}</td>
                   <td className="acoes">
                     <div className="icones">
-                    <button onClick={() => handleEditar(processo.id)}>
-                      <PencilLine/>
-                    </button>
-                    <button onClick={() => handleExcluir(processo.id)}>
-                    <Trash/>
-                    </button>
+                      <button onClick={() => handleEditar(processo.id)}>
+                        <PencilLine />
+                      </button>
+                      <button onClick={() => handleExcluir(processo.id)}>
+                        <Trash />
+                      </button>
                     </div>
                   </td>
                 </tr>

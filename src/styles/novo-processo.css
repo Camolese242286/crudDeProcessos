@@ -1,5 +1,5 @@
 /* Ajuste no container principal */
-.index-container {
+.container-novo-processo {
   margin-left: 150px;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
 }
 
 /* Ajustando o container principal para centralizar conteúdo */
-.container {
+.container-processo {
   margin-top: 150px;
   display: flex;
   flex-direction: column;
@@ -47,21 +47,35 @@
   padding: 8px;
   min-width: 500px;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  font-family: "Montserrat";
+  border: 1px solid #6800ff;
+  font-family: "Open Sans";
+}
+.container-titulo::placeholder{
+  color: #aaa;
+}
+.container-titulo .texto:focus {
+  outline: none;
+  border: solid 2px #6800ff;
 }
 
-/* Ajuste no campo de descrição */
 .container-titulo .descricao {
+  color: #6800ff;
   font-size: 18px;
   font-weight: 500;
   min-width: 500px;
   max-width: 800px;
-  margin-top: 1em;
+  margin-top: 0;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #6800ff;
   font-family: "Open Sans";
+}
+/* .container-titulo .descricao::placeholder{
+  color: #6800ff;
+} */
+.descricao:focus{
+  outline: none;
+  border: solid 1px #6800ff;
 }
 .options {
   display: flex;
@@ -89,13 +103,19 @@
   border-radius: 12px;
   font-family: "Open Sans";
 }
-
+.selectPrioridade:focus{
+  outline: none;
+  border: solid 2px #6800ff;
+}
 /* Ajuste no select de Opções */
-.opcoes-processo {
+.select-opcoes-questao {
   display: grid;
   justify-content: center; /* Centraliza o select */
 }
-
+.selectOpcoes:focus{
+  outline: none;
+  border: solid 2px #6800ff;
+}
 .selectOpcoes {
   display: grid;
   justify-content: center;
@@ -165,7 +185,11 @@
 .questoes-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
   border: solid 1px #6800ff;
+  padding: 10px;
   gap: 20px;
 }
 
@@ -179,7 +203,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: 90%;
+  width: 600px;
   margin: 15px auto; /* Centraliza os itens */
 }
 
@@ -282,4 +306,35 @@
 
 .btn-add-item:hover {
   background-color: #7800cc;
+}
+.botoes-actions{
+  /* font-family: "Open Sans"; */
+  /* width: 100px; */
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+.btn-cancelar-processo{
+  background-color: #8f0000;
+  color: #fff;
+  border-radius: 15px;
+  padding: 5px;
+  width: 120px;
+}
+.btn-salvar-processo{
+  background-color: #6800ff;
+  color: #fff;
+  border-radius: 15px;
+  padding: 5px;
+  width: 120px;
+}
+.btn-salvar-enviar{
+  background-color: #6800ff;
+  color: #fff;
+  border-radius: 15px;
+  padding: 5px;
+  width: 150px;
 }
