@@ -26,7 +26,8 @@ public class Processos {
     private String Status; 
 	@CreationTimestamp
 	private LocalDate createdDate;
-
+    
+	private LocalDateTime ultimaAtualizacao;
 	
 	public Long getId() {
 		return id;
@@ -64,4 +65,13 @@ public class Processos {
 	public void setStatus(String status) {
 		Status = status;
 	}
+
+   	public LocalDateTime getUltimaAtualizacao() {
+		return ultimaAtualizacao;
+	}
+
+	public void setUltimaAtualizacao(LocalDateTime ultimaAtualizacao) {
+		this.ultimaAtualizacao = ultimaAtualizacao;
+	}
+
 }
