@@ -22,8 +22,8 @@ public class Processos {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String Name;
-	private String Responsavel;
-	
+	private String Prioridade;
+    private String Status; 
 	@CreationTimestamp
 	private LocalDate createdDate;
 
@@ -52,6 +52,16 @@ public class Processos {
 	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
-	
-
+		public LocalDate getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(LocalDate createdDate) {
+		this.createdDate = createdDate;
+	}
+   	public String getStatus() {
+		return Status;
+	}
+	public void setStatus(String status) {
+		Status = status;
+	}
 }
