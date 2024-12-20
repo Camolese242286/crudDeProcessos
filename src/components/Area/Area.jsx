@@ -60,6 +60,7 @@ function Area() {
     setpopupExclusao(false);
   }
 
+  //Cancelar a exclusao do id
   const cancelarExclusaoArea = () => {
     setpopupExclusao(false);
     setIdParaExcluir(null);
@@ -97,6 +98,7 @@ function Area() {
             <button onClick={handleNovaArea}>+ Nova Área</button>
           </div>
         </div>
+
         <div className="TableArea">
           <table>
             <thead>
@@ -116,15 +118,17 @@ function Area() {
                   <tr key={area.id}>
                     <td>{area.nome}</td>
                     <td>{area.responsavel}</td>
-                    <td>0</td>
+                    <td>{area.subArea}</td>
                     <td>Ativo</td>
                     <td className="acoes">
-                      <button onClick={() => handleEditarArea(area.id)}>
-                        <PencilSimpleLine size={18} />
-                      </button>
-                      <button onClick={() => handleExluirArea(area.id)}>
-                        <Trash size={18} />
-                      </button>
+                      <div className="icon-acoes">
+                        <button onClick={() => handleEditarArea(area.id)}>
+                          <PencilSimpleLine size={18} />
+                        </button>
+                        <button onClick={() => handleExluirArea(area.id)}>
+                          <Trash size={18} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -136,8 +140,8 @@ function Area() {
 
               {popupExclusao && (
                 <ExcluirPopupArea
-                  titleArea= "Excluir área?"
-                  mensagem= "Essa ação não pode ser desfeita"
+                  titleArea="Excluir área?"
+                  mensagem="Essa ação não pode ser desfeita"
                   onConfirm={confirmarExclusaoArea}
                   onCancel={cancelarExclusaoArea}
                 />

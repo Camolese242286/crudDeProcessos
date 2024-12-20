@@ -5,55 +5,62 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from '../../styles/StyleArea/nova-area.css'
 
 function NovaArea() {
-    const navigate = useNavigate();
-    const {id} = useParams();
-    const [nomeArea, setNomeArea] = useState("");
-    const [descricaoArea, setDescricaoArea] = useState("");
-    const [responsavel, setResponsavel] = useState("");
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [nomeArea, setNomeArea] = useState("");
+  const [descricaoArea, setDescricaoArea] = useState("");
+  const [responsavel, setResponsavel] = useState("");
+  const [subArea, setSubArea] = useState("");
 
-    const validarCampos = () => {
-        if(!nomeArea || !descricaoArea) {
-            alert("Por favor, preencha o nome da Área e a descrição");
-            return false;
-        }
-        return true;
+  const validarCampos = () => {
+    if (!nomeArea || !descricaoArea) {
+      alert("Por favor, preencha o nome da Área e a descrição");
+      return false;
     }
+    return true;
+  }
 
-    const handleSalvarArea = () => {
-        if(!validarCampos()) return;
+  const handleSalvarArea = () => {
+    if (!validarCampos()) return;
 
-        const novaArea = {
-            id: id || Date.now(), //Gera um novo ID se não existir
-            nome: nomeArea,
-            descricao: descricaoArea,
-            responsavel: responsavel,
-        };
-
-        const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
-        const index = areasSalvos.findIndex((a) => a.id === novaArea.id);
-
-        if (index >= 0) {
-            areasSalvos[index] = novaArea; //Atualiza área existente
-        } else {
-            areasSalvos.push(novaArea); //Adiciona uma nova área
-        }
-
-        localStorage.setItem("area", JSON.stringify(areasSalvos));
-        navigate("/area");
+    const novaArea = {
+      id: id || Date.now(), //Gera um novo ID se não existir
+      nome: nomeArea,
+      descricao: descricaoArea,
+      responsavel: responsavel,
+      subArea: subArea,
     };
 
-    useEffect(() => {
-        if (id) {
-            const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
-            const area = areasSalvos.find((a) => a.id === Number(id));
-            
-            if(area) {
-                setNomeArea(area.nome);
-                setDescricaoArea(area.descricao);
-                setResponsavel(area.responsavel);
-            }
-        }
-    }, [id]);
+    const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
+    const index = areasSalvos.findIndex((a) => a.id === novaArea.id);
+
+    if (index >= 0) {
+      areasSalvos[index] = novaArea; //Atualiza área existente
+    } else {
+      areasSalvos.push(novaArea); //Adiciona uma nova área
+    }
+
+    localStorage.setItem("area", JSON.stringify(areasSalvos));
+    navigate("/area");
+  };
+
+  useEffect(() => {
+    if (id) {
+      const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
+      const area = areasSalvos.find((a) => a.id === Number(id));
+
+      if (area) {
+        setNomeArea(area.nome);
+        setDescricaoArea(area.descricao);
+        setResponsavel(area.responsavel);
+        setSubArea(area.subArea);
+      }
+    }
+  }, [id]);
+
+  const handleCancelArea = () => {
+    navigate('/area');
+  }
 
   return (
     <div className="container-principal">
@@ -97,10 +104,23 @@ function NovaArea() {
           </select>
         </div>
 
+        <div className="sub-area-container">
+          <input
+            className="sub-area"
+            type="text" 
+            placeholder="Sub-Area"
+            value={subArea}
+            onChange={(e) => setSubArea(e.target.value)}
+            />
+        </div>
+
         {/* Botão de Adicionar */}
         <div className="btn-add-area">
-          <button className="botao-area" onClick={handleSalvarArea}>
-             Salvar
+          <button className="btn-cancelar-area" onClick={handleCancelArea}>
+            Cancelar
+          </button>
+          <button className="btn-salvar-area" onClick={handleSalvarArea}>
+            Salvar
           </button>
         </div>
       </div>

@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap");
 
-.container-page{
-  margin-left: 150px; /* Respeitando o menu lateral */
+.container-page {
+  margin-left: 150px;
+  /* Respeitando o menu lateral */
   gap: 30px;
   font-family: "Open Sans", sans-serif;
 }
+
 .container-area {
   display: flex;
   justify-content: start;
@@ -33,8 +35,10 @@
 }
 
 .filters-area,
-.search,
-.botao-area {
+.search
+
+/*.botao-area*/
+  {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,7 +60,7 @@
   background-color: #6800ff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
 }
@@ -72,8 +76,8 @@
 
 .TableArea table {
   width: 100%;
-  border-collapse: collapse;
-  background-color: #f0e5ff;
+  /*border-collapse: collapse;*/
+  background-color: #fcfaff;
   color: #6800ff;
   font-family: "Open Sans", sans-serif;
 }
@@ -97,6 +101,7 @@
 .TableArea th:last-child {
   border-top-right-radius: 10px;
 }
+
 /* Estilização do componente Search */
 .input-container {
   position: relative;
@@ -106,29 +111,42 @@
   padding: 3px;
   width: 260px;
 }
+
 .input-container input {
-  padding-left: 5px; /* Espaço para o ícone */
+  padding-left: 5px;
+  /* Espaço para o ícone */
   height: 40px;
   width: 250px;
   box-sizing: border-box;
   color: #6800ff;
 }
+
 .input-container input:focus {
-  outline: none; /* Remove o contorno padrão */
-  border: 1px solid #ccc; /* Adicione uma borda personalizada, se quiser */
+  outline: none;
+  /* Remove o contorno padrão */
+  border: 1px solid #ccc;
+  /* Adicione uma borda personalizada, se quiser */
   border-radius: 15px;
 }
 
 .input-container .icon {
   position: absolute;
-  right: 10px; /* Distância da borda direita */
+  right: 10px;
+  /* Distância da borda direita */
   top: 50%;
-  transform: translateY(-50%); /* Centraliza verticalmente */
+  transform: translateY(-50%);
+  /* Centraliza verticalmente */
   color: #6800ff;
-  pointer-events: none; /* Evita que o ícone interfira no input */
+  pointer-events: none;
+  /* Evita que o ícone interfira no input */
 }
+
+.icon-acoes {
+  text-align: center;  
+}
+
 /* Estilização do componente Search na página Área */
-.search-area{
+.search-area {
   display: flex;
   justify-content: end;
 }
@@ -145,7 +163,7 @@
     align-items: center;
   }
 
-  .slArea select{
+  .slArea select {
     width: 200%;
   }
 
