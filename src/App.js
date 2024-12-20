@@ -28,8 +28,6 @@ function App() {
 
   return (
     <>
-      <Header/>
-      <Menu/>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
@@ -50,9 +48,8 @@ function App() {
         <Route path="/questionario/:id" element={<Questionario />} />
         <Route path="/Nova-Area" element={<NovaArea />} />
         <Route path="/editar-area/:id" element={<NovaArea />} />
-        <Route path="/StatusIndicator" element={<Principal/>} />
+        <Route path="/StatusIndicator" element={<Principal />} />
       </Routes>
-      
     </>
   );
 }

@@ -17,7 +17,6 @@ const Header = () => {
     "/Outros": "Outros Exemplos",
   };
 
-  // Pega o nome da página atual com base na rota
   const pageTitle = pageNames[location.pathname] || "LGPD";
 
   return (

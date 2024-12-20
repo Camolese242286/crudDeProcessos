@@ -5,7 +5,7 @@ import SearchWithDebounce from "./SearchProcesso";
 import ExcluirPopup from "./Popup-excluir-processo";
 import { PencilLine, Trash } from "phosphor-react";
 import Header from "./Header";
-import api from "./apiService"; // Arquivo para gerenciar requisições
+import api from "./apiService";
 
 const Processos = () => {
   const navigate = useNavigate();
@@ -15,16 +15,10 @@ const Processos = () => {
   const [idParaExcluir, setIdParaExcluir] = useState(null);
   const [mostrarPopup, setMostrarPopup] = useState(false);
 
-  // Navegar para criar novo processo
-  const handleButtonOpen = () => {
-    navigate("/Novo-Processo");
-  };
-
-  // Buscar processos do back-end
   useEffect(() => {
     const fetchProcessos = async () => {
       try {
-        const response = await api.get("/processos"); // Endpoint do back-end
+        const response = await api.get("/processos");
         setProcessos(response.data);
         setProcessosFiltrados(response.data);
       } catch (error) {
@@ -35,12 +29,8 @@ const Processos = () => {
     fetchProcessos();
   }, []);
 
-  // Editar processo
-  const handleEditar = (id) => {
-    navigate(`/editar-processo/${id}`);
-  };
+  const navegarPara = (rota) => navigate(rota);
 
-  // Excluir processo
   const handleExcluir = (id) => {
     setIdParaExcluir(id);
     setMostrarPopup(true);
@@ -48,10 +38,8 @@ const Processos = () => {
 
   const confirmarExclusao = async () => {
     try {
-      await api.delete(`/processos/${idParaExcluir}`); // Endpoint para excluir
-      const novosProcessos = processos.filter(
-        (processo) => processo.id !== idParaExcluir
-      );
+      await api.delete(`/processos/${idParaExcluir}`);
+      const novosProcessos = processos.filter(({ id }) => id !== idParaExcluir);
       setProcessos(novosProcessos);
       setProcessosFiltrados(novosProcessos);
       setMostrarPopup(false);
@@ -65,19 +53,17 @@ const Processos = () => {
     setIdParaExcluir(null);
   };
 
-  // Atualizar status no back-end
   const handleStatusChange = async (processoId, novoStatus) => {
     try {
-      const updatedProcesso = processos.find((p) => p.id === processoId);
+      const processoAtualizado = processos.find(({ id }) => id === processoId);
       const response = await api.put(`/processos/${processoId}`, {
-        ...updatedProcesso,
+        ...processoAtualizado,
         status: novoStatus,
       });
 
       const novosProcessos = processos.map((processo) =>
         processo.id === processoId ? response.data : processo
       );
-
       setProcessos(novosProcessos);
       setProcessosFiltrados(novosProcessos);
     } catch (error) {
@@ -85,7 +71,6 @@ const Processos = () => {
     }
   };
 
-  // Formatar data
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return isNaN(date) ? "Data Inválida" : date.toLocaleDateString("pt-BR");
@@ -94,7 +79,7 @@ const Processos = () => {
   return (
     <div className="processos-container">
       <Menu />
-      <Header title={Processos}/>
+      <Header title={"Processos"} />
       <div className="filters">
         <select
           className="slProcessos"
@@ -125,17 +110,15 @@ const Processos = () => {
             </tr>
           </thead>
           <tbody>
-            {processosFiltrados.length > 0 ? (
-              processosFiltrados.map((processo) => (
-                <tr key={processo.id}>
-                  <td>{processo.nome}</td>
-                  <td>{processo.prioridade || "Não definida"}</td>
+            {processosFiltrados.length ? (
+              processosFiltrados.map(({ id, nome, prioridade, status, dataCriacao }) => (
+                <tr key={id}>
+                  <td>{nome}</td>
+                  <td>{prioridade || "Não definida"}</td>
                   <td>
                     <select
-                      value={processo.status || "Não definido"}
-                      onChange={(e) =>
-                        handleStatusChange(processo.id, e.target.value)
-                      }
+                      value={status || "Não definido"}
+                      onChange={(e) => handleStatusChange(id, e.target.value)}
                     >
                       <option value="">Selecione o Status</option>
                       <option value="Enviado">Enviado</option>
@@ -144,13 +127,13 @@ const Processos = () => {
                       <option value="Não respondido">Não respondido</option>
                     </select>
                   </td>
-                  <td>{formatDate(processo.dataCriacao)}</td>
+                  <td>{formatDate(dataCriacao)}</td>
                   <td className="acoes">
                     <div className="icones">
-                      <button onClick={() => handleEditar(processo.id)}>
+                      <button onClick={() => navegarPara(`/editar-processo/${id}`)}>
                         <PencilLine />
                       </button>
-                      <button onClick={() => handleExcluir(processo.id)}>
+                      <button onClick={() => handleExcluir(id)}>
                         <Trash />
                       </button>
                     </div>
@@ -178,7 +161,7 @@ const Processos = () => {
       )}
 
       <div className="botaoNovoProcesso">
-        <button onClick={handleButtonOpen}>+ Novo Processo</button>
+        <button onClick={() => navegarPara("/Novo-Processo")}>+ Novo Processo</button>
       </div>
     </div>
   );

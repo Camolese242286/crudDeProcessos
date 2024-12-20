@@ -11,11 +11,9 @@
 }
 
 .header h1 {
-  display: flex;
   font-size: 38px;
-  justify-content: start;
   color: #6800ff;
-  text-align: center;
+  text-align: left;
 }
 
 .filters {
@@ -33,18 +31,16 @@
   font-size: 1rem;
 }
 
-
 .TabelaProcesso {
   overflow-x: auto;
 }
 
 .TabelaProcesso table {
-  min-width: 100%;
-  /* border-collapse: collapse; */
+  width: 100%;
   border-radius: 20px;
   background: #fcfaff;
-  border-radius: 20px;
   color: #6800ff;
+  border-collapse: collapse;
 }
 
 .TabelaProcesso th,
@@ -57,9 +53,16 @@
   background-color: #d2b4fe;
   font-weight: bold;
 }
+
 td.empty {
-  border: solid 2px;
+  border: 2px solid;
   border-radius: 5px;
+  text-align: center;
+}
+
+.acoes {
+  display: flex;
+  justify-content: center;
 }
 
 .acoes button {
@@ -70,25 +73,32 @@ td.empty {
   border-radius: 4px;
   cursor: pointer;
 }
-.componente_Search{
+
+.acoes button:hover {
+  background: #6800ff;
+  color: white;
+}
+
+.componente_Search {
   position: relative;
   display: inline-block;
   width: 250px;
 }
-.componente_Search input{
+
+.componente_Search input {
   width: 100%;
   padding: 10px;
   border: 1px solid #6800ff;
   border-radius: 15px;
-  outline: none;
   font-size: 16px;
-  box-sizing: border-box;
 }
-.componente_Search input:focus{
+
+.componente_Search input:focus {
   border: 1px solid #6800ff;
   box-shadow: 0 0 10px #888;
 }
-.componente_Search .icon-search{
+
+.componente_Search .icon-search {
   position: absolute;
   right: 10px;
   top: 20%;
@@ -96,22 +106,14 @@ td.empty {
   font-size: 18px;
   pointer-events: none;
 }
-.acoes button:hover {
-  background: #6800ff;
-  color: white;
-}
-.icones{
-  display: flex;
-  justify-content: center;
-}
+
 .processos-container .botaoNovoProcesso button {
   margin: 0 auto;
-  padding: 10px 10px;
+  padding: 10px;
   background-color: #6800ff;
   color: white;
   border: none;
   border-radius: 10px;
-  font-size: small;
   font-weight: bold;
   cursor: pointer;
 }
