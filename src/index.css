@@ -6,6 +6,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body, .content {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.content {
+  margin-top: 100px; /* Altura do Header */
+  margin-left: 100px; /* Largura do Menu */
+  padding: 20px;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

@@ -4,81 +4,97 @@ import Menu from "./Menu";
 import SearchWithDebounce from "./SearchProcesso";
 import ExcluirPopup from "./Popup-excluir-processo";
 import { PencilLine, Trash } from "phosphor-react";
-
-// import { GoPencil, GoTrash } from "react-icons/go";
+import Header from "./Header";
+import api from "./apiService"; // Arquivo para gerenciar requisições
 
 const Processos = () => {
   const navigate = useNavigate();
   const [processos, setProcessos] = useState([]);
   const [processosFiltrados, setProcessosFiltrados] = useState([]);
   const [selectProcessos, setSelectProcessos] = useState("");
-
   const [idParaExcluir, setIdParaExcluir] = useState(null);
   const [mostrarPopup, setMostrarPopup] = useState(false);
 
+  // Navegar para criar novo processo
   const handleButtonOpen = () => {
     navigate("/Novo-Processo");
   };
 
+  // Buscar processos do back-end
   useEffect(() => {
-    const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
-    setProcessos(processosSalvos);
-    setProcessosFiltrados(processosSalvos);
+    const fetchProcessos = async () => {
+      try {
+        const response = await api.get("/processos"); // Endpoint do back-end
+        setProcessos(response.data);
+        setProcessosFiltrados(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar processos:", error);
+      }
+    };
+
+    fetchProcessos();
   }, []);
 
+  // Editar processo
   const handleEditar = (id) => {
     navigate(`/editar-processo/${id}`);
-    // Atualizar o estado com os dados atuais de processos salvos após a edição
-    const processosAtualizados = JSON.parse(localStorage.getItem("processos")) || [];
-    setProcessos(processosAtualizados);
-    setProcessosFiltrados(processosAtualizados); // Para garantir que os filtros também sejam aplicados corretamente
-};
+  };
 
-
+  // Excluir processo
   const handleExcluir = (id) => {
     setIdParaExcluir(id);
     setMostrarPopup(true);
   };
 
-  const confirmarExclusao = () => {
-    const novoProcessos = processos.filter(
-      (processo) => processo.id !== idParaExcluir
-    );
-    setProcessos(novoProcessos); // Atualiza o estado local
-    setProcessosFiltrados(novoProcessos); // Atualiza os processos filtrados
-    localStorage.setItem("processos", JSON.stringify(novoProcessos)); // Atualiza o localStorage
-    setMostrarPopup(false);
-};
-
+  const confirmarExclusao = async () => {
+    try {
+      await api.delete(`/processos/${idParaExcluir}`); // Endpoint para excluir
+      const novosProcessos = processos.filter(
+        (processo) => processo.id !== idParaExcluir
+      );
+      setProcessos(novosProcessos);
+      setProcessosFiltrados(novosProcessos);
+      setMostrarPopup(false);
+    } catch (error) {
+      console.error("Erro ao excluir processo:", error);
+    }
+  };
 
   const cancelarExclusao = () => {
     setMostrarPopup(false);
     setIdParaExcluir(null);
   };
 
+  // Atualizar status no back-end
+  const handleStatusChange = async (processoId, novoStatus) => {
+    try {
+      const updatedProcesso = processos.find((p) => p.id === processoId);
+      const response = await api.put(`/processos/${processoId}`, {
+        ...updatedProcesso,
+        status: novoStatus,
+      });
+
+      const novosProcessos = processos.map((processo) =>
+        processo.id === processoId ? response.data : processo
+      );
+
+      setProcessos(novosProcessos);
+      setProcessosFiltrados(novosProcessos);
+    } catch (error) {
+      console.error("Erro ao atualizar status do processo:", error);
+    }
+  };
+
+  // Formatar data
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return isNaN(date) ? "Data Inválida" : date.toLocaleDateString("pt-BR");
   };
 
-  const handleStatusChange = (processoId, novoStatus) => {
-    const novosProcessos = processos.map((processo) =>
-      processo.id === processoId
-        ? { ...processo, status: novoStatus }
-        : processo
-    );
-    setProcessos(novosProcessos);
-    localStorage.setItem("processos", JSON.stringify(novosProcessos));
-    setProcessosFiltrados(novosProcessos);
-  };
-
   return (
     <div className="processos-container">
       <Menu />
-      <div className="header">
-        <h1>Processos</h1>
-      </div>
-
+      <Header title={Processos}/>
       <div className="filters">
         <select
           className="slProcessos"
@@ -113,7 +129,7 @@ const Processos = () => {
               processosFiltrados.map((processo) => (
                 <tr key={processo.id}>
                   <td>{processo.nome}</td>
-                  <td>{processo.prioridades || "Não definida"}</td>
+                  <td>{processo.prioridade || "Não definida"}</td>
                   <td>
                     <select
                       value={processo.status || "Não definido"}

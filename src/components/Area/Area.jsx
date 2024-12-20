@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import Menu from "../Menu";
+import Header from "../Header";
 import Search from "./Search";
 
 import ExcluirPopupArea from "./Popup-excluir-area";
@@ -68,6 +69,7 @@ function Area() {
   return (
     <div className="container-page-area">
         <Menu />
+        <Header/>
     <div className="container-area">
         <div className="title">
           <h2>Áreas da Empresa</h2>

@@ -6,6 +6,7 @@ import "./Processos";
 import PopupSalvarEnviar from "./Popup_Salvar_Enviar";
 import { FaTrashAlt } from "react-icons/fa";
 import { ArrowSquareDown, ArrowSquareUp, Trash } from "phosphor-react";
+import Header from "./Header";
 import "../styles/novo-processo.css";
 
 function NovoProcesso() {
@@ -187,9 +188,10 @@ function NovoProcesso() {
   return (
     <div className="container-novo-processo">
       <Menu />
-      <div className="title-fixed">
+      <Header/>
+      {/* <div className="title-fixed">
         <h1>Novo Processo</h1>
-      </div>
+      </div> */}
 
       <div className="container-processo">
         <div className="container-titulo">

@@ -40,55 +40,48 @@ function EditarProcesso() {
     if (!validarCampos()) return;
 
     const processoAtualizado = {
-        id: Number(id), // Garantir que o id seja o mesmo
-        nome: nomeProcesso,
-        descricao: descricao,
-        prioridades: prioridades,
-        questoes: [...questoes],
+      id: Number(id), // Garantir que o id seja o mesmo
+      nome: nomeProcesso,
+      descricao: descricao,
+      prioridades: prioridades,
+      questoes: [...questoes],
     };
 
     try {
-        // Buscar os processos salvos no localStorage
-        const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
-        
-        // Verificar se o nome ou id já existe para evitar duplicação
-        const processoExistente = processosSalvos.find(
-            (p) => p.id === processoAtualizado.id || p.nome === processoAtualizado.nome
-        );
+      // Buscar os processos salvos no localStorage
+      const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
 
-        if (processoExistente) {
-            // Se o processo já existir (mesmo id ou nome), não permita duplicação
-            alert("Já existe um processo com o mesmo nome ou ID.");
-            return;
-        }
+      // Verificar se outro processo já tem o mesmo nome
+      const processoDuplicado = processosSalvos.find(
+        (p) => p.nome === processoAtualizado.nome && p.id !== processoAtualizado.id
+      );
 
-        // Encontrar o índice do processo que precisa ser atualizado
-        const index = processosSalvos.findIndex((p) => p.id === processoAtualizado.id);
+      if (processoDuplicado) {
+        alert("Já existe outro processo com o mesmo nome.");
+        return;
+      }
 
-        if (index >= 0) {
-            // Atualizar o processo existente no localStorage
-            processosSalvos[index] = processoAtualizado;
-        } else {
-            // Caso o processo não tenha sido encontrado, adicionar um novo
-            processosSalvos.push(processoAtualizado);
-        }
+      // Atualizar ou adicionar o processo
+      const index = processosSalvos.findIndex((p) => p.id === processoAtualizado.id);
 
-        // Salvar no localStorage
-        localStorage.setItem("processos", JSON.stringify(processosSalvos));
+      if (index >= 0) {
+        // Atualizar o processo existente
+        processosSalvos[index] = processoAtualizado;
+      } else {
+        // Caso o processo não tenha sido encontrado, adicionar um novo
+        processosSalvos.push(processoAtualizado);
+      }
 
-        // Atualizar o estado de processos e processos filtrados (no componente de listagem)
-        setProcessos(processosSalvos); // Atualiza o estado com os processos modificados
-        setProcessosFiltrados(processosSalvos); // Atualiza os processos filtrados
+      // Salvar no localStorage
+      localStorage.setItem("processos", JSON.stringify(processosSalvos));
 
-        // Navegar para a página de processos
-        navigate("/processos");
-
+      alert("Processo salvo com sucesso.");
+      navigate("/processos");
     } catch (error) {
-        console.error("Erro ao salvar o processo:", error);
-        alert("Ocorreu um erro ao tentar salvar o processo.");
+      console.error("Erro ao salvar o processo:", error);
+      alert("Ocorreu um erro ao tentar salvar o processo.");
     }
-};
-
+  };
 
   const handleAbrirPopup = () => {
     if (!validarCampos()) return;
@@ -275,12 +268,16 @@ function EditarProcesso() {
                         <input
                           type="checkbox"
                           checked={item.checked || false}
-                          onChange={(e) => handleAtualizarCheckListItem(questao.id, idx, e.target.checked)}
+                          onChange={(e) =>
+                            handleAtualizarCheckListItem(questao.id, idx, e.target.checked)
+                          }
                         />
                         <input
                           type="text"
                           value={item.text}
-                          onChange={(e) => handleAtualizarCheckListItem(questao.id, idx, e.target.value)}
+                          onChange={(e) =>
+                            handleAtualizarCheckListItem(questao.id, idx, e.target.value)
+                          }
                           placeholder="Texto do item"
                         />
                       </div>
@@ -293,6 +290,9 @@ function EditarProcesso() {
         </div>
 
         <div className="botao">
+          <button onClick={handleSalvarClick} className="botao-salvar">
+            Salvar
+          </button>
           <button onClick={handleAbrirPopup} className="botao-salvar-enviar">
             Salvar e Enviar
           </button>

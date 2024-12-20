@@ -12,6 +12,8 @@ import NovaArea from "./components/Area/Nova-Area";
 import StatusIndicator from "./components/StatusIndicator";
 
 import Area from "./components/Area/Area";
+import Header from "./components/Header";
+import Menu from "./components/Menu";
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -26,6 +28,8 @@ function App() {
 
   return (
     <>
+      <Header/>
+      <Menu/>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
