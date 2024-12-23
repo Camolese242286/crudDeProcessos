@@ -3,16 +3,27 @@
 .container-page {
   margin-left: 150px;
   /* Respeitando o menu lateral */
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+.container-page-area{
+  margin-left: 150px;
+  margin-top: 0px;
   gap: 30px;
   font-family: "Open Sans", sans-serif;
 }
 
 .container-area {
-  display: flex;
+  display: grid;
   justify-content: start;
   padding: 20px;
   flex-direction: column;
   gap: 30px;
+  margin: 0px;
+  margin-top: 0px;
 }
 
 .title {

@@ -1,10 +1,15 @@
 .processos-container {
+<<<<<<< HEAD
   margin-left: 150px;
   /* Respeitando o menu lateral */
+=======
+  margin-left: 110px;
+  margin-top: 150px;
+>>>>>>> 7455db6aa723dbbdd3a4557bf5d9a872bb736002
   justify-content: center;
   padding: 20px;
   display: flex;
-  width: 90vw;
+  max-width: calc(100vw - 110px);
   flex-direction: column;
   gap: 30px;
   font-family: "Open Sans", sans-serif;
@@ -12,7 +17,7 @@
 
 .header h1 {
   display: flex;
-  font-size: 2rem;
+  font-size: 38px;
   justify-content: start;
   color: #6800ff;
   text-align: center;

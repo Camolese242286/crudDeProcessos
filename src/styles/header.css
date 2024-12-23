@@ -1,0 +1,26 @@
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: start;
+  top: 0;
+  left: 110px;
+  width: calc(100vw - 110px);
+  height: 100px;
+  background-color: #fff;
+  border-bottom: solid 1px #6800ff;
+  box-shadow: 5px 1px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-size: 30px;
+  text-align: center;
+}
+.header h1{
+  color: #6800ff;
+  padding: 20px;
+}

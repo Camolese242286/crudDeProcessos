@@ -3,6 +3,7 @@ import Menu from "./Menu";
 import "../styles/principal.css";
 import "../styles/menu.css";
 import StatusIndicator from "./StatusIndicator";
+import Header from "./Header";
 
 const Principal = () => {
   // Usando um estado de objeto para manter os status de cada linha de forma independente
@@ -19,7 +20,7 @@ const Principal = () => {
     const newStatus = event.target.value;
     setStatuses((prevStatuses) => ({
       ...prevStatuses,
-      [area]: newStatus // Atualiza o status da área específica
+      [area]: newStatus, // Atualiza o status da área específica
     }));
   };
 
@@ -27,6 +28,7 @@ const Principal = () => {
     <>
       <div className="index-container">
         <Menu />
+        <Header />
       </div>
       <div className="main-container">
         <div className="body_container">
