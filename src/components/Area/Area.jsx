@@ -7,7 +7,7 @@ import Search from "./Search";
 
 import ExcluirPopupArea from "./Popup-excluir-area";
 
-import { PencilSimpleLine, Trash } from "phosphor-react"
+import { PencilSimpleLine, Trash } from "phosphor-react";
 
 import "../../styles/StyleArea/area.css";
 
@@ -42,40 +42,34 @@ function Area() {
   //Editar o campo da área
   const handleEditarArea = (id) => {
     navigate(`/editar-area/${id}`);
-  }
+  };
 
   //Excluir o id da area
   const handleExluirArea = (id) => {
     setIdParaExcluir(id);
     setpopupExclusao(true);
-  }
+  };
 
-  //Confirmar a exclusão do id 
+  //Confirmar a exclusão do id
   const confirmarExclusaoArea = () => {
-    const novaAreas = areas.filter(
-      (area) => area.id !== idParaExcluir
-    );
+    const novaAreas = areas.filter((area) => area.id !== idParaExcluir);
     setAreas(novaAreas);
     setAreasFiltrados(novaAreas);
     localStorage.setItem("area", JSON.stringify(novaAreas));
     setpopupExclusao(false);
-  }
+  };
 
   //Cancelar a exclusao do id
   const cancelarExclusaoArea = () => {
     setpopupExclusao(false);
     setIdParaExcluir(null);
-  }
+  };
 
   return (
     <div className="container-page-area">
-        <Menu />
-        <Header/>
-    <div className="container-area">
-        <div className="title">
-          <h2>Áreas da Empresa</h2>
-        </div>
-
+      <Menu />
+      <Header />
+      <div className="container-area">
         <div className="settings">
           <div className="filters-area">
             <select
@@ -113,7 +107,6 @@ function Area() {
               </tr>
             </thead>
             <tbody>
-
               {/* Aqui você pode mapear os dados filtrados */}
               {areasFiltrados.length > 0 ? (
                 areasFiltrados.map((area) => (
@@ -157,12 +150,11 @@ function Area() {
                   <td>{area.status}</td>
                 </tr>
               ))}*/}
-
             </tbody>
           </table>
         </div>
       </div>
-     </div>
+    </div>
   );
 }
 

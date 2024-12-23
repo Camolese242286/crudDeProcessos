@@ -7,25 +7,24 @@ import "../styles/login.css"; // Estilos da página
 import logo from "../images/logo.png"; // Logo da página
 
 function Login() {
-  const { login } = useAuth(); // Função para autenticar o usuário com email e senha
-  const { instance } = useMsal(); // Instância do MSAL para login via Microsoft
+  const { login } = useAuth();
+  const { instance } = useMsal();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState(""); // Armazena o email digitado
-  const [password, setPassword] = useState(""); // Armazena a senha digitada
-  const [error, setError] = useState(""); // Mensagem de erro para o usuário
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  // Função de login com credenciais tradicionais (e-mail e senha)
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const result = await login(email, password); // Passa o email e a senha para autenticação
+      const result = await login(email, password); 
       if (result) {
         const activeAccount = instance.getActiveAccount();
         if (activeAccount) {
           console.log("Usuário logado:", activeAccount.username);
-          navigate("/principal"); // Redireciona para a página principal após o login
+          navigate("/principal");
         }
       } else {
         setError("Login falhou! Verifique suas credenciais.");
@@ -36,14 +35,13 @@ function Login() {
     }
   };
 
-  // Função de login com a conta Microsoft via MSAL
   const handleMicrosoftLogin = async () => {
     try {
       const response = await instance.loginPopup({
         scopes: ["User.Read", "openid", "profile"],
       });
       console.log("Usuário logado com a Microsoft:", response.account);
-      navigate("/principal"); // Redireciona para a página principal após login com Microsoft
+      navigate("/principal");
     } catch (error) {
       console.error("Erro ao fazer login com a Microsoft:", error);
       setError("Erro ao tentar fazer login com a Microsoft. Tente novamente.");
@@ -53,10 +51,10 @@ function Login() {
   return (
     <main>
       <div className="page-container">
-        {/* Container da imagem à esquerda */}
+        {/* Container da imagem*/}
         <div className="left-container"></div>
 
-        {/* Container do formulário de login à direita */}
+        {/* Container do formulário de login*/}
         <div className="right-container">
           <div className="login-box">
             <div className="logo_topo">
@@ -72,43 +70,11 @@ function Login() {
             </div>
             {/* Formulário de login */}
             <form className="input_login" onSubmit={handleLogin}>
-              {/* <label>
-                E-mail:
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)} // Atualiza o valor do e-mail
-                  placeholder="exemplo@email.com"
-                  required
-                />
-              </label> */}
-
-              {/* <label>
-                Senha:
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)} // Atualiza o valor da senha
-                  placeholder="Min. 8 caracteres"
-                  required
-                />
-              </label> */}
-
-              {/* Exibição de erro, caso haja */}
+              {/*Mensagem de erro no Login comm a Microsoft*/}
               {error && <div className="error-message">{error}</div>}
 
-              {/* <div className="options">
-                <label className="cl-checkbox">
-                  <input type="checkbox" />
-                  <span>Mantenha-me conectado</span>
-                </label>
-                <label>
-                  <a href="http://www.google.com">Esqueci minha senha</a>
-                </label>
-              </div> */}
             </form>
             <div className="botoes">
-              {/* <button type="submit">ENTRAR</button> */}
             </div>
             <button className="botao_microsoft" type="button" onClick={handleMicrosoftLogin}>
               Entrar

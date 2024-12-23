@@ -1,17 +1,16 @@
-/* Importação de fontes */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap');
 
-/* Container principal */
 .container-principal{
   margin-left: 150px;
   max-width: 90vw;
   height: 100vh;
 }
 .index-container {
-  margin-left: 110px; /* Respeita o espaço do menu lateral (Menu) */
+  margin-left: 150px;
+  margin-top: 150px;
+
 }
 
-/* Estilo do título da página */
 .title-area {
   text-align: center;
   margin: 20px;
@@ -24,7 +23,6 @@
   color: #6800FF;
 }
 
-/* Container principal de área */
 .container-area {
   margin-top: 20px;
   padding: 0 20px;
@@ -36,7 +34,6 @@
   margin: 0 auto;
 }
 
-/* Estilo do input de texto (Nome da Área) */
 .container-title-description {
   display: flex;
   flex-direction: column;
@@ -61,7 +58,6 @@
   color: #D2B2FF;
 }
 
-/* Estilo da área de descrição */
 .description-area {
   font-size: 18px;
   font-weight: 400;
@@ -81,7 +77,6 @@
   color: #D2B2FF;
 }
 
-/* Estilo do select de responsável */
 .select-responsavel-container {
   margin-top: 10px;
 }
@@ -102,6 +97,7 @@
   font-size: 16px;
 }
 
+<<<<<<< HEAD
 .sub-area {
   width: 25%;
   padding: 12px;
@@ -112,6 +108,11 @@
   position: relative;
   left: 75%;
   top: -68px;
+=======
+.btn-add-area {
+  margin-top: 20px;
+  text-align: center;
+>>>>>>> 00bbf4e13cdd278f71374dfee027a89257551c4a
 }
 
 .sub-area:focus {
@@ -163,10 +164,9 @@
   background-color: #5700CC;
 }
 
-/* Responsividade para telas menores */
 @media (max-width: 768px) {
   .index-container {
-    margin-left: 80px; /* Ajusta o espaçamento lateral no mobile */
+    margin-left: 80px;
   }
 
   .container-area {

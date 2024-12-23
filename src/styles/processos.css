@@ -1,11 +1,6 @@
 .processos-container {
-<<<<<<< HEAD
-  margin-left: 150px;
-  /* Respeitando o menu lateral */
-=======
   margin-left: 110px;
   margin-top: 150px;
->>>>>>> 7455db6aa723dbbdd3a4557bf5d9a872bb736002
   justify-content: center;
   padding: 20px;
   display: flex;
@@ -16,11 +11,9 @@
 }
 
 .header h1 {
-  display: flex;
   font-size: 38px;
-  justify-content: start;
   color: #6800ff;
-  text-align: center;
+  text-align: left;
 }
 
 .filters {
@@ -43,12 +36,11 @@
 }
 
 .TabelaProcesso table {
-  min-width: 100%;
-  /* border-collapse: collapse; */
+  width: 100%;
   border-radius: 20px;
   background: #fcfaff;
-  border-radius: 20px;
   color: #6800ff;
+  border-collapse: collapse;
 }
 
 .TabelaProcesso th,
@@ -63,8 +55,14 @@
 }
 
 td.empty {
-  border: solid 2px;
+  border: 2px solid;
   border-radius: 5px;
+  text-align: center;
+}
+
+.acoes {
+  display: flex;
+  justify-content: center;
 }
 
 .acoes button {
@@ -74,6 +72,11 @@ td.empty {
   border: 1px solid #6800ff;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.acoes button:hover {
+  background: #6800ff;
+  color: white;
 }
 
 .componente_Search {
@@ -87,9 +90,7 @@ td.empty {
   padding: 10px;
   border: 1px solid #6800ff;
   border-radius: 15px;
-  outline: none;
   font-size: 16px;
-  box-sizing: border-box;
 }
 
 .componente_Search input:focus {
@@ -106,24 +107,13 @@ td.empty {
   pointer-events: none;
 }
 
-.acoes button:hover {
-  background: #6800ff;
-  color: white;
-}
-
-.icones {
-  display: flex;
-  justify-content: center;
-}
-
 .processos-container .botaoNovoProcesso button {
   margin: 0 auto;
-  padding: 10px 10px;
+  padding: 10px;
   background-color: #6800ff;
   color: white;
   border: none;
   border-radius: 10px;
-  font-size: small;
   font-weight: bold;
   cursor: pointer;
 }

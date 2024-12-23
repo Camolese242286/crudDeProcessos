@@ -10,7 +10,10 @@ body, .content {
   padding: 0;
   box-sizing: border-box;
 }
-
+input{
+  outline: none;
+  border: solid 1px #6800ff;
+}
 .content {
   margin-top: 100px; /* Altura do Header */
   margin-left: 100px; /* Largura do Menu */

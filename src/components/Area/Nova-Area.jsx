@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Menu from "../Menu";
 
 import { useNavigate, useParams } from "react-router-dom";
-import styles from '../../styles/StyleArea/nova-area.css'
+import styles from "../../styles/StyleArea/nova-area.css";
+import Header from "../Header";
 
 function NovaArea() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function NovaArea() {
       return false;
     }
     return true;
-  }
+  };
 
   const handleSalvarArea = () => {
     if (!validarCampos()) return;
@@ -27,17 +28,13 @@ function NovaArea() {
       id: id || Date.now(), //Gera um novo ID se não existir
       nome: nomeArea,
       descricao: descricaoArea,
-      responsavel: responsavel,
       subArea: subArea,
     };
 
-    const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
-    const index = areasSalvos.findIndex((a) => a.id === novaArea.id);
-
     if (index >= 0) {
-      areasSalvos[index] = novaArea; //Atualiza área existente
+      areasSalvos[index] = novaArea;
     } else {
-      areasSalvos.push(novaArea); //Adiciona uma nova área
+      areasSalvos.push(novaArea);
     }
 
     localStorage.setItem("area", JSON.stringify(areasSalvos));
@@ -66,10 +63,7 @@ function NovaArea() {
     <div className="container-principal">
       <div className="index-container">
         <Menu />
-      </div>
-
-      <div className="title-area">
-        <h2>Nova Área</h2>
+        <Header />
       </div>
       <div className="container-area">
         {/* Título e Descrição */}
