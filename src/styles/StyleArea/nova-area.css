@@ -97,7 +97,6 @@
   font-size: 16px;
 }
 
-<<<<<<< HEAD
 .sub-area {
   width: 25%;
   padding: 12px;
@@ -108,11 +107,6 @@
   position: relative;
   left: 75%;
   top: -68px;
-=======
-.btn-add-area {
-  margin-top: 20px;
-  text-align: center;
->>>>>>> 00bbf4e13cdd278f71374dfee027a89257551c4a
 }
 
 .sub-area:focus {
