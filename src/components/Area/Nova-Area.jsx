@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Menu from "../Menu";
-
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "../../styles/StyleArea/nova-area.css";
 import Header from "../Header";
@@ -25,16 +24,20 @@ function NovaArea() {
     if (!validarCampos()) return;
 
     const novaArea = {
-      id: id || Date.now(), //Gera um novo ID se não existir
+      id: id || Date.now(),
       nome: nomeArea,
       descricao: descricaoArea,
       subArea: subArea,
+      responsavel: responsavel, // Adicionando o responsável ao salvar
     };
 
+    const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
+    const index = areasSalvos.findIndex((a) => a.id === Number(id));
+
     if (index >= 0) {
-      areasSalvos[index] = novaArea;
+      areasSalvos[index] = novaArea; // Atualiza a área existente
     } else {
-      areasSalvos.push(novaArea);
+      areasSalvos.push(novaArea); // Adiciona uma nova área
     }
 
     localStorage.setItem("area", JSON.stringify(areasSalvos));
@@ -56,8 +59,8 @@ function NovaArea() {
   }, [id]);
 
   const handleCancelArea = () => {
-    navigate('/area');
-  }
+    navigate("/area");
+  };
 
   return (
     <div className="container-principal">
@@ -101,11 +104,11 @@ function NovaArea() {
         <div className="sub-area-container">
           <input
             className="sub-area"
-            type="text" 
+            type="text"
             placeholder="Sub-Area"
             value={subArea}
             onChange={(e) => setSubArea(e.target.value)}
-            />
+          />
         </div>
 
         {/* Botão de Adicionar */}
