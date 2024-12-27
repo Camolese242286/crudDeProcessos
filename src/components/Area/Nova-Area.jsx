@@ -30,6 +30,9 @@ function NovaArea() {
       descricao: descricaoArea,
       subArea: subArea,
     };
+    
+    const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
+    const index = areasSalvos.findIndex((p) => p.id === novaArea.id);
 
     if (index >= 0) {
       areasSalvos[index] = novaArea;

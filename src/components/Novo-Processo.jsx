@@ -16,6 +16,13 @@ function NovoProcesso() {
   const [descricao, setDescricao] = useState("");
   const [prioridades, setPrioridade] = useState("");
   const [questoes, setQuestoes] = useState([]); // Guardar todas as questões criadas
+  const [questoesPorTipo, setQuestoesPorTipo] = useState({
+    "Texto-aberto": [],
+    "Upload-arquivo": [],
+    "CheckList": [],
+    "Seletor-opcoes": [],
+  });
+
   const [SelectedOption, setSelectedOption] = useState(""); // Tipo de questão selecionado
   const [popupVisivel, setPopupVisivel] = useState(false);
 
@@ -61,15 +68,15 @@ function NovoProcesso() {
     setPopupVisivel(false);
   };
 
+  const handleCancelarClick = () => {
+    navigate("/processos");
+  };
+
   const handleEnviarProcesso = (responsaveis) => {
     console.log("Processo enviado para: ", responsaveis);
     // Aqui pode ser adicionada a lógica de envio, dependendo da aplicação
     handleSalvarClick(); // Salva antes de enviar
     alert("Processo enviado!");
-    navigate("/processos");
-  };
-
-  const handleCancelarClick = () => {
     navigate("/processos");
   };
 
@@ -88,7 +95,18 @@ function NovoProcesso() {
   }, [id]);
 
   const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value); // Atualiza o tipo de questão para nova questão
+    const novaOpcao = e.target.value;
+
+    setQuestoesPorTipo((prev) => ({
+      ...prev,
+      [SelectedOption]:questoes, //Salva as questões da opção atual
+    })); 
+
+    // Atualiza a opção selecionada
+    setSelectedOption(novaOpcao);
+
+    // Carrega as questões da nova opção ou iniciativa vazio
+    setQuestoes(questoesPorTipo[novaOpcao] || []);
   };
 
   const handleAdicionarQuestao = () => {
@@ -123,9 +141,9 @@ function NovoProcesso() {
     const questoesAtualizadas = questoes.map((questao) =>
       questao.id === id
         ? {
-            ...questao,
-            itens: [...(questao.itens || []), { text: "", checked: false }],
-          }
+          ...questao,
+          itens: [...(questao.itens || []), { text: "", checked: false }],
+        }
         : questao
     );
     setQuestoes(questoesAtualizadas);
@@ -188,7 +206,7 @@ function NovoProcesso() {
   return (
     <div className="container-novo-processo">
       <Menu />
-      <Header/>
+      <Header />
       {/* <div className="title-fixed">
         <h1>Novo Processo</h1>
       </div> */}

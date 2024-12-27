@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import './Novo-Processo';
 import Menu from "./Menu";
 import SearchWithDebounce from "./SearchProcesso";
 import ExcluirPopup from "./Popup-excluir-processo";
+
 import { PencilLine, Trash } from "phosphor-react";
 import Header from "./Header";
+
 import api from "./apiService";
 
 const Processos = () => {
@@ -14,6 +18,12 @@ const Processos = () => {
   const [selectProcessos, setSelectProcessos] = useState("");
   const [idParaExcluir, setIdParaExcluir] = useState(null);
   const [mostrarPopup, setMostrarPopup] = useState(false);
+
+  useEffect(() => {
+    const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
+    setProcessos(processosSalvos);
+    setProcessosFiltrados(processosSalvos);
+  }, []);
 
   useEffect(() => {
     const fetchProcessos = async () => {
@@ -36,7 +46,14 @@ const Processos = () => {
     setMostrarPopup(true);
   };
 
-  const confirmarExclusao = async () => {
+  const confirmarExclusao = () => {
+    const novosProcessos = processos.filter(({id}) => id !== idParaExcluir);
+    setProcessos(novosProcessos);
+    setProcessosFiltrados(novosProcessos);
+    setMostrarPopup(false);
+  }
+
+  /*const confirmarExclusao = async () => {
     try {
       await api.delete(`/processos/${idParaExcluir}`);
       const novosProcessos = processos.filter(({ id }) => id !== idParaExcluir);
@@ -46,7 +63,7 @@ const Processos = () => {
     } catch (error) {
       console.error("Erro ao excluir processo:", error);
     }
-  };
+  };*/
 
   const cancelarExclusao = () => {
     setMostrarPopup(false);
@@ -65,11 +82,14 @@ const Processos = () => {
         processo.id === processoId ? response.data : processo
       );
       setProcessos(novosProcessos);
+      localStorage.setItem("processos", JSON.stringify(novosProcessos));
       setProcessosFiltrados(novosProcessos);
+
     } catch (error) {
       console.error("Erro ao atualizar status do processo:", error);
     }
   };
+  
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -111,14 +131,14 @@ const Processos = () => {
           </thead>
           <tbody>
             {processosFiltrados.length ? (
-              processosFiltrados.map(({ id, nome, prioridade, status, dataCriacao }) => (
-                <tr key={id}>
-                  <td>{nome}</td>
-                  <td>{prioridade || "Não definida"}</td>
+              processosFiltrados.map((processo) => (
+                <tr key={processo.id}>
+                  <td>{processo.nome}</td>
+                  <td>{processo.prioridades || "Não definida"}</td>
                   <td>
                     <select
-                      value={status || "Não definido"}
-                      onChange={(e) => handleStatusChange(id, e.target.value)}
+                      value={processo.status || "Não definido"}
+                      onChange={(e) => handleStatusChange(processo.id, e.target.value)}
                     >
                       <option value="">Selecione o Status</option>
                       <option value="Enviado">Enviado</option>
@@ -127,13 +147,13 @@ const Processos = () => {
                       <option value="Não respondido">Não respondido</option>
                     </select>
                   </td>
-                  <td>{formatDate(dataCriacao)}</td>
+                  <td>{formatDate(processo.dataCriacao)}</td>
                   <td className="acoes">
                     <div className="icones">
-                      <button onClick={() => navegarPara(`/editar-processo/${id}`)}>
+                      <button onClick={() => navegarPara(`/editar-processo/${processo.id}`)}>
                         <PencilLine />
                       </button>
-                      <button onClick={() => handleExcluir(id)}>
+                      <button onClick={() => handleExcluir(processo.id)}>
                         <Trash />
                       </button>
                     </div>
@@ -166,5 +186,6 @@ const Processos = () => {
     </div>
   );
 };
+
 
 export default Processos;

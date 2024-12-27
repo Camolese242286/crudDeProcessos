@@ -16,13 +16,13 @@ function Area() {
   const [areas, setAreas] = useState([]); // Estado com a lista de áreas
   const [areasFiltrados, setAreasFiltrados] = useState([]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     // Carrega as áreas salvas no localStorage
     const areasSalvas = JSON.parse(localStorage.getItem("areas")) || [];
     setAreas(areasSalvas);
     setAreasFiltrados(areasSalvas);
   }, []);
-
+*/
   //Abrir outra página
   const handleNovaArea = () => {
     navigate("/Nova-Area");
