@@ -82,7 +82,8 @@ function NovoProcesso() {
 
   useEffect(() => {
     if (id) {
-      const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
+      const processosSalvos =
+        JSON.parse(localStorage.getItem("processos")) || [];
       const processo = processosSalvos.find((p) => p.id === Number(id));
 
       if (processo) {
@@ -120,7 +121,8 @@ function NovoProcesso() {
       titulo: "",
       resposta: "",
       tipo: SelectedOption,
-      itens: SelectedOption === "CheckList" ? [{ text: "", checked: false }] : [], // Itens para CheckList
+      itens:
+        SelectedOption === "CheckList" ? [{ text: "", checked: false }] : [], // Itens para CheckList
     };
 
     setQuestoes((prev) => [...prev, novaQuestao]);
@@ -230,6 +232,18 @@ function NovoProcesso() {
           </div>
         </div>
         <div className="options">
+
+          {/* Opções */}
+          <div className="select-opcoes-questao">
+            <p>Selecione o tipo da Questão</p>
+            <select className="selectOpcoes" onChange={handleOptionChange}>
+              <option value="">Selecione...</option>
+              <option value="Texto-aberto">Texto Aberto</option>
+              <option value="Upload-arquivo">Upload de arquivo</option>
+              <option value="CheckList">Checklist</option>
+              <option value="Seletor-opcoes">Seletor de opções</option>
+            </select>
+          </div>
           <div className="prioridade">
             <p>Selecione a Prioridade</p>
             <select
@@ -241,18 +255,6 @@ function NovoProcesso() {
               <option value="Alta">Alta</option>
               <option value="Média">Média</option>
               <option value="Baixa">Baixa</option>
-            </select>
-          </div>
-
-          {/* Opções */}
-          <div className="select-opcoes-questao">
-            <p>Selecione o tipo da Questão</p>
-            <select className="selectOpcoes" onChange={handleOptionChange}>
-              <option value="">Selecione...</option>
-              <option value="Texto-aberto">Texto Aberto</option>
-              <option value="Upload-arquivo">Upload de arquivo</option>
-              <option value="CheckList">Checklist</option>
-              <option value="Seletor-opcoes">Seletor de opções</option>
             </select>
           </div>
         </div>
@@ -309,7 +311,9 @@ function NovoProcesso() {
                     type="text"
                     value={questao.resposta}
                     onChange={(e) =>
-                      handleEditarQuestao(questao.id, { resposta: e.target.value })
+                      handleEditarQuestao(questao.id, {
+                        resposta: e.target.value,
+                      })
                     }
                     placeholder="Digite sua resposta"
                   />
@@ -378,7 +382,11 @@ function NovoProcesso() {
                           onChange={(e) => {
                             const atualizado = [...questao.itens];
                             atualizado[idx].value = e.target.value;
-                            handleAtualizarQuestao(questao.id, "itens", atualizado);
+                            handleAtualizarQuestao(
+                              questao.id,
+                              "itens",
+                              atualizado
+                            );
                           }}
                         >
                           <option value="">Selecione uma opção</option>
@@ -416,16 +424,16 @@ function NovoProcesso() {
 
         {/* Botões de ação */}
         <div className="botoes-actions">
-          <button onClick={handleCancelarClick} className="btn-cancelar-processo">
+          <button
+            onClick={handleCancelarClick}
+            className="btn-cancelar-processo"
+          >
             Cancelar
           </button>
           <button onClick={handleSalvarClick} className="btn-salvar-processo">
             Salvar
           </button>
-          <button
-            onClick={handleAbrirPopup}
-            className="btn-salvar-enviar"
-          >
+          <button onClick={handleAbrirPopup} className="btn-salvar-enviar">
             Salvar e Enviar
           </button>
         </div>

@@ -1,6 +1,6 @@
 .processos-container {
   margin-left: 110px;
-  margin-top: 150px;
+  margin-top: 250px;
   justify-content: center;
   padding: 20px;
   display: flex;
@@ -33,6 +33,7 @@
 
 .TabelaProcesso {
   overflow-x: auto;
+  margin-top: 50px;
 }
 
 .TabelaProcesso table {
@@ -88,6 +89,7 @@ td.empty {
 .componente_Search input {
   width: 100%;
   padding: 10px;
+  outline: none;
   border: 1px solid #6800ff;
   border-radius: 15px;
   font-size: 16px;

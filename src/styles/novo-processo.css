@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 40px; /* Adicionando espaçamento entre as seções */
+  gap: 40px;
 }
 
 /* Alinhando o título fixo */
@@ -37,7 +37,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: start; /* Centraliza os inputs */
+  align-items: start;
 }
 
 .container-titulo .texto {
@@ -58,7 +58,7 @@
   border: solid 2px #6800ff;
 }
 
-.container-titulo .descricao {
+.descricao {
   color: #6800ff;
   font-size: 18px;
   font-weight: 500;
@@ -70,12 +70,10 @@
   border: 1px solid #6800ff;
   font-family: "Open Sans";
 }
-/* .container-titulo .descricao::placeholder{
-  color: #6800ff;
-} */
+
 .descricao:focus{
   outline: none;
-  border: solid 1px #6800ff;
+  border: solid 2px #6800ff;
 }
 .options {
   display: flex;
@@ -93,13 +91,13 @@
 /* Ajuste no select de Prioridade */
 .prioridade {
   display: grid;
-  justify-content: center; /* Centraliza o select */
+  justify-content: center;
 }
 
 .selectPrioridade {
-  width: 200px;
+  width: 100px;
   height: 3em;
-  border: 1px solid #c3c1c1;
+  border: 1px solid #6800ff;
   border-radius: 12px;
   font-family: "Open Sans";
 }
@@ -110,7 +108,7 @@
 /* Ajuste no select de Opções */
 .select-opcoes-questao {
   display: grid;
-  justify-content: center; /* Centraliza o select */
+  justify-content: center;
 }
 .selectOpcoes:focus{
   outline: none;
@@ -121,7 +119,7 @@
   justify-content: center;
   width: 200px;
   height: 3em;
-  border: 1px solid #c3c1c1;
+  border: 1px solid #6800ff;
   border-radius: 12px;
   font-family: "Open Sans";
 }
@@ -136,7 +134,7 @@
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  margin: 10px auto; /* Centraliza o botão */
+  margin: 10px auto;
   display: block;
 }
 
@@ -204,7 +202,7 @@
   flex-direction: column;
   gap: 15px;
   width: 600px;
-  margin: 15px auto; /* Centraliza os itens */
+  margin: 15px auto;
 }
 
 .questao-conteudo {
@@ -308,8 +306,8 @@
   background-color: #7800cc;
 }
 .botoes-actions{
-  /* font-family: "Open Sans"; */
-  /* width: 100px; */
+  font-family: "Open Sans";
+  width: 100px;
   display: flex;
   justify-content: space-between;
   gap: 20px;
