@@ -12,7 +12,7 @@ public class Areas {
 	private Long id;
 	private String Name;
 	private String Responsavel;
-	private Long SubArea;
+	private String SubArea;
 	private String Status;
 	public Long getId() {
 		return id;
@@ -27,10 +27,10 @@ public class Areas {
 		Name = name;
 	}
 
-    	public Long getSubArea() {
+    	public String getSubArea() {
 		return SubArea;
 	}
-	public void setSubArea(Long subArea) {
+	public void setSubArea(String subArea) {
 		SubArea = subArea;
 	}
 
