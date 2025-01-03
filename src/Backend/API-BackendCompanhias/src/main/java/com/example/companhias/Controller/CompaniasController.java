@@ -45,7 +45,7 @@ public class CompaniasController {
 	
 	
 	  @DeleteMapping("/{id}")
-	    public ResponseEntity<Void> excluir(@RequestParam Long id){
+	    public ResponseEntity<Void> excluir(@PathVariable Long id){
 		  
 		  service.excluir(id);
 		  
