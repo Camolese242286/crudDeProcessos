@@ -26,7 +26,9 @@ public class Processoservice {
 		
 		
 		public Processos salvar(Processos processos) {
-			
+			    if (processos.getCreatedDate() == null) {
+		        processos.setCreatedDate(LocalDate.now());
+		    }
 			
 			return  repository.save(processos);
 		}
