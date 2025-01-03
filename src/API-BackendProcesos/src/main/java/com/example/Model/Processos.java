@@ -29,7 +29,7 @@ public class Processos {
 	@CreationTimestamp
     @Column(name = "created_at", updatable = false)
 	@JsonFormat(pattern ="dd/MM/yy")
-	private LocalDate createdDate;
+	private LocalDate createdDate=LocalDate.now();
     
 
 	@JsonFormat(pattern ="dd/MM/yy")
