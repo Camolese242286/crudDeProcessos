@@ -94,7 +94,11 @@ td.empty {
   border-radius: 15px;
   font-size: 16px;
 }
-
+.status-container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 .componente_Search input:focus {
   border: 1px solid #6800ff;
   box-shadow: 0 0 10px #888;

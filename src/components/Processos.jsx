@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-import './Novo-Processo';
+import { PencilLine, Trash } from "phosphor-react";
 import Menu from "./Menu";
 import SearchWithDebounce from "./SearchProcesso";
 import ExcluirPopup from "./Popup-excluir-processo";
-
-import { PencilLine, Trash } from "phosphor-react";
 import Header from "./Header";
-
+import StatusIndicator from "./StatusIndicator";
 import api from "./apiService";
 
 const Processos = () => {
@@ -53,43 +50,23 @@ const Processos = () => {
     setMostrarPopup(false);
   }
 
-  /*const confirmarExclusao = async () => {
-    try {
-      await api.delete(`/processos/${idParaExcluir}`);
-      const novosProcessos = processos.filter(({ id }) => id !== idParaExcluir);
-      setProcessos(novosProcessos);
-      setProcessosFiltrados(novosProcessos);
-      setMostrarPopup(false);
-    } catch (error) {
-      console.error("Erro ao excluir processo:", error);
-    }
-  };*/
-
   const cancelarExclusao = () => {
     setMostrarPopup(false);
     setIdParaExcluir(null);
   };
 
-  const handleStatusChange = async (processoId, novoStatus) => {
-    try {
-      const processoAtualizado = processos.find(({ id }) => id === processoId);
-      const response = await api.put(`/processos/${processoId}`, {
-        ...processoAtualizado,
-        status: novoStatus,
-      });
+  const handleStatusChange = (processoId, novoStatus) => {
+    const processoAtualizado = processos.find(({ id }) => id === processoId);
+    processoAtualizado.status = novoStatus;
 
-      const novosProcessos = processos.map((processo) =>
-        processo.id === processoId ? response.data : processo
-      );
-      setProcessos(novosProcessos);
-      localStorage.setItem("processos", JSON.stringify(novosProcessos));
-      setProcessosFiltrados(novosProcessos);
+    const novosProcessos = processos.map((processo) =>
+      processo.id === processoId ? processoAtualizado : processo
+    );
 
-    } catch (error) {
-      console.error("Erro ao atualizar status do processo:", error);
-    }
+    setProcessos(novosProcessos);
+    setProcessosFiltrados(novosProcessos);
+    localStorage.setItem("processos", JSON.stringify(novosProcessos));
   };
-  
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -136,16 +113,19 @@ const Processos = () => {
                   <td>{processo.nome}</td>
                   <td>{processo.prioridades || "Não definida"}</td>
                   <td>
-                    <select
-                      value={processo.status || "Não definido"}
-                      onChange={(e) => handleStatusChange(processo.id, e.target.value)}
-                    >
-                      <option value="">Selecione o Status</option>
-                      <option value="Enviado">Enviado</option>
-                      <option value="Não enviado">Não enviado</option>
-                      <option value="Respondido">Respondido</option>
-                      <option value="Não respondido">Não respondido</option>
-                    </select>
+                    <div className="status-container">
+                      <select
+                        value={processo.status || "Não definido"}
+                        onChange={(e) => handleStatusChange(processo.id, e.target.value)}
+                      >
+                        <option value="">Selecione o Status</option>
+                        <option value="Enviado">Enviado</option>
+                        <option value="Não Enviado">Não enviado</option>
+                        <option value="Respondido">Respondido</option>
+                        <option value="Não Respondido">Não respondido</option>
+                      </select>
+                      <StatusIndicator status={processo.status} />
+                    </div>
                   </td>
                   <td>{formatDate(processo.dataCriacao)}</td>
                   <td className="acoes">
@@ -186,6 +166,5 @@ const Processos = () => {
     </div>
   );
 };
-
 
 export default Processos;
