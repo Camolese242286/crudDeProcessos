@@ -13,7 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
@@ -24,11 +24,32 @@ public class Processos {
 	private String Name;
 	private String Prioridade;
     private String Status; 
+	
+	
 	@CreationTimestamp
-	private LocalDate createdDate;
+    @Column(name = "created_at", updatable = false)
+	@JsonFormat(pattern ="dd/MM/yy")
+	private LocalDate createdDate=LocalDate.now();
     
+
+	@JsonFormat(pattern ="dd/MM/yy")
 	private LocalDateTime ultimaAtualizacao;
 	
+     @PrePersist
+    public void onCreate() {
+    	createdDate=LocalDate.now();
+    	setUpdatedAt(LocalDate.now());
+    }
+	
+    
+    @PreUpdate
+    public void onUpdate() {
+    	setUpdatedAt(LocalDate.now());
+    
+    }
+
+
+
 	public Long getId() {
 		return id;
 	}

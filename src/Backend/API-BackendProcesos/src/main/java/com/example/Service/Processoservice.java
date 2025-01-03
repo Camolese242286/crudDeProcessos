@@ -26,7 +26,9 @@ public class Processoservice {
 		
 		
 		public Processos salvar(Processos processos) {
-			
+			    if (processos.getCreatedDate() == null) {
+		        processos.setCreatedDate(LocalDate.now());
+		    }
 			
 			return  repository.save(processos);
 		}
@@ -34,7 +36,9 @@ public class Processoservice {
 		
 		
 		public Processos atualizar(Long id , Processos processoAtulizado) {
-			
+			 if (processoAtulizado.getCreatedDate() == null) {
+			        processoAtulizado.setUpdatedAt(LocalDate.now());
+			    }
 			if (repository.existsById(id)) {
 				 processoAtulizado.setId(id);
 			
