@@ -24,7 +24,7 @@ const StatusIndicator = ({ status }) => {
       break;
     case "Não Respondido":
       statusText = "Não Respondido";
-      statusStyle = { backgroundColor: "#9e9e9e", color: "white" }; // Cinza
+      statusStyle = { backgroundColor: "#5664b3", color: "white" }; // Cinza
       break;
     default:
       statusText = "Indefinido";
@@ -39,7 +39,7 @@ const StatusIndicator = ({ status }) => {
         fontSize: "14px",
         padding: "10px",
         borderRadius: "20px",
-        maxWidth: '130px',
+        width: '130px',
         fontWeight: 'bolder',
         ...statusStyle,
       }}
