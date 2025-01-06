@@ -36,7 +36,7 @@ function NovaArea() {
       nome: nomeArea,
       responsavel: responsavel,
       ultimaMovimentacao: new Date().toISOString(),
-      status: "Não enviado",
+      status: "",
     };
     
     //const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];

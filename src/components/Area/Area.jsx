@@ -60,6 +60,7 @@ function Area() {
     setAreas(novaAreas);
     setAreasFiltrados(novaAreas);
     localStorage.setItem("area", JSON.stringify(novaAreas));
+    localStorage.setItem("principal", JSON.stringify(novaAreas));
     setpopupExclusao(false);
   };
 

@@ -12,7 +12,7 @@ const Principal = () => {
   const [principais, setPrincipais] = useState([]);
   const [statuses, setStatuses] = useState({});
   const [cardConfigs, setCardConfigs] = useState([]);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  //const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [currentCard, setCurrentCard] = useState(null);
 
   const handleStatusChange = (event, area) => {
@@ -58,7 +58,7 @@ const Principal = () => {
   const handleCardClick = (cardId) => {
     if (cardId >= 0 && cardId < cardConfigs.length) {
       setCurrentCard(cardId);
-      setIsPopupOpen(true);
+      //setIsPopupOpen(true);
     }
   }
 
@@ -110,13 +110,13 @@ const Principal = () => {
           ))}
         </section>
 
-        {isPopupOpen && (
+        {/*}{isPopupOpen && (
           <ConfigPopup
             cardConfigs={cardConfigs[currentCard]}
             onClose={() => setIsPopupOpen(false)}
             onSave={(updateConfig) => updateCardConfig(currentCard, updateConfig)}
           />
-        )}
+        )}*/}
 
         <div className="tabela-usuarios">
           <p>Áreas em inadequação</p>
