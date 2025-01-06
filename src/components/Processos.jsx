@@ -39,6 +39,10 @@ const Processos = () => {
     fetchProcessos();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("processos", JSON.stringify(processos));
+  }, [processos]);
+
   const navegarPara = (rota) => navigate(rota);
 
   const handleExcluir = (id) => {
@@ -47,7 +51,7 @@ const Processos = () => {
   };
 
   const confirmarExclusao = () => {
-    const novosProcessos = processos.filter(({id}) => id !== idParaExcluir);
+    const novosProcessos = processos.filter(({ id }) => id !== idParaExcluir);
     setProcessos(novosProcessos);
     setProcessosFiltrados(novosProcessos);
     setMostrarPopup(false);
@@ -89,7 +93,6 @@ const Processos = () => {
       console.error("Erro ao atualizar status do processo:", error);
     }
   };
-  
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);

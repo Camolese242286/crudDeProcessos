@@ -35,6 +35,10 @@ function Area() {
     setAreasFiltrados(areasSalvos);
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("area", JSON.stringify(areas));
+  }, [areas]);
+
   //Excluir o id da area na tabela
   const [idParaExcluir, setIdParaExcluir] = useState(null);
   const [popupExclusao, setpopupExclusao] = useState(false);

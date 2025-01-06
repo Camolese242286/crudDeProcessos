@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import ConfigPopup from "./ConfigPopup";
+
 import Menu from "./Menu";
 import "../styles/principal.css";
 import "../styles/menu.css";
@@ -6,21 +9,85 @@ import StatusIndicator from "./StatusIndicator";
 import Header from "./Header";
 
 const Principal = () => {
-  const [statuses, setStatuses] = useState({
-    area1: "Não Enviado",
-    area2: "Não Enviado",
-    area3: "Não Enviado",
-    area4: "Não Enviado",
-    area5: "Não Enviado",
-  });
+  const [principais, setPrincipais] = useState([]);
+  const [statuses, setStatuses] = useState({});
+  const [cardConfigs, setCardConfigs] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [currentCard, setCurrentCard] = useState(null);
 
   const handleStatusChange = (event, area) => {
     const newStatus = event.target.value;
-    setStatuses((prevStatuses) => ({
-      ...prevStatuses,
-      [area]: newStatus,
-    }));
+
+    setStatuses((prevStatuses) => {
+      const updatedStatuses = {
+        ...prevStatuses,
+        [area]: newStatus,
+      };
+
+      const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
+      const updatedPrincipais = principalSalvos.map((item) => {
+        if (item.nome === area) {
+          return { ...item, status: newStatus };
+        }
+        return item;
+      });
+
+      localStorage.setItem("principal", JSON.stringify(updatedPrincipais));
+      return updatedStatuses;
+    });
   };
+
+  useEffect(() => {
+    const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
+    setPrincipais(principalSalvos);
+
+    const savedConfigs = JSON.parse(localStorage.getItem("cardConfigs")) || [
+      { id: 0, title: "Processo por area", subtitle: "Substítulo 1", dataType: "area" },
+      { id: 0, title: "Processo por area", subtitle: "Substítulo 2", dataType: "processo" },
+      { id: 0, title: "Processo por area", subtitle: "Substítulo 3", dataType: "outro" },
+    ];
+    setCardConfigs(savedConfigs);
+
+    const initialStatuses = principalSalvos.reduce((acc, item) => {
+      acc[item.nome] = item.status || "Não enviado";
+      return acc;
+    }, {});
+    setStatuses(initialStatuses);
+  }, []);
+
+  const handleCardClick = (cardId) => {
+    if (cardId >= 0 && cardId < cardConfigs.length) {
+      setCurrentCard(cardId);
+      setIsPopupOpen(true);
+    }
+  }
+
+  const updateCardConfig = (cardId, updateConfig) => {
+    const newConfigs = cardConfigs.map((config, index) =>
+      index === cardId ? { ...config, ...updateConfig } : config
+    );
+    setCardConfigs(newConfigs);
+    localStorage.setItem("cardConfigs", JSON.stringify(newConfigs));
+  };
+
+  const calcularTotal = (dataType) => {
+    if (dataType === "area") {
+      //const areasDistintas = new Set(principais.map((item) => item.nome));
+      //return areasDistintas.size;
+      const processosSalvos = JSON.parse(localStorage.getItem("area")) || [];
+      return processosSalvos.length;
+    } else if (dataType === "processo") {
+      const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
+      return processosSalvos.length;
+    } else {
+      return 0;
+    }
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return isNaN(date) ? "Data inválida" : date.toLocaleDateString("pt-BR");
+  }
 
   return (
     <>
@@ -30,18 +97,27 @@ const Principal = () => {
       </div>
       <div className="body-container">
         <section className="graficos">
-          {Array.from({ length: 3 }, (_, index) => (
-            <div className="graphic" key={index}>
+          {cardConfigs.map((config, index) => (
+            <div className="graphic" key={index} onClick={() => handleCardClick(index)}>
               <section className="numericos">
-                <div className="num-graphic">{99 - index}</div>
+                <div className="num-graphic">{calcularTotal(config.dataType)}</div>
               </section>
               <div>
-                <h3>Processos por área</h3>
-                <p>Subtítulo {index + 1}</p>
+                <h3>{config.title}</h3>
+                <p>{config.subtitle}</p>
               </div>
             </div>
           ))}
         </section>
+
+        {isPopupOpen && (
+          <ConfigPopup
+            cardConfigs={cardConfigs[currentCard]}
+            onClose={() => setIsPopupOpen(false)}
+            onSave={(updateConfig) => updateCardConfig(currentCard, updateConfig)}
+          />
+        )}
+
         <div className="tabela-usuarios">
           <p>Áreas em inadequação</p>
           <table>
@@ -55,18 +131,18 @@ const Principal = () => {
               </tr>
             </thead>
             <tbody>
-              {Object.keys(statuses).map((area, index) => (
-                <tr key={area}>
-                  <td>Área {index + 1}</td>
-                  <td>Responsável {String.fromCharCode(65 + index)}</td>
-                  <td>12/{12 - index}/2024</td>
+              {principais.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.nome}</td>
+                  <td>{item.responsavel}</td>
+                  <td>{formatDate(item.ultimaMovimentacao)}</td>
                   <td>
-                    <StatusIndicator status={statuses[area]} />
+                    <StatusIndicator status={statuses[item.nome]} />
                   </td>
                   <td>
                     <select
-                      value={statuses[area]}
-                      onChange={(e) => handleStatusChange(e, area)}
+                      value={statuses[item.nome]}
+                      onChange={(e) => handleStatusChange(e, item.nome)}
                     >
                       <option value="Enviado">Enviado</option>
                       <option value="Não Enviado">Não Enviado</option>

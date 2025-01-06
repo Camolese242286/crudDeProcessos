@@ -30,6 +30,14 @@ function NovaArea() {
       subArea: subArea,
       responsavel: responsavel, // Adicionando o responsável ao salvar
     };
+
+    const Principal = {
+      id: id || Date.now(),
+      nome: nomeArea,
+      responsavel: responsavel,
+      ultimaMovimentacao: new Date().toISOString(),
+      status: "Não enviado",
+    };
     
     //const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
     //const index = areasSalvos.findIndex((p) => p.id === novaArea.id);
@@ -45,6 +53,17 @@ function NovaArea() {
 
     localStorage.setItem("area", JSON.stringify(areasSalvos));
     navigate("/area");
+
+    const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
+    const indexPrincipal = principalSalvos.findIndex((i) => i.id === Principal.id);
+
+    if(indexPrincipal >= 0) {
+      principalSalvos[indexPrincipal] = Principal;
+    } else {
+      principalSalvos.push(Principal);
+    }
+
+    localStorage.setItem("principal", JSON.stringify(principalSalvos));
   };
 
   useEffect(() => {
@@ -57,6 +76,18 @@ function NovaArea() {
         setDescricaoArea(area.descricao);
         setResponsavel(area.responsavel);
         setSubArea(area.subArea);
+      }
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
+      const principais = principalSalvos.find((r) => r.id === Number(id));
+
+      if(principais) {
+        setNomeArea(principais.nome);
+        setResponsavel(principais.responsavel);        
       }
     }
   }, [id]);
