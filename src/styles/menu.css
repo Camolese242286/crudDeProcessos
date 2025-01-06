@@ -48,17 +48,29 @@ body {
   text-align: center;
   color: var(--sidebar-color);
   cursor: pointer;
+  position: relative;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
+/* Estilização para a legenda ficar visível somente quando o mouse passar por cima do ícone */
 .menu-item span {
+  visibility: hidden;
   font-size: 0.6rem;
   margin-top: 5px;
   display: block;
+  text-align: center;
+  bottom: -20px;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-item:hover span {
+  visibility: visible;
+  opacity: 1;
 }
 
 .menu-item:hover {
-  transform: scale(1.2);
+  transform: scale(1.8);
   color: var(--highlight-color);
   font-weight: bold;
 }
@@ -87,6 +99,6 @@ body {
 }
 
 .sidebar-footer:hover {
-  transform: scale(1.1);
+  transform: scale(1.8);
   color: var(--highlight-color);
 }

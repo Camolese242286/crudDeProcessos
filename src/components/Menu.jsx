@@ -18,6 +18,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [notificationsCount, setNotificationsCount] = useState(3);
+  const [hoveredIcon, setHoveredIcon] = useState(null);
 
   const handleOpenPopup = () => {
     setIsPopupOpen(true);
@@ -31,6 +32,15 @@ const Sidebar = () => {
     setNotificationsCount(0);
   };
 
+  // Função para gerenciar o mouse hover em cada item
+  const handleMouseEnter = (icon) => {
+    setHoveredIcon(icon);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIcon(null);
+  };
+
   return (
     <>
       <div className="sidebar-container">
@@ -39,36 +49,53 @@ const Sidebar = () => {
         </div>
 
         <div className="sidebar-menu">
-          <div className="menu-item" onClick={() => navigate("/principal")}>
-            <House size={22} />
-            <span>Início</span>
+          <div
+            className="menu-item"
+            onClick={() => navigate("/principal")}
+            onMouseEnter={() => handleMouseEnter("home")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <House size={28} />
+            {hoveredIcon === "home" && <span>Início</span>}
           </div>
 
-          <div className="menu-item" onClick={() => navigate("/processos")}>
-            <ListPlus size={22} />
-            <span>Processos</span>
+          <div
+            className="menu-item"
+            onClick={() => navigate("/processos")}
+            onMouseEnter={() => handleMouseEnter("processos")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <ListPlus size={28} />
+            {hoveredIcon === "processos" && <span>Processos</span>}
           </div>
 
-          <div className="menu-item" onClick={() => navigate("/area")}>
-            <Buildings size={22} />
-            <span>Área</span>
+          <div
+            className="menu-item"
+            onClick={() => navigate("/area")}
+            onMouseEnter={() => handleMouseEnter("area")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <Buildings size={28} />
+            {hoveredIcon === "area" && <span>Área</span>}
           </div>
 
           <div
             className="menu-item notification"
             onClick={handleViewNotifications}
+            onMouseEnter={() => handleMouseEnter("notificacoes")}
+            onMouseLeave={handleMouseLeave}
           >
             <Bell size={22} />
             {notificationsCount > 0 && (
               <span className="notification-badge">{notificationsCount}</span>
             )}
-            <span>Notificações</span>
+            {hoveredIcon === "notificacoes" && <span>Notificações</span>}
           </div>
         </div>
 
         <div className="sidebar-footer" onClick={handleOpenPopup}>
-          <SignOut size={22} />
-          <span>Sair</span>
+          <SignOut size={28} />
+          {hoveredIcon === "sair" && <span>Sair</span>}
         </div>
       </div>
 
