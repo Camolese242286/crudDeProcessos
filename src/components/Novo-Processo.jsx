@@ -26,6 +26,21 @@ function NovoProcesso() {
   const [SelectedOption, setSelectedOption] = useState(""); // Tipo de questão selecionado
   const [popupVisivel, setPopupVisivel] = useState(false);
 
+  useEffect(() => {
+    if (id) {
+      const processosSalvos =
+        JSON.parse(localStorage.getItem("processos")) || [];
+      const processo = processosSalvos.find((p) => p.id === Number(id));
+
+      if (processo) {
+        setNomeProcesso(processo.nome);
+        setPrioridade(processo.prioridades);
+        setDescricao(processo.descricao);
+        setQuestoes(processo.questoes || []); // Carregar todas as questões
+      }
+    }
+  }, [id]);
+
   const validarCampos = () => {
     if (!nomeProcesso || !descricao) {
       alert("Por favor, preencha o nome do Processo e a descrição");
@@ -38,7 +53,7 @@ function NovoProcesso() {
     if (!validarCampos()) return;
 
     const novoProcesso = {
-      id: id || Date.now(),
+      id: Number(id) || Date.now(),
       nome: nomeProcesso,
       descricao: descricao,
       prioridades: prioridades,
@@ -46,17 +61,22 @@ function NovoProcesso() {
       questoes: [...questoes], // Salvar todas as questões, sem separar por tipo
     };
 
-    const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
-    const index = processosSalvos.findIndex((p) => p.id === novoProcesso.id);
+    try {
+      const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
+      const index = processosSalvos.findIndex((p) => p.id === novoProcesso.id);
 
-    if (index >= 0) {
-      processosSalvos[index] = novoProcesso;
-    } else {
-      processosSalvos.push(novoProcesso);
+      if (index >= 0) {
+        processosSalvos[index] = novoProcesso;
+      } else {
+        processosSalvos.push(novoProcesso);
+      }
+
+      localStorage.setItem("processos", JSON.stringify(processosSalvos));
+      navigate("/processos");
+    } catch (error) {
+      console.error("Erro ao salvar processo:", error);
+      alert("Erro ao salvar processo. Por favor, tente novamente.");
     }
-
-    localStorage.setItem("processos", JSON.stringify(processosSalvos));
-    navigate("/processos");
   };
 
   const handleAbrirPopup = () => {
@@ -78,36 +98,21 @@ function NovoProcesso() {
     handleSalvarClick(); // Salva antes de enviar
     alert("Processo enviado!");
     navigate("/processos");
-  };
-
-  useEffect(() => {
-    if (id) {
-      const processosSalvos =
-        JSON.parse(localStorage.getItem("processos")) || [];
-      const processo = processosSalvos.find((p) => p.id === Number(id));
-
-      if (processo) {
-        setNomeProcesso(processo.nome);
-        setPrioridade(processo.prioridades);
-        setDescricao(processo.descricao);
-        setQuestoes(processo.questoes || []); // Carregar todas as questões
-      }
-    }
-  }, [id]);
+  };  
 
   const handleOptionChange = (e) => {
     const novaOpcao = e.target.value;
 
     setQuestoesPorTipo((prev) => ({
       ...prev,
-      [SelectedOption]:questoes, //Salva as questões da opção atual
-    })); 
+      [SelectedOption]: questoes, //Salva as questões da opção atual
+    }));
 
     // Atualiza a opção selecionada
     setSelectedOption(novaOpcao);
 
     // Carrega as questões da nova opção ou iniciativa vazio
-    setQuestoes(questoesPorTipo[novaOpcao] || []);
+    //setQuestoes(questoesPorTipo[novaOpcao] || []);
   };
 
   const handleAdicionarQuestao = () => {
