@@ -36,7 +36,14 @@ public class SecurityConfig1 extends SecurityConfigurerAdapter<DefaultSecurityFi
 	        
 	            User user = new User(username, passwordEncoder().encode("password"), new ArrayList<>());
 	            return user;
-	        };
+	        }
+
+    @Bean
+	    protected UserDetailsService userDetailsService() {
+	        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+	        manager.createUser(User.withUsername("user").password(passwordEncoder().encode("password")).roles("USER").build());
+	        return manager;
+	    }
     	private BCryptPasswordEncoder passwordEncoder() {
 			
 			return new BCryptPasswordEncoder();
