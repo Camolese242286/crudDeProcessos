@@ -24,7 +24,7 @@ function NovaArea() {
     if (!validarCampos()) return;
 
     const novaArea = {
-      id: id || Date.now(),
+      id: Number(id) || Date.now(),
       nome: nomeArea,
       descricao: descricaoArea,
       subArea: subArea,
@@ -32,38 +32,41 @@ function NovaArea() {
     };
 
     const Principal = {
-      id: id || Date.now(),
+      id: Number(id) || Date.now(),
       nome: nomeArea,
       responsavel: responsavel,
       ultimaMovimentacao: new Date().toISOString(),
       status: "",
     };
+
+    try {
+      const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
+      const index = areasSalvos.findIndex((p) => p.id === novaArea.id);
+
+      if (index >= 0) {
+        areasSalvos[index] = novaArea; // Atualiza a área existente
+      } else {
+        areasSalvos.push(novaArea); // Adiciona uma nova área
+      }
+
+      localStorage.setItem("area", JSON.stringify(areasSalvos));
+      navigate("/area");
     
-    //const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
-    //const index = areasSalvos.findIndex((p) => p.id === novaArea.id);
+      const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
+      const indexPrincipal = principalSalvos.findIndex((i) => i.id === Principal.id);
 
-    const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
-    const index = areasSalvos.findIndex((a) => a.id === Number(id));
+      if (indexPrincipal >= 0) {
+        principalSalvos[indexPrincipal] = Principal;
+      } else {
+        principalSalvos.push(Principal);
+      }
 
-    if (index >= 0) {
-      areasSalvos[index] = novaArea; // Atualiza a área existente
-    } else {
-      areasSalvos.push(novaArea); // Adiciona uma nova área
+      localStorage.setItem("principal", JSON.stringify(principalSalvos));
+      
+    } catch (error) {
+      console.error("Erro ao salvar a área:", error);
+      alert("Erro ao salvar a área. Por favor, tente novamente.")
     }
-
-    localStorage.setItem("area", JSON.stringify(areasSalvos));
-    navigate("/area");
-
-    const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
-    const indexPrincipal = principalSalvos.findIndex((i) => i.id === Principal.id);
-
-    if(indexPrincipal >= 0) {
-      principalSalvos[indexPrincipal] = Principal;
-    } else {
-      principalSalvos.push(Principal);
-    }
-
-    localStorage.setItem("principal", JSON.stringify(principalSalvos));
   };
 
   useEffect(() => {
@@ -85,9 +88,9 @@ function NovaArea() {
       const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
       const principais = principalSalvos.find((r) => r.id === Number(id));
 
-      if(principais) {
+      if (principais) {
         setNomeArea(principais.nome);
-        setResponsavel(principais.responsavel);        
+        setResponsavel(principais.responsavel);
       }
     }
   }, [id]);
