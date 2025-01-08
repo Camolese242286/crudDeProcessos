@@ -34,7 +34,7 @@ const EnviarProcesso = ({ visivel, fecharPopup, nomeProcesso, onEnviar }) => {
         setResponsaveis(responsaveis.filter((item) => item !== nome));
     };
 
-    const handleEnviar = (nome) => {
+    const handleEnviar = () => {
         onEnviar(responsaveis);
         fecharPopup();
     }
@@ -84,7 +84,7 @@ const EnviarProcesso = ({ visivel, fecharPopup, nomeProcesso, onEnviar }) => {
                     </div>
                     <div className="botoesPopup">
                         <button className="fecharPop" onClick={fecharPopup}>Cancelar</button>
-                        <button className="enviarPop">Enviar</button>
+                        <button className="enviarPop" onClick={handleEnviar}>Enviar</button>
                     </div>
                 </div>
             </div>

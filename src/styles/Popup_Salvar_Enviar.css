@@ -25,7 +25,7 @@
     border-radius: 20px;
     z-index: 1000;    
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    min-width: 40%;
+    min-width: 30%;
     height: 25em;
     display: flex;
     flex-direction: column;
@@ -85,7 +85,7 @@
 }
 
 .botoesPopup {
-    display: flex;
+    display: flex;    
 }
 
 .popup-content button.fecharPop {
@@ -98,7 +98,9 @@
     cursor: pointer;
     position: relative;
     left: 1.8em;
-    top: 4em;
+    top: 4em;  
+    width: 120px;
+    height: 40px;  
 }
 
 .popup-content button.fecharPop:hover {
@@ -112,6 +114,8 @@
     font-family: 'Open Sans';
     font-weight: 700;
     border-radius: 12px;
+    width: 120px;
+    height: 40px;
 }
 
 .popup-container {

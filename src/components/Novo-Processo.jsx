@@ -8,6 +8,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { ArrowSquareDown, ArrowSquareUp, Trash } from "phosphor-react";
 import Header from "./Header";
 import "../styles/novo-processo.css";
+import EnviarProcesso from "./Popup_Salvar_Enviar";
 
 function NovoProcesso() {
   const navigate = useNavigate();
@@ -96,9 +97,10 @@ function NovoProcesso() {
     console.log("Processo enviado para: ", responsaveis);
     // Aqui pode ser adicionada a lógica de envio, dependendo da aplicação
     handleSalvarClick(); // Salva antes de enviar
+    setPopupVisivel(true);
     alert("Processo enviado!");
-    navigate("/processos");
-  };  
+    //navigate("/processos");
+  };
 
   const handleOptionChange = (e) => {
     const novaOpcao = e.target.value;
@@ -442,6 +444,15 @@ function NovoProcesso() {
             Salvar e Enviar
           </button>
         </div>
+
+        {popupVisivel && (
+          <EnviarProcesso
+            visivel={popupVisivel}
+            fecharPopup={handleFecharPopup}
+            nomeProcesso={nomeProcesso}
+            onEnviar={handleEnviarProcesso}
+          />
+        )}
       </div>
     </div>
   );
