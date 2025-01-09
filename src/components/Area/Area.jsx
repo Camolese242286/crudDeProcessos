@@ -74,7 +74,7 @@ function Area() {
     <div className="container-page-area">
       <Menu />
       <Header />
-      <div className="container-area">
+      <div className="container_area">
         <div className="settings">
           <div className="filters-area">
             <select

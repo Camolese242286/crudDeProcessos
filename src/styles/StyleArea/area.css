@@ -10,20 +10,19 @@ html {
   padding: 0;
 }
 .container-page-area{
-  margin-left: 150px;
+  margin-left: 100px;
   margin-top: 150px;
   gap: 30px;
   font-family: "Open Sans", sans-serif;
 }
 
-.container-area {
+.container_area {
   display: grid;
   justify-content: start;
-  padding: 20px;
   flex-direction: column;
+  width: 100%;
+  padding: 20px;
   gap: 30px;
-  margin: 0px;
-  margin-top: 0px;
 }
 
 .title {
@@ -41,53 +40,50 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 90vw;
   flex-wrap: wrap;
   gap: 15px;
 }
 
-.filters-area,
-.search
-
-/*.botao-area*/
-  {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  max-width: 200px;
-  height: 50px;
-}
-
 .slArea {
-  width: 100%;
+  width: 200px;
   padding: 10px;
   border: 1px solid #6800ff;
   border-radius: 5px;
   color: #6800ff;
+  outline: none;
+}
+.slArea:focus {
+  border: solid 2px #6800ff;
 }
 
 .botao-area button {
   padding: 10px 20px;
+  width: 200px;
   background-color: #6800ff;
   color: white;
-  border: none;
   border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
-}
+  border: none;
+  font-weight: bold;
 
-.botao-area button:hover {
+}
+.botao-area:hover {
+  border-radius: 10px;
+  font-weight: bold;
   background-color: #5700cc;
 }
+
 
 .TableArea {
   margin-top: 20px;
   overflow-x: auto;
+  width: auto;
 }
 
 .TableArea table {
   width: 100%;
-  /*border-collapse: collapse;*/
   background-color: #fcfaff;
   color: #6800ff;
   font-family: "Open Sans", sans-serif;
@@ -108,9 +104,15 @@ html {
 .TableArea th:first-child {
   border-top-left-radius: 10px;
 }
-
 .TableArea th:last-child {
   border-top-right-radius: 10px;
+}
+
+.TableArea tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+.TableArea tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
 }
 
 /* Estilização do componente Search */
@@ -172,14 +174,6 @@ html {
     flex-direction: column;
     gap: 30;
     align-items: center;
-  }
-
-  .slArea select {
-    width: 200%;
-  }
-
-  .botao-area button {
-    max-width: 100%;
   }
 
   .TableArea table {

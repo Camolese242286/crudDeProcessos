@@ -1,6 +1,6 @@
 .processos-container {
   margin-left: 110px;
-  margin-top: 250px;
+  margin-top: 150px;
   justify-content: center;
   padding: 20px;
   display: flex;
@@ -25,12 +25,16 @@
 }
 
 .slProcessos {
-  max-width: 300px;
+  width: 200px;
   padding: 10px;
-  border-radius: 4px;
-  font-size: 1rem;
+  border: 1px solid #6800ff;
+  border-radius: 5px;
+  color: #6800ff;
+  outline: none;
 }
-
+.slProcessos:focus{
+  border: solid 2px #6800ff;
+}
 .TabelaProcesso {
   overflow-x: auto;
   margin-top: 50px;
@@ -63,13 +67,14 @@ td.empty {
 
 .acoes {
   display: flex;
+  height: 60px;
   justify-content: center;
+  align-items: center;
 }
 
 .acoes button {
   margin: 0 5px;
   padding: 5px 10px;
-  background: none;
   border: 1px solid #6800ff;
   border-radius: 4px;
   cursor: pointer;
@@ -101,6 +106,11 @@ td.empty {
 }
 .status-container select{
   width: 200px;
+  outline: none;
+  border: solid 1px #6800ff;
+}
+.status-container select:focus{
+  border: solid 2px #6800ff;
 }
 .componente_Search input:focus {
   border: 1px solid #6800ff;
@@ -116,8 +126,9 @@ td.empty {
   pointer-events: none;
 }
 
-.processos-container .botaoNovoProcesso button {
+.botaoNovoProcesso button {
   margin: 0 auto;
+  width: 200px;
   padding: 10px;
   background-color: #6800ff;
   color: white;
