@@ -33,7 +33,7 @@ public class Processos {
     
 
 	@JsonFormat(pattern ="dd/MM/yy")
-	private LocalDateTime ultimaAtualizacao;
+	private LocalDateTime updatedDate;
 	
      @PrePersist
     public void onCreate() {
@@ -87,12 +87,12 @@ public class Processos {
 		Status = status;
 	}
 
-   	public LocalDateTime getUltimaAtualizacao() {
+   	public LocalDateTime getupdatedDate() {
 		return ultimaAtualizacao;
 	}
 
-	public void setUltimaAtualizacao(LocalDateTime ultimaAtualizacao) {
-		this.ultimaAtualizacao = ultimaAtualizacao;
+	public void setupdatedDate(LocalDateTime updatedDate) {
+		this.updatedDate= updatedDate;
 	}
 
 }
