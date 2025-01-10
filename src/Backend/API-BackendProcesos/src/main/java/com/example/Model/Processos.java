@@ -24,7 +24,7 @@ public class Processos {
 	private String Name;
 	private String Prioridade;
     private String Status; 
-	
+	private String CreatedBy;
 	
 	@CreationTimestamp
     @Column(name = "created_at", updatable = false)
@@ -93,6 +93,15 @@ public class Processos {
 
 	public void setupdatedDate(LocalDateTime updatedDate) {
 		this.updatedDate= updatedDate;
+	}
+
+
+	public String getCreatedBy() {
+		return CreatedBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		CreatedBy = createdBy;
 	}
 
 }

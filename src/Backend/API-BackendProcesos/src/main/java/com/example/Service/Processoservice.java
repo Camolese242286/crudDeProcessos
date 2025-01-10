@@ -19,6 +19,25 @@ public class Processoservice {
 	 @Autowired
 		private ProcessosRepository repository;
 		
+		public usuarios createResource(Processos resource) {
+        String username = getCurrentUsername();
+        resource.setCreatedBy1(username); 
+        return repository.save(resource);
+    }
+
+    
+    private String getCurrentUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return userDetails.getUsername();
+        }
+        return null;
+    }
+		
+		
+		
+		
 		public List<Processos> listartodos(){
 			
 			return repository.findAll();
