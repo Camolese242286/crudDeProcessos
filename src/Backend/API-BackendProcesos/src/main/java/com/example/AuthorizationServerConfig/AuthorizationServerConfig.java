@@ -26,7 +26,7 @@ public class AuthorizationServerConfig {
 		            .scope(OidcScopes.OPENID)
 		            .scope("read")
 		            .scope("write")
-		            .redirectUri("http://localhost:8081/login/oauth2/code/")
+		            .redirectUri("http://localhost:8080/login/oauth2/code/")
 		            .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 		            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
 		            .tokenSettings(TokenSettings.builder().build())
@@ -38,7 +38,7 @@ public class AuthorizationServerConfig {
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()
-            .issuer("http://localhost:8081")
+            .issuer("http://localhost:8080")
             .build();
     }
 
