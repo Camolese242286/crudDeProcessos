@@ -66,7 +66,7 @@ function Login() {
             </div>
             <div className="h2p">
               <h2>Login</h2>
-              <p>Entre com sua conta Microdoft para acessar a plataforma LGPD da Qintess</p>
+              <p>Entre para acessar plataforma LGPD da Qintess</p>
             </div>
             {/* Formulário de login */}
             <form className="input_login" onSubmit={handleLogin}>
