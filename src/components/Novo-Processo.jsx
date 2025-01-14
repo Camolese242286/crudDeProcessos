@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Menu from "./Menu";
+
 import Popup from "./Popup";
 import "./Processos";
 import PopupSalvarEnviar from "./Popup_Salvar_Enviar";
 import { FaTrashAlt } from "react-icons/fa";
-import { ArrowSquareDown, ArrowSquareUp, Trash } from "phosphor-react";
-import Header from "./Header";
+import { ArrowSquareDown, ArrowSquareUp, Trash, TextT, FileArrowUp, CheckSquare, List } from "phosphor-react";
+
 import "../styles/novo-processo.css";
 import EnviarProcesso from "./Popup_Salvar_Enviar";
 
 function NovoProcesso() {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [currentView, setCurrentView] = useState("opcoes");
   const [nomeProcesso, setNomeProcesso] = useState("");
   const [descricao, setDescricao] = useState("");
   const [prioridades, setPrioridade] = useState("");
@@ -214,8 +215,7 @@ function NovoProcesso() {
 
   return (
     <div className="container-novo-processo">
-      <Menu />
-      <Header />
+
       {/* <div className="title-fixed">
         <h1>Novo Processo</h1>
       </div> */}
@@ -230,7 +230,7 @@ function NovoProcesso() {
             onChange={(e) => setNomeProcesso(e.target.value)}
           />
           <div>
-            <textarea
+            <input
               className="descricao"
               placeholder="Adicione uma descrição para esse processo"
               value={descricao}
@@ -238,40 +238,64 @@ function NovoProcesso() {
             />
           </div>
         </div>
-        <div className="options">
 
-          {/* Opções */}
-          <div className="select-opcoes-questao">
-            <p>Selecione o tipo da Questão</p>
-            <select className="selectOpcoes" onChange={handleOptionChange}>
-              <option value="">Selecione...</option>
-              <option value="Texto-aberto">Texto Aberto</option>
-              <option value="Upload-arquivo">Upload de arquivo</option>
-              <option value="CheckList">Checklist</option>
-              <option value="Seletor-opcoes">Seletor de opções</option>
-            </select>
-          </div>
-          <div className="prioridade">
-            <p>Selecione a Prioridade</p>
-            <select
-              className="selectPrioridade"
-              value={prioridades}
-              onChange={(e) => setPrioridade(e.target.value)}
-            >
-              <option value="">Selecione...</option>
-              <option value="Alta">Alta</option>
-              <option value="Média">Média</option>
-              <option value="Baixa">Baixa</option>
-            </select>
-          </div>
+        <div className="prioridade">
+          <p>Prioridade</p>
+          <select
+            className="selectPrioridade"
+            value={prioridades}         
+            onChange={(e) => setPrioridade(e.target.value)}
+          >
+            <option value="" className="frase">Selecione a prioridade do processo</option>
+            <option value="Alta">Alta</option>
+            <option value="Média">Média</option>
+            <option value="Baixa">Baixa</option>
+          </select>
         </div>
 
+        <div className="options">
+          {/* Opções */}
+          {currentView === "opcoes" && (
+            <div className="select-opcoes-questao">
+              <div className="opcoes-etapa2">
+                <button className="textoAberto">
+                  <div className="icone">
+                    <TextT size={32} />
+                  </div>
+                  <p>Texto aberto</p>
+                </button>
+
+                <button className="Upload">
+                  <div className="icone">
+                    <FileArrowUp size={32} />
+                  </div>
+                  <p>Upload de arquivo</p>
+                </button>
+
+                <button className="CheckList">
+                  <div className="icone">
+                    <CheckSquare size={32} />
+                  </div>
+                  <p>Checklist</p>
+                </button>
+
+                <button className="SeletorOpcoes">
+                  <div className="icone">
+                    <List size={32} />
+                  </div>
+                  <p>Seletor de opções</p>
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+        
         {/* Botão para adicionar questão */}
-        <div className="btn-novaQuestao">
+        {/*}<div className="btn-novaQuestao">
           <button onClick={handleAdicionarQuestao} className="add-btn">
             Adicionar Questão
           </button>
-        </div>
+        </div>*/}
 
         {/* Renderizar todas as questões */}
         <div className="questoes-container">

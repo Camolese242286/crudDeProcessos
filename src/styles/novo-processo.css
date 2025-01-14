@@ -1,10 +1,10 @@
 /* Ajuste no container principal */
 .container-novo-processo {
-  margin-left: 150px;
+  margin-left: 60px;
   display: flex;
   flex-direction: column;
-  align-items: start;
-  gap: 40px;
+  align-items: center;
+  gap: 20px;
 }
 
 /* Alinhando o título fixo */
@@ -25,11 +25,18 @@
 
 /* Ajustando o container principal para centralizar conteúdo */
 .container-processo {
-  margin-top: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 20px; /* Adicionando espaçamento entre seções */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 60vw;
+  height: 580px;
+  transform: translate(-50%, -50%);
+  background: #fcfaff;
+  padding: 30px;
+  /*box-shadow: 10px 20px 30px rgba(0, 3, 0, 0.2);*/
+  z-index: 1000;
+  border-radius: 30px;
+  transition: all 0.3s ease;
 }
 
 /* Ajuste no título do processo */
@@ -38,82 +45,135 @@
   flex-direction: column;
   gap: 10px;
   align-items: start;
+  
 }
 
 .container-titulo .texto {
   font-size: 30px;
   color: #a466ff;
-  font-weight: 500;
+  font-weight: 600;
   padding: 8px;
-  min-width: 500px;
+  min-width: 50px;
   border-radius: 8px;
-  border: 1px solid #6800ff;
   font-family: "Open Sans";
-}
-.container-titulo::placeholder{
-  color: #aaa;
-}
-.container-titulo .texto:focus {
-  outline: none;
-  border: solid 2px #6800ff;
+  background-color: #fcfaff;
 }
 
-.descricao {
+.container-titulo .texto::placeholder {
   color: #6800ff;
+}
+
+.container-titulo .texto:focus {
+  outline: none;
+}
+
+.container-titulo .descricao {
+  color: #222;
   font-size: 18px;
   font-weight: 500;
-  min-width: 500px;
+  min-width: 600px;
   max-width: 800px;
   margin-top: 0;
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #6800ff;
+  font-family: "Open Sans";
+  border: none;
+  background-color: #fcfaff;
+}
+
+.descricao:focus {
+  outline: none;
+}
+
+.prioridade p{
+  position: relative;
+  top: -10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Ajuste no select de Prioridade */
+.prioridade {
+  display: grid;
+  justify-content: center;
+  position: relative;
+  top: 30px;
+  right: 358px;
+}
+
+.selectPrioridade {
+  width: 350px;
+  height: 3em;
+  border: 1px solid #d8d5dd;
+  border-radius: 12px;
   font-family: "Open Sans";
 }
 
-.descricao:focus{
+.selectPrioridade:focus {
   outline: none;
-  border: solid 2px #6800ff;
+  border: solid 1px #6800ff;
 }
+
 .options {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 50px;
+  position: relative;
+  top:80px;
 }
-.options p {
+
+.options button {
+  width: 320px;
+  margin: 15px;
+  border: 1px solid #222;
+  border-radius: 15px;
+  background-color: #fcfaff;
+}
+
+.options button:hover {
+  border: 2px solid #6800ff;
+}
+
+.options button .icone {
+  position: relative;
+  right: 110px;
+  top: 10px;
   color: #6800ff;
 }
+
+.textoAberto p {
+  position: relative;
+  right: 20px;
+}
+
+.CheckList p {
+  position: relative;
+  right: 20px;
+}
+
+.options p {
+  color: #222;
+  font-size: 16px;
+  position: relative;
+  top: -20px;
+}
+
 .options select {
   width: 300px;
   color: #6800ff;
 }
-/* Ajuste no select de Prioridade */
-.prioridade {
-  display: grid;
-  justify-content: center;
-}
 
-.selectPrioridade {
-  width: 100px;
-  height: 3em;
-  border: 1px solid #6800ff;
-  border-radius: 12px;
-  font-family: "Open Sans";
-}
-.selectPrioridade:focus{
-  outline: none;
-  border: solid 2px #6800ff;
-}
 /* Ajuste no select de Opções */
 .select-opcoes-questao {
   display: grid;
   justify-content: center;
 }
-.selectOpcoes:focus{
+
+.selectOpcoes:focus {
   outline: none;
   border: solid 2px #6800ff;
 }
+
 .selectOpcoes {
   display: grid;
   justify-content: center;
@@ -155,9 +215,11 @@
   font-weight: 500;
   margin: 10px;
 }
+
 .botoes-salvar {
   display: flex;
 }
+
 /* Ajustes nos botões de ação */
 .botao-cancelar button {
   background-color: #daa7a7;
@@ -180,7 +242,7 @@
 }
 
 /* Melhorando o layout das questões */
-.questoes-container {
+/*.questoes-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -189,7 +251,7 @@
   border: solid 1px #6800ff;
   padding: 10px;
   gap: 20px;
-}
+}*/
 
 /* Ajuste no item da questão */
 .questao-item {
@@ -217,6 +279,7 @@
   border-radius: 15px;
   width: 100%;
 }
+
 .header-questao {
   display: flex;
   flex-direction: row;
@@ -224,31 +287,37 @@
   font-size: 24px;
   color: #6800ff;
 }
+
 .numero-questao {
   display: flex;
 }
+
 .setas_excluir {
   display: flex;
   justify-content: space-between;
   width: 100px;
 }
+
 .icone-questao {
   display: flex;
   justify-content: end;
   color: #6800ff;
   cursor: pointer;
 }
+
 .setas-flex {
   display: flex;
   gap: 10px;
 }
+
 .icone-excluir {
   display: flex;
   justify-content: end;
   color: #6800ff;
   cursor: pointer;
 }
-.in-line{
+
+.in-line {
   display: flex;
   justify-content: center;
   font-size: 18px;
@@ -305,34 +374,51 @@
 .btn-add-item:hover {
   background-color: #7800cc;
 }
-.botoes-actions{
+
+.botoes-actions {  
   font-family: "Open Sans";
   width: 100px;
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  width: 100%;
+  width: 95%;
   margin-bottom: 50px;
-  margin-top: 20px;
+  margin-top: 120px;
 }
-.btn-cancelar-processo{
-  background-color: #8f0000;
-  color: #fff;
+
+.botoes-actions button {
+  height: 50px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.btn-cancelar-processo {
+  background-color: #fcfaff;
+  color: #6800ff;
+  border: 1px solid #6800ff;
   border-radius: 15px;
   padding: 5px;
   width: 120px;
+  position: relative;
+  left: 15px;
 }
-.btn-salvar-processo{
-  background-color: #6800ff;
-  color: #fff;
-  border-radius: 15px;
+
+.btn-salvar-processo {
+  background-color: #fcfaff;
+  color: #6800ff;
+  border: 1px solid #6800ff;
+  border-radius: 10px;
   padding: 5px;
   width: 120px;
+  position: relative;
+  left: 280px;
 }
-.btn-salvar-enviar{
+
+.btn-salvar-enviar {
   background-color: #6800ff;
   color: #fff;
-  border-radius: 15px;
+  border: none;
+  border-radius: 10px;
   padding: 5px;
-  width: 150px;
+  width: 165px;
 }
