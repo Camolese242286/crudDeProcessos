@@ -75,6 +75,15 @@ body {
   box-shadow: var(--box-shadow);
   padding: 1rem;
 }
+.iconOpenArea {
+  background-image: url("../images/iconOpen.png");
+  background-size: cover;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  max-width: 50px;
+  max-height: 50px;
+}
 
 .tabela-usuarios p {
   font-size: 1.2rem;
