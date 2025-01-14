@@ -7,6 +7,8 @@ import ExcluirPopup from "./Popup-excluir-processo";
 import Header from "./Header";
 import StatusIndicator from "./StatusIndicator";
 import api from "./apiService";
+import { Link } from "react-router-dom";
+import IconOpen from "../images/iconOpen.png";
 
 const Processos = () => {
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ const Processos = () => {
     setProcessos(novosProcessos);
     setProcessosFiltrados(novosProcessos);
     setMostrarPopup(false);
-  }
+  };
 
   const cancelarExclusao = () => {
     setMostrarPopup(false);
@@ -103,6 +105,7 @@ const Processos = () => {
         <table>
           <thead>
             <tr>
+              <th></th>
               <th>Nome Processo</th>
               <th>Prioridade</th>
               <th>Status</th>
@@ -114,13 +117,22 @@ const Processos = () => {
             {processosFiltrados.length ? (
               processosFiltrados.map((processo) => (
                 <tr key={processo.id}>
+                  <td>
+                    <div>
+                      <Link to={(`/editar-processo/${processo.id}`)}>
+                        <img src={IconOpen} alt="Go to Processo" />
+                      </Link>
+                    </div>
+                  </td>
                   <td>{processo.nome}</td>
                   <td>{processo.prioridades || "Não definida"}</td>
                   <td>
                     <div className="status-container">
                       <select
                         value={processo.status || "Não definido"}
-                        onChange={(e) => handleStatusChange(processo.id, e.target.value)}
+                        onChange={(e) =>
+                          handleStatusChange(processo.id, e.target.value)
+                        }
                       >
                         <option value="">Selecione o Status</option>
                         <option value="Enviado">Enviado</option>
@@ -134,7 +146,11 @@ const Processos = () => {
                   <td>{formatDate(processo.dataCriacao)}</td>
                   <td className="acoes">
                     <div className="icones">
-                      <button onClick={() => navegarPara(`/editar-processo/${processo.id}`)}>
+                      <button
+                        onClick={() =>
+                          navegarPara(`/editar-processo/${processo.id}`)
+                        }
+                      >
                         <PencilLine />
                       </button>
                       <button onClick={() => handleExcluir(processo.id)}>
@@ -165,7 +181,9 @@ const Processos = () => {
       )}
 
       <div className="botaoNovoProcesso">
-        <button onClick={() => navegarPara("/Novo-Processo")}>+ Novo Processo</button>
+        <button onClick={() => navegarPara("/Novo-Processo")}>
+          + Novo Processo
+        </button>
       </div>
     </div>
   );

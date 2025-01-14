@@ -31,7 +31,7 @@ const SearchWithDebounce = ({ processos, setProcessosFiltrados }) => {
         placeholder={
           processos.length === 0
             ? "Nenhum processo disponível"
-            : "Buscar..."
+            : "Buscar processo..."
         }
         value={query}
         onChange={handleSearch}

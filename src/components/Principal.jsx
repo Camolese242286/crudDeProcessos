@@ -7,6 +7,8 @@ import "../styles/principal.css";
 import "../styles/menu.css";
 import StatusIndicator from "./StatusIndicator";
 import Header from "./Header";
+import { Link } from "react-router-dom";
+import IconOpen from "../images/iconOpen.png";
 
 const Principal = () => {
   const [principais, setPrincipais] = useState([]);
@@ -24,7 +26,8 @@ const Principal = () => {
         [area]: newStatus,
       };
 
-      const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
+      const principalSalvos =
+        JSON.parse(localStorage.getItem("principal")) || [];
       const updatedPrincipais = principalSalvos.map((item) => {
         if (item.nome === area) {
           return { ...item, status: newStatus };
@@ -42,9 +45,24 @@ const Principal = () => {
     setPrincipais(principalSalvos);
 
     const savedConfigs = JSON.parse(localStorage.getItem("cardConfigs")) || [
-      { id: 0, title: "Processo por area", subtitle: "Substítulo 1", dataType: "area" },
-      { id: 0, title: "Processo por area", subtitle: "Substítulo 2", dataType: "processo" },
-      { id: 0, title: "Processo por area", subtitle: "Substítulo 3", dataType: "outro" },
+      {
+        id: 0,
+        title: "Processo por area",
+        subtitle: "Substítulo 1",
+        dataType: "area",
+      },
+      {
+        id: 0,
+        title: "Processo por area",
+        subtitle: "Substítulo 2",
+        dataType: "processo",
+      },
+      {
+        id: 0,
+        title: "Processo por area",
+        subtitle: "Substítulo 3",
+        dataType: "outro",
+      },
     ];
     setCardConfigs(savedConfigs);
 
@@ -60,7 +78,7 @@ const Principal = () => {
       setCurrentCard(cardId);
       //setIsPopupOpen(true);
     }
-  }
+  };
 
   const updateCardConfig = (cardId, updateConfig) => {
     const newConfigs = cardConfigs.map((config, index) =>
@@ -77,17 +95,18 @@ const Principal = () => {
       const processosSalvos = JSON.parse(localStorage.getItem("area")) || [];
       return processosSalvos.length;
     } else if (dataType === "processo") {
-      const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
+      const processosSalvos =
+        JSON.parse(localStorage.getItem("processos")) || [];
       return processosSalvos.length;
     } else {
       return 0;
     }
-  }
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return isNaN(date) ? "Data inválida" : date.toLocaleDateString("pt-BR");
-  }
+  };
 
   return (
     <>
@@ -98,9 +117,15 @@ const Principal = () => {
       <div className="body-container">
         <section className="graficos">
           {cardConfigs.map((config, index) => (
-            <div className="graphic" key={index} onClick={() => handleCardClick(index)}>
+            <div
+              className="graphic"
+              key={index}
+              onClick={() => handleCardClick(index)}
+            >
               <section className="numericos">
-                <div className="num-graphic">{calcularTotal(config.dataType)}</div>
+                <div className="num-graphic">
+                  {calcularTotal(config.dataType)}
+                </div>
               </section>
               <div>
                 <h3>{config.title}</h3>
@@ -123,6 +148,7 @@ const Principal = () => {
           <table>
             <thead>
               <tr>
+                <th> </th>
                 <th>Área</th>
                 <th>Responsável</th>
                 <th>Última movimentação</th>
@@ -133,6 +159,13 @@ const Principal = () => {
             <tbody>
               {principais.map((item) => (
                 <tr key={item.id}>
+                  <td>
+                    <div>
+                      <Link to="/area">
+                        <img src={IconOpen} alt="Go to Area" />
+                      </Link>
+                    </div>
+                  </td>
                   <td>{item.nome}</td>
                   <td>{item.responsavel}</td>
                   <td>{formatDate(item.ultimaMovimentacao)}</td>

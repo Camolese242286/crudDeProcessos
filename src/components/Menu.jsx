@@ -55,7 +55,7 @@ const Sidebar = () => {
             onMouseEnter={() => handleMouseEnter("home")}
             onMouseLeave={handleMouseLeave}
           >
-            <House size={28} />
+            <House size={35} />
             {hoveredIcon === "home" && <span>Início</span>}
           </div>
 
@@ -65,7 +65,7 @@ const Sidebar = () => {
             onMouseEnter={() => handleMouseEnter("processos")}
             onMouseLeave={handleMouseLeave}
           >
-            <ListPlus size={28} />
+            <ListPlus size={35} />
             {hoveredIcon === "processos" && <span>Processos</span>}
           </div>
 
@@ -75,26 +75,26 @@ const Sidebar = () => {
             onMouseEnter={() => handleMouseEnter("area")}
             onMouseLeave={handleMouseLeave}
           >
-            <Buildings size={28} />
+            <Buildings size={35} />
             {hoveredIcon === "area" && <span>Área</span>}
           </div>
 
           <div
-            className="menu-item notification"
+            className="menu-item"
             onClick={handleViewNotifications}
             onMouseEnter={() => handleMouseEnter("notificacoes")}
             onMouseLeave={handleMouseLeave}
           >
-            <Bell size={22} />
+            <Bell size={35} />
             {notificationsCount > 0 && (
               <span className="notification-badge">{notificationsCount}</span>
             )}
-            {hoveredIcon === "notificacoes" && <span>Notificações</span>}
+            {hoveredIcon === "" && <span>Notificações</span>}
           </div>
         </div>
 
         <div className="sidebar-footer" onClick={handleOpenPopup}>
-          <SignOut size={28} />
+          <SignOut size={35} />
           {hoveredIcon === "sair" && <span>Sair</span>}
         </div>
       </div>

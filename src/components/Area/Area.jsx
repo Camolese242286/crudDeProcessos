@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import StatusIndicator from "../StatusIndicator";
 import { useNavigate } from "react-router-dom";
 import Menu from "../Menu";
 import Header from "../Header";
@@ -13,6 +13,7 @@ import "../../styles/StyleArea/area.css";
 
 function Area() {
   const navigate = useNavigate();
+  const [statuses, setStatuses] = useState({});
   const [areas, setAreas] = useState([]); // Estado com a lista de áreas
   const [areasFiltrados, setAreasFiltrados] = useState([]);
 
@@ -119,7 +120,7 @@ function Area() {
                     <td>{area.nome}</td>
                     <td>{area.responsavel}</td>
                     <td>{area.subArea}</td>
-                    <td>Ativo</td>
+                    <td><StatusIndicator status={statuses[area.status]} /></td>
                     <td className="acoes">
                       <div className="icon-acoes">
                         <button onClick={() => handleEditarArea(area.id)}>

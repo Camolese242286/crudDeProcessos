@@ -1,6 +1,6 @@
 /* Ajuste no container principal */
 .container-novo-processo {
-  margin-left: 60px;
+  margin-left: 65px;
   display: flex;
   flex-direction: column;
   align-items: center;
