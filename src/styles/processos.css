@@ -25,10 +25,12 @@
 }
 
 .slProcessos {
-  width: 200px;
+  width: 218px;
+  height: 48px;
   padding: 10px;
   border: 1px solid #6800ff;
-  border-radius: 5px;
+  border-radius: 16px;
+  font-size: 16px;
   color: #6800ff;
   outline: none;
 }
@@ -48,15 +50,21 @@
   border-collapse: collapse;
 }
 
-.TabelaProcesso th,
-.TabelaProcesso td {
-  padding: 10px;
-  border: 1px solid #ccc;
-}
 
 .TabelaProcesso th {
-  background-color: #d2b4fe;
+  padding: 10px;
+  background-color: #EDE1FF;
   font-weight: bold;
+  text-align: left;
+}
+
+.TabelaProcesso td {
+  padding: 10px;
+  color: #222222;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  border-bottom: 1px solid #BEB9C6;
 }
 
 td.empty {
@@ -88,7 +96,11 @@ td.empty {
 .componente_Search {
   position: relative;
   display: inline-block;
-  width: 250px;
+  width: 338px;
+  height: 49px;
+  font-family: Open Sans;
+  font-weight: 400;
+  font-style: italic;
 }
 
 .componente_Search input {
@@ -97,7 +109,7 @@ td.empty {
   outline: none;
   border: 1px solid #6800ff;
   border-radius: 15px;
-  font-size: 16px;
+  font-size: 14px;
 }
 .status-container{
   width: 100%;
@@ -121,21 +133,25 @@ td.empty {
   position: absolute;
   right: 10px;
   top: 20%;
-  color: #888;
+  color: #6800FF;
   font-size: 18px;
   pointer-events: none;
 }
-
+.botaoNovoProcesso{
+  text-align: end;
+}
 .botaoNovoProcesso button {
   margin: 0 auto;
-  width: 200px;
-  padding: 10px;
+  width: 209px;
+  height: 52px;
+  padding: 15px;
   background-color: #6800ff;
   color: white;
   border: none;
   border-radius: 10px;
-  font-weight: bold;
+  font-weight: 700;
   cursor: pointer;
+  right: 5px;
 }
 
 .botaoNovoProcesso button:hover {
