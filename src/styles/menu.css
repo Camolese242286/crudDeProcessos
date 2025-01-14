@@ -44,9 +44,12 @@ body {
 }
 
 .menu-item {
+  display: flex;
   margin: 20px 0;
   text-align: center;
-  color: var(--sidebar-color);
+  align-items: center;
+  justify-content: center;
+  color: #BEB9C6;
   cursor: pointer;
   position: relative;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -61,33 +64,37 @@ body {
   text-align: center;
   bottom: -20px;
   opacity: 0;
+  color: #FFF;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .menu-item:hover span {
   visibility: visible;
   opacity: 1;
+  width: auto;
+  height: 23px;
+  border-radius: 3px;
+  padding: 4px 8px 5px 8px;
+  position: absolute;
+  top: -15px;
+  left: 50px;
+  font-weight: bold;
+  background-color: #030303;
 }
 
 .menu-item:hover {
-  transform: scale(1.8);
+  transform: scale(1.5);
   color: var(--highlight-color);
-  font-weight: bold;
-}
-
-.notification {
-  position: relative;
+  background-color: #EDE1FF;
+  width: 64px;
+  height: 48px;
+  border-radius: 12px;
 }
 
 .notification-badge {
-  position: absolute;
-  top: -5px;
-  right: -10px;
   background-color: var(--notification-color);
   color: white;
   border-radius: 50%;
-  font-size: 0.7rem;
-  padding: 2px 5px;
 }
 
 .sidebar-footer {
