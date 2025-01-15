@@ -106,6 +106,13 @@ body {
   overflow: hidden;
   text-align: left;
 }
+.selectStatusArea{
+  width: 200px;
+  padding: 5px;
+  outline: none;
+  border: solid 1px #6800ff;
+  border-radius: 16px;
+}
 
 .tabela-usuarios th{
   padding: 0.5rem;

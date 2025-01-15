@@ -58,21 +58,20 @@ html {
   border: solid 2px #6800ff;
 }
 
-.botao-area button {
+.btnNovaArea button {
   padding: 10px 20px;
   width: 200px;
   background-color: #6800ff;
   color: white;
-  border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
   border: none;
   font-weight: bold;
-}
-.botao-area:hover {
   border-radius: 10px;
-  font-weight: bold;
+}
+.btnNovaArea button:hover {
   background-color: #5700cc;
+  border-radius: 10px;
 }
 
 .TableArea {

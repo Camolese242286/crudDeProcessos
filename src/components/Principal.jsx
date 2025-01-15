@@ -174,6 +174,7 @@ const Principal = () => {
                   </td>
                   <td>
                     <select
+                      className="selectStatusArea"
                       value={statuses[item.nome]}
                       onChange={(e) => handleStatusChange(e, item.nome)}
                     >

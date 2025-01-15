@@ -98,7 +98,7 @@ function Area() {
               ))}
             </select>
           </div>
-          <div className="botao-area">
+          <div className="btnNovaArea">
             <button onClick={handleNovaArea}>+ Nova Área</button>
           </div>
         </div>
