@@ -4,7 +4,6 @@
   --secondary-bg-color: #f0e5ff;
   --box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   --menu-width: 100px;
-  
 }
 
 body {
@@ -61,20 +60,25 @@ body {
   text-align: center;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
 }
+
 .graphic h3{
   font-size: 18.66px;
 }
+
 .graphic p{
   text-align: left;
   font-size: 14px;
 }
+
 .tabela-usuarios {
   margin: 2rem 1rem;
   background-color: var(--background-color);
   border-radius: 10px;
-  box-shadow: var(--box-shadow);
   padding: 1rem;
+  background: rgba(252, 250, 255, 1);
+
 }
+
 .iconOpenArea {
   background-image: url("../images/iconOpen.png");
   background-size: cover;
@@ -102,6 +106,7 @@ body {
   overflow: hidden;
   text-align: left;
 }
+
 .tabela-usuarios th{
   padding: 0.5rem;
   background-color: var(--secondary-bg-color);
@@ -109,6 +114,7 @@ body {
   text-align: left;
   font-size: 16px;
 }
+
 .tabela-usuarios td{
   padding: 0.5rem;
   background-color: var(--background-color);
@@ -149,6 +155,6 @@ body {
 
   .tabela-usuarios table th,
   .tabela-usuarios table td {
-    font-size: 0.8rem;
+    font-size: 16px;
   }
 }

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Menu from "../Menu";
 import Header from "../Header";
 import Search from "./Search";
+import { Link } from "react-router-dom";
+import IconOpen from "../../images/iconOpen.png";
 
 import ExcluirPopupArea from "./Popup-excluir-area";
 
@@ -105,6 +107,7 @@ function Area() {
           <table>
             <thead>
               <tr className="table-names">
+                <th></th>
                 <th>Nome da área</th>
                 <th>Responsável</th>
                 <th># Sub-Áreas</th>
@@ -117,15 +120,22 @@ function Area() {
               {areasFiltrados.length > 0 ? (
                 areasFiltrados.map((area) => (
                   <tr key={area.id}>
+                    <td>
+                    <div>
+                      <Link to={(`/editar-area/${area.id}`)}>
+                        <img src={IconOpen} alt="Area de Empresa" />
+                      </Link>
+                    </div>
+                  </td>
                     <td>{area.nome}</td>
                     <td>{area.responsavel}</td>
                     <td>{area.subArea}</td>
                     <td><StatusIndicator status={statuses[area.status]} /></td>
                     <td className="acoes">
                       <div className="icon-acoes">
-                        <button onClick={() => handleEditarArea(area.id)}>
+                        {/* <button onClick={() => handleEditarArea(area.id)}>
                           <PencilSimpleLine size={18} />
-                        </button>
+                        </button> */}
                         <button onClick={() => handleExluirArea(area.id)}>
                           <Trash size={18} />
                         </button>
@@ -148,14 +158,14 @@ function Area() {
                 />
               )}
 
-              {/*}{areasFiltrados.map((area) => (
+              {/* }{areasFiltrados.map((area) => (
                 <tr key={area.id}>
                   <td>{area.nome}</td>
                   <td>{area.responsavel}</td>
                   <td>{area.subAreas}</td>
                   <td>{area.status}</td>
                 </tr>
-              ))}*/}
+              ))} */}
             </tbody>
           </table>
         </div>

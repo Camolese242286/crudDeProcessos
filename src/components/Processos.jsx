@@ -119,7 +119,7 @@ const Processos = () => {
                 <tr key={processo.id}>
                   <td>
                     <div>
-                      <Link to={(`/editar-processo/${processo.id}`)}>
+                      <Link to={`/editar-processo/${processo.id}`}>
                         <img src={IconOpen} alt="Go to Processo" />
                       </Link>
                     </div>
@@ -145,18 +145,16 @@ const Processos = () => {
                   </td>
                   <td>{formatDate(processo.dataCriacao)}</td>
                   <td className="acoes">
-                    <div className="icones">
-                      <button
+                    {/* <button
                         onClick={() =>
                           navegarPara(`/editar-processo/${processo.id}`)
                         }
                       >
                         <PencilLine />
-                      </button>
-                      <button onClick={() => handleExcluir(processo.id)}>
-                        <Trash />
-                      </button>
-                    </div>
+                      </button> */}
+                    <button onClick={() => handleExcluir(processo.id)}>
+                      <Trash />
+                    </button>
                   </td>
                 </tr>
               ))

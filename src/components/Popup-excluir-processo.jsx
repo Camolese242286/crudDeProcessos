@@ -8,11 +8,11 @@ const ExcluirPopup = ({ title, mensagem, onConfirm, onCancel }) => {
         <h3 className="titulo">{title}</h3>
         <p className="mensagem">{mensagem}</p>
         <div className="popup-excluir-botao">
-          <button onClick={onConfirm} className="btn-confirmar">
-            Excluir Processo
-          </button>
           <button onClick={onCancel} className="btn-cancelar">
             Cancelar
+          </button>
+          <button onClick={onConfirm} className="btn-confirmar">
+            Excluir Processo
           </button>
         </div>
       </div>
