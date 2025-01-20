@@ -42,18 +42,17 @@
   border: 1px solid #6800ff;
   border-radius: 16px;
   font-size: 16px;
+  font-weight: 600;
   color: #6800ff;
   outline: none;
 }
 .slProcessos:focus{
   border: solid 2px #6800ff;
 }
-.TabelaProcesso {
-  overflow-x: auto;
-  margin-top: 50px;
-}
 
 .TabelaProcesso table {
+  overflow-x: auto;
+  margin-top: 50px;
   width: 100%;
   border-radius: 20px;
   background: #fcfaff;
@@ -67,6 +66,7 @@
   background-color: #EDE1FF;
   font-weight: bold;
   text-align: left;
+  font-size: 16px;
 }
 
 .TabelaProcesso td {
@@ -86,13 +86,13 @@ td.empty {
 
 .acoes {
   display: flex;
-  height: 60px;
+  height: 65px;
   justify-content: center;
   align-items: center;
 }
 
 .acoes button {
-  margin: 0 5px;
+  /* margin: 0 5px; */
   padding: 5px 10px;
   border: 1px solid #6800ff;
   border-radius: 4px;
@@ -123,7 +123,7 @@ td.empty {
   font-size: 14px;
 }
 .status-container{
-  width: 100%;
+  max-width: 400px;
   display: flex;
   justify-content: space-between;
 }
@@ -131,6 +131,7 @@ td.empty {
   width: 200px;
   outline: none;
   border: solid 1px #6800ff;
+  border-radius: 16px;
 }
 .status-container select:focus{
   border: solid 2px #6800ff;

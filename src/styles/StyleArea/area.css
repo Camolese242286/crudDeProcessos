@@ -2,14 +2,13 @@
 
 .container-page {
   margin-left: 150px;
-  /* Respeitando o menu lateral */
 }
 
 html {
   margin: 0;
   padding: 0;
 }
-.container-page-area{
+.container-page-area {
   margin-left: 100px;
   margin-top: 150px;
   gap: 30px;
@@ -46,10 +45,12 @@ html {
 }
 
 .slArea {
-  width: 200px;
+  width: 218px;
+  height: 48px;
   padding: 10px;
   border: 1px solid #6800ff;
-  border-radius: 5px;
+  border-radius: 16px;
+  font-size: 16px;
   color: #6800ff;
   outline: none;
 }
@@ -57,24 +58,21 @@ html {
   border: solid 2px #6800ff;
 }
 
-.botao-area button {
+.btnNovaArea button {
   padding: 10px 20px;
   width: 200px;
   background-color: #6800ff;
   color: white;
-  border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
   border: none;
   font-weight: bold;
-
-}
-.botao-area:hover {
   border-radius: 10px;
-  font-weight: bold;
-  background-color: #5700cc;
 }
-
+.btnNovaArea button:hover {
+  background-color: #5700cc;
+  border-radius: 10px;
+}
 
 .TableArea {
   margin-top: 20px;
@@ -87,23 +85,25 @@ html {
   background-color: #fcfaff;
   color: #6800ff;
   font-family: "Open Sans", sans-serif;
+  border-collapse: collapse;
 }
 
-.TableArea th,
+.TableArea th {
+  padding: 10px;
+  background-color: #ede1ff;
+  font-weight: bold;
+  text-align: left;
+}
 .TableArea td {
   padding: 10px;
   text-align: left;
-  border: 1px solid #ccc;
-}
-
-.TableArea .table-names th {
-  font-weight: 600;
-  background-color: #d2b4fe;
+  border-bottom: 1px solid #ccc;
 }
 
 .TableArea th:first-child {
   border-top-left-radius: 10px;
 }
+
 .TableArea th:last-child {
   border-top-right-radius: 10px;
 }
@@ -115,7 +115,7 @@ html {
   border-bottom-left-radius: 10px;
 }
 
-/* Estilização do componente Search */
+/* Estilização do componenti Search */
 .input-container {
   position: relative;
   display: inline-block;
@@ -127,7 +127,6 @@ html {
 
 .input-container input {
   padding-left: 5px;
-  /* Espaço para o ícone */
   height: 40px;
   width: 250px;
   box-sizing: border-box;
@@ -136,29 +135,24 @@ html {
 
 .input-container input:focus {
   outline: none;
-  /* Remove o contorno padrão */
   border: 1px solid #ccc;
-  /* Adicione uma borda personalizada, se quiser */
   border-radius: 15px;
 }
 
 .input-container .icon {
   position: absolute;
   right: 10px;
-  /* Distância da borda direita */
   top: 50%;
   transform: translateY(-50%);
-  /* Centraliza verticalmente */
   color: #6800ff;
   pointer-events: none;
-  /* Evita que o ícone interfira no input */
 }
 
 .icon-acoes {
-  text-align: center;  
+  text-align: center;
 }
 
-/* Estilização do componente Search na página Área */
+/* Estiulização do componente Search na página Área */
 .search-area {
   display: flex;
   justify-content: end;
