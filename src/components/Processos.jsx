@@ -9,6 +9,7 @@ import StatusIndicator from "./StatusIndicator";
 import api from "./apiService";
 import { Link } from "react-router-dom";
 import IconOpen from "../images/iconOpen.png";
+import NovoProcesso from "./Novo-Processo";
 
 const Processos = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Processos = () => {
   const [selectProcessos, setSelectProcessos] = useState("");
   const [idParaExcluir, setIdParaExcluir] = useState(null);
   const [mostrarPopup, setMostrarPopup] = useState(false);
+  const [mostrarNovoProcesso, setMostrarNovoProcesso] = useState(false);
 
   useEffect(() => {
     const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
@@ -60,6 +62,16 @@ const Processos = () => {
     setMostrarPopup(false);
     setIdParaExcluir(null);
   };
+
+  const handleNovoProcessoClick = () => {
+    setMostrarNovoProcesso(true);
+  }
+
+  const handleFecharProcessoClick = () => {
+    setMostrarNovoProcesso(false);
+  }
+
+
 
   const handleStatusChange = (processoId, novoStatus) => {
     const processoAtualizado = processos.find(({ id }) => id === processoId);
@@ -181,10 +193,17 @@ const Processos = () => {
       )}
 
       <div className="botaoNovoProcesso">
-        <button onClick={() => navegarPara("/Novo-Processo")}>
+        <button onClick={handleNovoProcessoClick}>
           + Novo Processo
         </button>
       </div>
+
+      {mostrarNovoProcesso && (
+        <div className="desfoquefundo">
+          <NovoProcesso onClose={handleFecharProcessoClick} />
+        </div>
+      )}
+
     </div>
   );
 };

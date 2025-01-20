@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-import Popup from "./Popup";
 import "./Processos";
-import PopupSalvarEnviar from "./Popup_Salvar_Enviar";
-import { FaTrashAlt } from "react-icons/fa";
-import { ArrowSquareDown, ArrowSquareUp, Trash, TextT, FileArrowUp, CheckSquare, List } from "phosphor-react";
-
+import Questao from "./Questao";
+import EnviarProcesso from './Popup_Salvar_Enviar';
 import "../styles/novo-processo.css";
-import EnviarProcesso from "./Popup_Salvar_Enviar";
 
-function NovoProcesso() {
+function NovoProcesso({onClose}) {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [currentView, setCurrentView] = useState("opcoes");
+  const [step, setStep] = useState(1);
+  const [currentView, setCurrentView] = useState('');
+  const [editandoNomeProcesso, setEditandoNomeProcesso] = useState(false);
   const [nomeProcesso, setNomeProcesso] = useState("");
   const [descricao, setDescricao] = useState("");
   const [prioridades, setPrioridade] = useState("");
@@ -25,7 +22,7 @@ function NovoProcesso() {
     "Seletor-opcoes": [],
   });
 
-  const [SelectedOption, setSelectedOption] = useState(""); // Tipo de questão selecionado
+  const [SelectedOption, setSelectedOption] = useState(''); // Tipo de questão selecionado
   const [popupVisivel, setPopupVisivel] = useState(false);
 
   useEffect(() => {
@@ -48,6 +45,7 @@ function NovoProcesso() {
       alert("Por favor, preencha o nome do Processo e a descrição");
       return false;
     }
+    setStep(2);
     return true;
   };
 
@@ -74,6 +72,7 @@ function NovoProcesso() {
       }
 
       localStorage.setItem("processos", JSON.stringify(processosSalvos));
+      //onClose();
       navigate("/processos");
     } catch (error) {
       console.error("Erro ao salvar processo:", error);
@@ -94,28 +93,12 @@ function NovoProcesso() {
     navigate("/processos");
   };
 
-  const handleEnviarProcesso = (responsaveis) => {
-    console.log("Processo enviado para: ", responsaveis);
-    // Aqui pode ser adicionada a lógica de envio, dependendo da aplicação
-    handleSalvarClick(); // Salva antes de enviar
-    setPopupVisivel(true);
-    alert("Processo enviado!");
-    //navigate("/processos");
-  };
+  const handleCancelarNovoProcesso = () => {
+    setStep(1);
+  }
 
   const handleOptionChange = (e) => {
-    const novaOpcao = e.target.value;
-
-    setQuestoesPorTipo((prev) => ({
-      ...prev,
-      [SelectedOption]: questoes, //Salva as questões da opção atual
-    }));
-
-    // Atualiza a opção selecionada
-    setSelectedOption(novaOpcao);
-
-    // Carrega as questões da nova opção ou iniciativa vazio
-    //setQuestoes(questoesPorTipo[novaOpcao] || []);
+    setSelectedOption(e.target.value);
   };
 
   const handleAdicionarQuestao = () => {
@@ -123,72 +106,17 @@ function NovoProcesso() {
       alert("Por favor, selecione um tipo de questão antes de adicionar");
       return;
     }
-
     const novaQuestao = {
-      id: Date.now(),
-      titulo: "",
-      resposta: "",
+      id: questoes.length + 1,
       tipo: SelectedOption,
-      itens:
-        SelectedOption === "CheckList" ? [{ text: "", checked: false }] : [], // Itens para CheckList
+      titulo: '',
+      resposta: SelectedOption === "Texto-aberto" ? "" : null,
+      itens: SelectedOption === "CheckList" ? [] : null,
+      opcoes: SelectedOption === "Seletor-opcoes" ? [] : null,
+      arquivo: SelectedOption === "Upload-arquivo" ? null : undefined,
     };
-
-    setQuestoes((prev) => [...prev, novaQuestao]);
-  };
-
-  const handleAtualizarQuestao = (id, field, value) => {
-    const questoesAtualizadas = questoes.map((questao) =>
-      questao.id === id ? { ...questao, [field]: value } : questao
-    );
-    setQuestoes(questoesAtualizadas);
-  };
-
-  const handleRemoverQuestao = (id) => {
-    setQuestoes(questoes.filter((questao) => questao.id !== id));
-  };
-
-  const handleAdicionarItemChecklist = (id) => {
-    const questoesAtualizadas = questoes.map((questao) =>
-      questao.id === id
-        ? {
-          ...questao,
-          itens: [...(questao.itens || []), { text: "", checked: false }],
-        }
-        : questao
-    );
-    setQuestoes(questoesAtualizadas);
-  };
-
-  const handleAtualizarChecklistText = (id, index, value) => {
-    const questoesAtualizadas = questoes.map((questao) => {
-      if (questao.id === id) {
-        const novoItens = [...(questao.itens || [])];
-        novoItens[index] = { ...novoItens[index], text: value }; // Atualiza o texto do item
-        return { ...questao, itens: novoItens };
-      }
-      return questao;
-    });
-    setQuestoes(questoesAtualizadas);
-  };
-
-  const handleAtualizarChecklistCheckbox = (id, index, checked) => {
-    const questoesAtualizadas = questoes.map((questao) => {
-      if (questao.id === id) {
-        const novoItens = [...(questao.itens || [])];
-        novoItens[index] = { ...novoItens[index], checked };
-        return { ...questao, itens: novoItens };
-      }
-      return questao;
-    });
-    setQuestoes(questoesAtualizadas);
-  };
-
-  const handleEditarQuestao = (id, novosDados) => {
-    const questoesAtualizadas = questoes.map((questao) =>
-      questao.id === id ? { ...questao, ...novosDados } : questao
-    );
-
-    setQuestoes(questoesAtualizadas);
+    setQuestoes([...questoes, novaQuestao]);
+    setSelectedOption("");
   };
 
   const handleMoverQuestaoParaCima = (index) => {
@@ -213,273 +141,182 @@ function NovoProcesso() {
     setQuestoes(questoesAtualizadas);
   };
 
+  const handleRemoverQuestao = (id) => {
+    const questoesAtualizadas = questoes.filter((questao) => questao.id !== id);
+    setQuestoes(questoesAtualizadas);
+  };
+
+  const handleEditarQuestao = (id, novosDados) => {
+    const questoesAtualizadas = questoes.map((questao) =>
+      questao.id === id ? { ...questao, ...novosDados } : questao
+    );
+    setQuestoes(questoesAtualizadas);
+  };
+
+  const renderizarQuestao = () => {
+    // Lógica para renderizar a questão
+    return questoes.map((questao) => (
+      <div key={questao.id}></div>
+    ));
+  };
+
   return (
     <div className="container-novo-processo">
+      <div className="popup-containe"
+        style={{
+          position: "fixed",
+          width: step === 1 ? "57em" : "90em",
+          height: step === 1 ? "29em" : "50em",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          background: "#fcfaff",
+          padding: "30px",
+          boxShadow: "10px 20px 30px rgba(0, 3, 0, 0.2)",
+          zIndex: 1000,
+          border: "none",
+          borderRadius: "10px",
+          transition: "all 0.5s ease",
+        }}
+      >
 
-      {/* <div className="title-fixed">
-        <h1>Novo Processo</h1>
-      </div> */}
+        <div className="etapa-1">
+          {step === 1 ? (
+            <div className="container-processo">
+              <div className="container-titulo">
+                <input
+                  className="texto"
+                  type="text"
+                  placeholder="Insira aqui o nome do processo"
+                  value={nomeProcesso}
+                  onChange={(e) => setNomeProcesso(e.target.value)}
+                  onFocus={() => setEditandoNomeProcesso(true)}
+                  onBlur={() => setEditandoNomeProcesso(false)}
+                />
+                <div>
+                  <input
+                    className="descricao"
+                    placeholder="Adicione uma descrição para esse processo"
+                    value={descricao}
+                    onChange={(e) => setDescricao(e.target.value)}
+                    onFocus={() => setDescricao("")}
+                  />
+                </div>
+              </div>
 
-      <div className="container-processo">
-        <div className="container-titulo">
-          <input
-            className="texto"
-            type="text"
-            placeholder="Insira aqui o nome do processo"
-            value={nomeProcesso}
-            onChange={(e) => setNomeProcesso(e.target.value)}
-          />
-          <div>
-            <input
-              className="descricao"
-              placeholder="Adicione uma descrição para esse processo"
-              value={descricao}
-              onChange={(e) => setDescricao(e.target.value)}
-            />
-          </div>
-        </div>
+              <div className="prioridade">
+                <p>Prioridade</p>
+                <select
+                  className="selectPrioridade"
+                  value={prioridades}
+                  onChange={(e) => setPrioridade(e.target.value)}
+                >
+                  <option value="" className="frase">Selecione a prioridade do processo</option>
+                  <option value="Alta">Alta</option>
+                  <option value="Média">Média</option>
+                  <option value="Baixa">Baixa</option>
+                </select>
+              </div>
 
-        <div className="prioridade">
-          <p>Prioridade</p>
-          <select
-            className="selectPrioridade"
-            value={prioridades}         
-            onChange={(e) => setPrioridade(e.target.value)}
-          >
-            <option value="" className="frase">Selecione a prioridade do processo</option>
-            <option value="Alta">Alta</option>
-            <option value="Média">Média</option>
-            <option value="Baixa">Baixa</option>
-          </select>
-        </div>
-
-        <div className="options">
-          {/* Opções */}
-          {currentView === "opcoes" && (
-            <div className="select-opcoes-questao">
-              <div className="opcoes-etapa2">
-                <button className="textoAberto">
-                  <div className="icone">
-                    <TextT size={32} />
-                  </div>
-                  <p>Texto aberto</p>
+              <div className="proximo">
+                <button onClick={validarCampos}>
+                  Próximo
                 </button>
+              </div>
 
-                <button className="Upload">
-                  <div className="icone">
-                    <FileArrowUp size={32} />
-                  </div>
-                  <p>Upload de arquivo</p>
+              <div className="botoes-actions">
+                <button onClick={onClose} className="btn-cancelar-processo">
+                  Cancelar
                 </button>
-
-                <button className="CheckList">
-                  <div className="icone">
-                    <CheckSquare size={32} />
-                  </div>
-                  <p>Checklist</p>
+                <button onClick={handleSalvarClick} className="btn-salvar-processo">
+                  Salvar
                 </button>
+                <button onClick={handleAbrirPopup} className="btn-salvar-enviar">
+                  Salvar e Enviar
+                </button>
+              </div>
+            </div>
 
-                <button className="SeletorOpcoes">
-                  <div className="icone">
-                    <List size={32} />
-                  </div>
-                  <p>Seletor de opções</p>
+          ) : (
+
+            <div className="etapa-2">
+              <h3 className="colorProcess">{nomeProcesso}</h3>
+              <p className="colorDescription">{descricao}</p>
+
+              <div className="prioridade-step2">
+                <p>Prioridade</p>
+                <select
+                  className="selectPrioridade"
+                  value={prioridades}
+                  onChange={(e) => setPrioridade(e.target.value)}
+                >
+                  <option value="" className="frase">Selecione a prioridade do processo</option>
+                  <option value="Alta">Alta</option>
+                  <option value="Média">Média</option>
+                  <option value="Baixa">Baixa</option>
+                </select>
+              </div>
+
+              <div className="select-opcoes-questao">
+                <p>Selecione o tipo da Questão</p>
+                <select className="selectOpcoes" value={SelectedOption} onChange={handleOptionChange}>
+                  <option value="">Selecione...</option>
+                  <option value="Texto-aberto">Texto Aberto</option>
+                  <option value="Upload-arquivo">Upload de arquivo</option>
+                  <option value="CheckList">Checklist</option>
+                  <option value="Seletor-opcoes">Seletor de opções</option>
+                </select>
+              </div>
+
+              <div className="btn-novaQuestao">
+                <button onClick={handleAdicionarQuestao} className="add-btn">
+                  Adicionar Questão
+                </button>
+              </div>
+
+              {renderizarQuestao()}
+
+              <div className="questoes-container" style={{ maxHeight: "420px", overflowY: "auto" }}>
+                {questoes.map((questao, index) => (
+                  <Questao
+                    key={questao.id}
+                    questao={questao}
+                    index={index}
+                    handleEditarQuestao={handleEditarQuestao}
+                    handleMoverQuestaoParaCima={handleMoverQuestaoParaCima}
+                    handleMoverQuestaoParaBaixo={handleMoverQuestaoParaBaixo}
+                    handleRemoverQuestao={handleRemoverQuestao}
+                  />
+                ))}
+              </div>
+
+              <div className="botoes-actions">
+                <button
+                  onClick={handleCancelarNovoProcesso}
+                  className="btn-cancelar-processo"
+                >
+                  Cancelar
+                </button>
+                <button onClick={handleSalvarClick} className="btn-salvar-processo">
+                  Salvar
+                </button>
+                <button onClick={handleAbrirPopup} className="btn-salvar-enviar">
+                  Salvar e Enviar
                 </button>
               </div>
             </div>
           )}
+          {popupVisivel && (
+            <EnviarProcesso
+              visivel={popupVisivel}
+              fecharPopup={handleFecharPopup}
+              nomeProcesso={nomeProcesso}
+              onEnviar={handleSalvarClick}
+            />
+          )}
         </div>
-        
-        {/* Botão para adicionar questão */}
-        {/*}<div className="btn-novaQuestao">
-          <button onClick={handleAdicionarQuestao} className="add-btn">
-            Adicionar Questão
-          </button>
-        </div>*/}
-
-        {/* Renderizar todas as questões */}
-        <div className="questoes-container">
-          {questoes.map((questao, index) => (
-            <div key={questao.id} className="questao-item">
-              <div className="header-questao">
-                <div className="numero-questao">{index + 1}.</div>
-                <div className="setas_excluir">
-                  <div className="setas-flex">
-                    <div
-                      className="icone-questao"
-                      onClick={() => handleMoverQuestaoParaCima(index)}
-                    >
-                      <ArrowSquareUp />
-                    </div>
-                    <div
-                      className="icone-questao"
-                      onClick={() => handleMoverQuestaoParaBaixo(index)}
-                    >
-                      <ArrowSquareDown />
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      className="icone-excluir"
-                      onClick={() => handleRemoverQuestao(questao.id)}
-                    >
-                      <Trash />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="questao-conteudo">
-                <input
-                  type="text"
-                  value={questao.titulo}
-                  onChange={(e) =>
-                    handleEditarQuestao(questao.id, { titulo: e.target.value })
-                  }
-                  placeholder="Título da pergunta do questionário"
-                />
-                {questao.tipo === "Texto-aberto" && (
-                  <input
-                    type="text"
-                    value={questao.resposta}
-                    onChange={(e) =>
-                      handleEditarQuestao(questao.id, {
-                        resposta: e.target.value,
-                      })
-                    }
-                    placeholder="Digite sua resposta"
-                  />
-                )}
-                <div className="upload-input">
-                  {questao.tipo === "Upload-arquivo" && (
-                    <input
-                      type="file"
-                      onChange={(e) =>
-                        handleEditarQuestao(
-                          questao.id,
-                          "resposta",
-                          e.target.files[0]?.name || ""
-                        )
-                      }
-                    />
-                  )}
-                </div>
-                {questao.tipo === "CheckList" && (
-                  <div className="checklist-container">
-                    {questao.itens?.map((item, idx) => (
-                      <div key={idx} className="checklist-item">
-                        <input
-                          type="checkbox"
-                          checked={item.checked || false}
-                          onChange={(e) => {
-                            const atualizado = [...questao.itens];
-                            atualizado[idx].checked = e.target.checked;
-                            handleAtualizarChecklistCheckbox(
-                              questao.id,
-                              idx,
-                              e.target.checked
-                            );
-                          }}
-                          style={{ width: "20px", height: "18px" }}
-                        />
-                        <input
-                          type="text"
-                          value={item.text || ""}
-                          onChange={(e) =>
-                            handleAtualizarChecklistText(
-                              questao.id,
-                              idx,
-                              e.target.value
-                            )
-                          }
-                          placeholder={`Item ${idx + 1}`}
-                        ></input>
-                      </div>
-                    ))}
-                    <button
-                      className="btn-add-item"
-                      onClick={() => handleAdicionarItemChecklist(questao.id)}
-                    >
-                      + Adicionar item
-                    </button>
-                  </div>
-                )}
-
-                {questao.tipo === "Seletor-opcoes" && (
-                  <div className="select-container">
-                    {questao.itens?.map((item, idx) => (
-                      <div key={idx} className="select-item">
-                        <select
-                          value={item.value || ""}
-                          onChange={(e) => {
-                            const atualizado = [...questao.itens];
-                            atualizado[idx].value = e.target.value;
-                            handleAtualizarQuestao(
-                              questao.id,
-                              "itens",
-                              atualizado
-                            );
-                          }}
-                        >
-                          <option value="">Selecione uma opção</option>
-                          <option value="Opção 1">Opção 1</option>
-                          <option value="Opção 2">Opção 2</option>
-                          <option value="Opção 3">Opção 3</option>
-                        </select>
-                      </div>
-                    ))}
-                    <button
-                      className="btn-add-item"
-                      onClick={() => {
-                        const atualizado = [...questao.itens, { value: "" }];
-                        handleAtualizarQuestao(questao.id, "itens", atualizado);
-                      }}
-                    >
-                      + Adicionar item
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {/* Botão de remover */}
-              <button
-                className="btn-delete"
-                onClick={() => handleRemoverQuestao(questao.id)}
-              >
-                <div className="icon">
-                  <FaTrashAlt size={20} />
-                </div>
-              </button>
-            </div>
-          ))}
-        </div>
-
-        {/* Botões de ação */}
-        <div className="botoes-actions">
-          <button
-            onClick={handleCancelarClick}
-            className="btn-cancelar-processo"
-          >
-            Cancelar
-          </button>
-          <button onClick={handleSalvarClick} className="btn-salvar-processo">
-            Salvar
-          </button>
-          <button onClick={handleAbrirPopup} className="btn-salvar-enviar">
-            Salvar e Enviar
-          </button>
-        </div>
-
-        {popupVisivel && (
-          <EnviarProcesso
-            visivel={popupVisivel}
-            fecharPopup={handleFecharPopup}
-            nomeProcesso={nomeProcesso}
-            onEnviar={handleEnviarProcesso}
-          />
-        )}
       </div>
-    </div>
+    </div >
   );
 }
-
 export default NovoProcesso;
