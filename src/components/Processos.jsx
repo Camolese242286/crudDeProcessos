@@ -19,6 +19,7 @@ const Processos = () => {
   const [idParaExcluir, setIdParaExcluir] = useState(null);
   const [mostrarPopup, setMostrarPopup] = useState(false);
   const [mostrarNovoProcesso, setMostrarNovoProcesso] = useState(false);
+  const [processoParaEditar, setProcessoParaEditar] = useState(null);
 
   useEffect(() => {
     const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
@@ -71,7 +72,10 @@ const Processos = () => {
     setMostrarNovoProcesso(false);
   }
 
-
+  const handleEditarProcessoClick = (processo) => {
+    setProcessoParaEditar(processo);
+    setMostrarNovoProcesso(true);
+  }
 
   const handleStatusChange = (processoId, novoStatus) => {
     const processoAtualizado = processos.find(({ id }) => id === processoId);
@@ -130,7 +134,7 @@ const Processos = () => {
               processosFiltrados.map((processo) => (
                 <tr key={processo.id}>
                   <td>
-                    <div>
+                    <div>                      
                       <Link to={`/editar-processo/${processo.id}`}>
                         <img src={IconOpen} alt="Go to Processo" />
                       </Link>
@@ -198,10 +202,10 @@ const Processos = () => {
 
       {mostrarNovoProcesso && (
         <div className="desfoquefundo">
-          <NovoProcesso onClose={handleFecharProcessoClick} />
+          <NovoProcesso
+            onClose={handleFecharProcessoClick} />
         </div>
       )}
-
     </div>
   );
 };

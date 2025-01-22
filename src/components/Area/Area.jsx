@@ -6,6 +6,7 @@ import Header from "../Header";
 import Search from "./Search";
 import { Link } from "react-router-dom";
 import IconOpen from "../../images/iconOpen.png";
+import NovaArea from "./Nova-Area";
 
 import ExcluirPopupArea from "./Popup-excluir-area";
 
@@ -18,6 +19,7 @@ function Area() {
   const [statuses, setStatuses] = useState({});
   const [areas, setAreas] = useState([]); // Estado com a lista de áreas
   const [areasFiltrados, setAreasFiltrados] = useState([]);
+  const [mostrarNovaArea, setMostrarNovaArea] = useState(false);
 
   /*useEffect(() => {
     // Carrega as áreas salvas no localStorage
@@ -27,9 +29,9 @@ function Area() {
   }, []);
 */
   //Abrir outra página
-  const handleNovaArea = () => {
+  /*const handleNovaArea = () => {
     navigate("/Nova-Area");
-  };
+  };*/
 
   //Os campos serão salvos na tabela após preencher na "Nova-Area"
   useEffect(() => {
@@ -73,6 +75,14 @@ function Area() {
     setIdParaExcluir(null);
   };
 
+  const handleNovaAreaClick = () => {
+    setMostrarNovaArea(true);
+  }
+
+  const handleFecharAreaClick = () => {
+    setMostrarNovaArea(false);
+  }
+
   return (
     <div className="container-page-area">
       <Menu />
@@ -98,9 +108,7 @@ function Area() {
               ))}
             </select>
           </div>
-          <div className="btnNovaArea">
-            <button onClick={handleNovaArea}>+ Nova Área</button>
-          </div>
+
         </div>
 
         <div className="TableArea">
@@ -121,12 +129,12 @@ function Area() {
                 areasFiltrados.map((area) => (
                   <tr key={area.id}>
                     <td>
-                    <div>
-                      <Link to={(`/editar-area/${area.id}`)}>
-                        <img src={IconOpen} alt="Area de Empresa" />
-                      </Link>
-                    </div>
-                  </td>
+                      <div>
+                        <Link to={(`/editar-area/${area.id}`)}>
+                          <img src={IconOpen} alt="Area de Empresa" />
+                        </Link>
+                      </div>
+                    </td>
                     <td>{area.nome}</td>
                     <td>{area.responsavel}</td>
                     <td>{area.subArea}</td>
@@ -169,6 +177,18 @@ function Area() {
             </tbody>
           </table>
         </div>
+
+        <div className="btnNovaArea">
+          <button onClick={handleNovaAreaClick}>+ Nova Área</button>
+        </div>
+
+        {mostrarNovaArea && (
+          <div className="desfoquefundoArea">
+            <NovaArea onClose={handleFecharAreaClick} />
+            <NovaArea onClick={handleEditarArea}/>
+          </div>
+        )}
+
       </div>
     </div>
   );

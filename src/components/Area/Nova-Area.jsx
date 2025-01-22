@@ -4,9 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "../../styles/StyleArea/nova-area.css";
 import Header from "../Header";
 
-function NovaArea() {
+function NovaArea({onClose}) {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams();  
   const [nomeArea, setNomeArea] = useState("");
   const [descricaoArea, setDescricaoArea] = useState("");
   const [responsavel, setResponsavel] = useState("");
@@ -51,7 +51,7 @@ function NovaArea() {
 
       localStorage.setItem("area", JSON.stringify(areasSalvos));
       navigate("/area");
-    
+
       const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
       const indexPrincipal = principalSalvos.findIndex((i) => i.id === Principal.id);
 
@@ -62,7 +62,7 @@ function NovaArea() {
       }
 
       localStorage.setItem("principal", JSON.stringify(principalSalvos));
-      
+
     } catch (error) {
       console.error("Erro ao salvar a área:", error);
       alert("Erro ao salvar a área. Por favor, tente novamente.")
@@ -101,61 +101,63 @@ function NovaArea() {
 
   return (
     <div className="container-principal">
-      <div className="index-container">
+      {/*}<div className="index-container">
         <Menu />
         <Header />
-      </div>
-      <div className="container-area">
-        {/* Título e Descrição */}
-        <div className="container-title-description">
-          <input
-            className="text-area"
-            type="text"
-            placeholder="Insira aqui o nome da área"
-            value={nomeArea}
-            onChange={(e) => setNomeArea(e.target.value)}
-          />
-          <textarea
-            className="description-area"
-            type="text"
-            placeholder="Adicione uma descrição para essa área"
-            value={descricaoArea}
-            onChange={(e) => setDescricaoArea(e.target.value)}
-          />
-        </div>
+      </div>*/}
+      <div className="popup-area">
+        <div className="container-area">
+          {/* Título e Descrição */}
+          <div className="container-title-description">
+            <input
+              className="text-area"
+              type="text"
+              placeholder="Insira aqui o nome da área"
+              value={nomeArea}
+              onChange={(e) => setNomeArea(e.target.value)}
+            />
+            <textarea
+              className="description-area"
+              type="text"
+              placeholder="Adicione uma descrição para essa área"
+              value={descricaoArea}
+              onChange={(e) => setDescricaoArea(e.target.value)}
+            />
+          </div>
 
-        {/* Responsável */}
-        <div className="select-responsavel-container">
-          <select
-            className="select-responsavel"
-            value={responsavel}
-            onChange={(e) => setResponsavel(e.target.value)}
-          >
-            <option value="">Selecione o responsável da área</option>
-            <option value="Name 1">Name 1</option>
-            <option value="Name 2">Name 2</option>
-            <option value="Name 3">Name 3</option>
-          </select>
-        </div>
+          {/* Responsável */}
+          <div className="select-responsavel-container">
+            <select
+              className="select-responsavel"
+              value={responsavel}
+              onChange={(e) => setResponsavel(e.target.value)}
+            >
+              <option value="">Selecione o responsável da área</option>
+              <option value="Name 1">Name 1</option>
+              <option value="Name 2">Name 2</option>
+              <option value="Name 3">Name 3</option>
+            </select>
+          </div>
 
-        <div className="sub-area-container">
-          <input
-            className="sub-area"
-            type="text"
-            placeholder="Sub-Area"
-            value={subArea}
-            onChange={(e) => setSubArea(e.target.value)}
-          />
-        </div>
+          <div className="sub-area-container">
+            <input
+              className="sub-area"
+              type="text"
+              placeholder="Sub-Area"
+              value={subArea}
+              onChange={(e) => setSubArea(e.target.value)}
+            />
+          </div>
 
-        {/* Botão de Adicionar */}
-        <div className="btn-add-area">
-          <button className="btn-cancelar-area" onClick={handleCancelArea}>
-            Cancelar
-          </button>
-          <button className="btn-salvar-area" onClick={handleSalvarArea}>
-            Salvar
-          </button>
+          {/* Botão de Adicionar */}
+          <div className="btn-add-area">
+            <button className="btn-cancelar-area" onClick={onClose}>
+              Cancelar
+            </button>
+            <button className="btn-salvar-area" onClick={handleSalvarArea}>
+              Salvar
+            </button>
+          </div>
         </div>
       </div>
     </div>
