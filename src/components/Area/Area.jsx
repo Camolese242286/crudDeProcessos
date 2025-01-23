@@ -14,33 +14,27 @@ import { PencilSimpleLine, Trash } from "phosphor-react";
 
 import "../../styles/StyleArea/area.css";
 
-function Area() {
+const Area = () => {
   const navigate = useNavigate();
   const [statuses, setStatuses] = useState({});
-  const [areas, setAreas] = useState([]); // Estado com a lista de áreas
+  const [areas, setAreas] = useState([]);
+  const [principal, setPrincipal] = useState([]);
   const [areasFiltrados, setAreasFiltrados] = useState([]);
   const [mostrarNovaArea, setMostrarNovaArea] = useState(false);
-
-  /*useEffect(() => {
-    // Carrega as áreas salvas no localStorage
-    const areasSalvas = JSON.parse(localStorage.getItem("areas")) || [];
-    setAreas(areasSalvas);
-    setAreasFiltrados(areasSalvas);
-  }, []);
-*/
-  //Abrir outra página
-  /*const handleNovaArea = () => {
-    navigate("/Nova-Area");
-  };*/
+  const [areaParaEditar, setAreaParaEditar] = useState(null);
 
   //Os campos serão salvos na tabela após preencher na "Nova-Area"
   useEffect(() => {
-    const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
-    setAreas(areasSalvos);
-    setAreasFiltrados(areasSalvos);
+    const areasSalvas = JSON.parse(localStorage.getItem('area')) || [];
+    setAreas(areasSalvas);
+    setAreasFiltrados(areasSalvas);
+
+    const principalSalvos = JSON.parse(localStorage.getItem('principal')) || [];
+    setPrincipal(principalSalvos);
   }, []);
 
   useEffect(() => {
+    setAreasFiltrados(areas);
     localStorage.setItem("area", JSON.stringify(areas));
   }, [areas]);
 
@@ -49,9 +43,9 @@ function Area() {
   const [popupExclusao, setpopupExclusao] = useState(false);
 
   //Editar o campo da área
-  const handleEditarArea = (id) => {
+  /*const handleEditarArea = (id) => {
     navigate(`/editar-area/${id}`);
-  };
+  };*/
 
   //Excluir o id da area
   const handleExluirArea = (id) => {
@@ -65,7 +59,12 @@ function Area() {
     setAreas(novaAreas);
     setAreasFiltrados(novaAreas);
     localStorage.setItem("area", JSON.stringify(novaAreas));
-    localStorage.setItem("principal", JSON.stringify(novaAreas));
+    //localStorage.setItem("principal", JSON.stringify(novaAreas));
+
+    const principaisAtualizadas = principal.filter((item) => item.id !== idParaExcluir);
+    setPrincipal(principaisAtualizadas);
+    localStorage.setItem("principal", JSON.stringify(principaisAtualizadas));
+
     setpopupExclusao(false);
   };
 
@@ -76,11 +75,62 @@ function Area() {
   };
 
   const handleNovaAreaClick = () => {
+    setAreaParaEditar(null);
+    setMostrarNovaArea(true);
+  }
+
+  const handleEditarAreaClick = (area) => {
+    setAreaParaEditar(area);
     setMostrarNovaArea(true);
   }
 
   const handleFecharAreaClick = () => {
     setMostrarNovaArea(false);
+  }
+
+  const handleSalvarArea = (novaArea) => {
+    const areasAtualizadas = areas.map((a) =>
+      a.id === novaArea.id ? novaArea : a
+    );
+    if (!areasAtualizadas.find((a) => a.id === novaArea.id)) {
+      areasAtualizadas.push(novaArea);
+    }
+    setAreas(areasAtualizadas);
+    localStorage.setItem('area', JSON.stringify(areasAtualizadas));
+    //setMostrarNovaArea(false);
+
+    const novaEntradaPrincipal = {
+      id: novaArea.id,
+      nome: novaArea.nome,
+      responsavel: novaArea.responsavel,
+      ultimaMovimentacao: new Date().toISOString(),
+      status: "",
+    };
+
+    const principaisAtualizadas = principal.map((item) =>
+      item.id === novaEntradaPrincipal.id ? novaEntradaPrincipal : item
+    );
+    
+    // Se não encontrar a área, adiciona
+    if (!principaisAtualizadas.find((item) => item.id === novaEntradaPrincipal.id)) {
+      principaisAtualizadas.push(novaEntradaPrincipal);
+    }
+
+    //const principaisAtualizadas = [...principal, novaEntradaPrincipal];
+    setPrincipal(principaisAtualizadas);
+    localStorage.setItem("principal", JSON.stringify(principaisAtualizadas));
+
+    setMostrarNovaArea(false);
+
+    /*const principalAtualizadas = principal.map((p) =>
+      p.id === principal.id ? principal : p
+    );
+    if (!principalAtualizadas.find((p) => p.id === principal.id)) {
+      principalAtualizadas.push(principal);
+    }
+    setPrincipal(principalAtualizadas);
+    localStorage.setItem('principal', JSON.stringify(principalAtualizadas));
+    setMostrarNovaArea(false);*/
   }
 
   return (
@@ -124,15 +174,14 @@ function Area() {
               </tr>
             </thead>
             <tbody>
-              {/* Aqui você pode mapear os dados filtrados */}
               {areasFiltrados.length > 0 ? (
                 areasFiltrados.map((area) => (
                   <tr key={area.id}>
                     <td>
                       <div>
-                        <Link to={(`/editar-area/${area.id}`)}>
+                        <Link onClick={() => handleEditarAreaClick(area)}>
                           <img src={IconOpen} alt="Area de Empresa" />
-                        </Link>
+                        </Link>                        
                       </div>
                     </td>
                     <td>{area.nome}</td>
@@ -141,9 +190,6 @@ function Area() {
                     <td><StatusIndicator status={statuses[area.status]} /></td>
                     <td className="acoes">
                       <div className="icon-acoes">
-                        {/* <button onClick={() => handleEditarArea(area.id)}>
-                          <PencilSimpleLine size={18} />
-                        </button> */}
                         <button onClick={() => handleExluirArea(area.id)}>
                           <Trash size={18} />
                         </button>
@@ -165,15 +211,6 @@ function Area() {
                   onCancel={cancelarExclusaoArea}
                 />
               )}
-
-              {/* }{areasFiltrados.map((area) => (
-                <tr key={area.id}>
-                  <td>{area.nome}</td>
-                  <td>{area.responsavel}</td>
-                  <td>{area.subAreas}</td>
-                  <td>{area.status}</td>
-                </tr>
-              ))} */}
             </tbody>
           </table>
         </div>
@@ -184,11 +221,13 @@ function Area() {
 
         {mostrarNovaArea && (
           <div className="desfoquefundoArea">
-            <NovaArea onClose={handleFecharAreaClick} />
-            <NovaArea onClick={handleEditarArea}/>
+            <NovaArea
+              onClose={handleFecharAreaClick}
+              area={areaParaEditar}
+              onSaveArea={handleSalvarArea}
+            />
           </div>
         )}
-
       </div>
     </div>
   );

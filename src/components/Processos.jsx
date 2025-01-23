@@ -29,6 +29,7 @@ const Processos = () => {
 
   useEffect(() => {
     setProcessosFiltrados(processos);
+    localStorage.setItem("processos", JSON.stringify(processos));
   }, [processos]);
 
   useEffect(() => {
@@ -44,10 +45,6 @@ const Processos = () => {
 
     fetchProcessos();
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("processos", JSON.stringify(processos));
-  }, [processos]);
 
   const navegarPara = (rota) => navigate(rota);
 
@@ -151,10 +148,7 @@ const Processos = () => {
               processosFiltrados.map((processo) => (
                 <tr key={processo.id}>
                   <td>
-                    <div>
-                      {/*}<Link to={`/editar-processo/${processo.id}`}>
-                        <img src={IconOpen} alt="Go to Processo" />
-                      </Link>*/}
+                    <div>                      
                       <Link onClick={() => handleEditarProcessoClick(processo)}>
                         <img src={IconOpen} alt="Go to Processo" />
                       </Link>
@@ -180,14 +174,7 @@ const Processos = () => {
                     </div>
                   </td>
                   <td>{formatDate(processo.dataCriacao)}</td>
-                  <td className="acoes">
-                    {/* <button
-                        onClick={() =>
-                          navegarPara(`/editar-processo/${processo.id}`)
-                        }
-                      >
-                        <PencilLine />
-                      </button> */}
+                  <td className="acoes">                   
                     <button onClick={() => handleExcluir(processo.id)}>
                       <Trash />
                     </button>

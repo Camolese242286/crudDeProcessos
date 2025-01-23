@@ -26,8 +26,8 @@ const Principal = () => {
         [area]: newStatus,
       };
 
-      const principalSalvos =
-        JSON.parse(localStorage.getItem("principal")) || [];
+      const principalSalvos = JSON.parse(localStorage.getItem("principal")) || [];
+
       const updatedPrincipais = principalSalvos.map((item) => {
         if (item.nome === area) {
           return { ...item, status: newStatus };
@@ -104,9 +104,10 @@ const Principal = () => {
   };
 
   const formatDate = (dateString) => {
+    if(!dateString) return "Data não disponível";
     const date = new Date(dateString);
     return isNaN(date) ? "Data inválida" : date.toLocaleDateString("pt-BR");
-  };
+  }; 
 
   return (
     <>

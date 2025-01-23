@@ -26,16 +26,11 @@ function NovoProcesso({onClose, processo, onSave}) {
   const [popupVisivel, setPopupVisivel] = useState(false);
 
   useEffect(() => {
-    /*if (id) {
-      const processosSalvos =
-        JSON.parse(localStorage.getItem("processos")) || [];
-      const processo = processosSalvos.find((p) => p.id === Number(id));*/
-
       if (processo) {
         setNomeProcesso(processo.nome);
         setPrioridade(processo.prioridades);
         setDescricao(processo.descricao);
-        setQuestoes(processo.questoes || []); // Carregar todas as questões
+        setQuestoes(processo.questoes || []); 
       } else {
         setNomeProcesso("");
         setDescricao("");
@@ -58,7 +53,6 @@ function NovoProcesso({onClose, processo, onSave}) {
     if (!validarCampos()) return;
 
     const novoProcesso = {
-      //id: Number(processo) || Date.now(),
       id: processo ? processo.id : Date.now(),
       nome: nomeProcesso,
       descricao: descricao,
@@ -68,23 +62,6 @@ function NovoProcesso({onClose, processo, onSave}) {
     };
 
     onSave(novoProcesso);
-    /*try {
-      const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
-      const index = processosSalvos.findIndex((p) => p.id === novoProcesso.id);
-
-      if (index >= 0) {
-        processosSalvos[index] = novoProcesso;
-      } else {
-        processosSalvos.push(novoProcesso);
-      }
-
-      localStorage.setItem("processos", JSON.stringify(processosSalvos));
-      onClose();
-      //navigate("/processos");
-    } catch (error) {
-      console.error("Erro ao salvar processo:", error);
-      alert("Erro ao salvar processo. Por favor, tente novamente.");
-    }*/
   };
 
   const handleAbrirPopup = () => {
@@ -204,8 +181,7 @@ function NovoProcesso({onClose, processo, onSave}) {
                     className="descricao"
                     placeholder="Adicione uma descrição para esse processo"
                     value={descricao}
-                    onChange={(e) => setDescricao(e.target.value)}
-                    onFocus={() => setDescricao("")}
+                    onChange={(e) => setDescricao(e.target.value)}                    
                   />
                 </div>
               </div>
