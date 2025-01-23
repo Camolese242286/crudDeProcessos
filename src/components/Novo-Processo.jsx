@@ -5,7 +5,7 @@ import Questao from "./Questao";
 import EnviarProcesso from './Popup_Salvar_Enviar';
 import "../styles/novo-processo.css";
 
-function NovoProcesso({onClose}) {
+function NovoProcesso({onClose, processo, onSave}) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [step, setStep] = useState(1);
@@ -26,19 +26,24 @@ function NovoProcesso({onClose}) {
   const [popupVisivel, setPopupVisivel] = useState(false);
 
   useEffect(() => {
-    if (id) {
+    /*if (id) {
       const processosSalvos =
         JSON.parse(localStorage.getItem("processos")) || [];
-      const processo = processosSalvos.find((p) => p.id === Number(id));
+      const processo = processosSalvos.find((p) => p.id === Number(id));*/
 
       if (processo) {
         setNomeProcesso(processo.nome);
         setPrioridade(processo.prioridades);
         setDescricao(processo.descricao);
         setQuestoes(processo.questoes || []); // Carregar todas as questões
+      } else {
+        setNomeProcesso("");
+        setDescricao("");
+        setPrioridade("");
+        setQuestoes([]);
       }
-    }
-  }, [id]);
+    //}
+  }, [processo]);
 
   const validarCampos = () => {
     if (!nomeProcesso || !descricao) {
@@ -53,7 +58,8 @@ function NovoProcesso({onClose}) {
     if (!validarCampos()) return;
 
     const novoProcesso = {
-      id: Number(id) || Date.now(),
+      //id: Number(processo) || Date.now(),
+      id: processo ? processo.id : Date.now(),
       nome: nomeProcesso,
       descricao: descricao,
       prioridades: prioridades,
@@ -61,7 +67,8 @@ function NovoProcesso({onClose}) {
       questoes: [...questoes], // Salvar todas as questões, sem separar por tipo
     };
 
-    try {
+    onSave(novoProcesso);
+    /*try {
       const processosSalvos = JSON.parse(localStorage.getItem("processos")) || [];
       const index = processosSalvos.findIndex((p) => p.id === novoProcesso.id);
 
@@ -72,12 +79,12 @@ function NovoProcesso({onClose}) {
       }
 
       localStorage.setItem("processos", JSON.stringify(processosSalvos));
-      //onClose();
-      navigate("/processos");
+      onClose();
+      //navigate("/processos");
     } catch (error) {
       console.error("Erro ao salvar processo:", error);
       alert("Erro ao salvar processo. Por favor, tente novamente.");
-    }
+    }*/
   };
 
   const handleAbrirPopup = () => {
@@ -90,7 +97,7 @@ function NovoProcesso({onClose}) {
   };
 
   const handleCancelarClick = () => {
-    navigate("/processos");
+    navigate("/processos");    
   };
 
   const handleCancelarNovoProcesso = () => {
@@ -154,9 +161,8 @@ function NovoProcesso({onClose}) {
   };
 
   const renderizarQuestao = () => {
-    // Lógica para renderizar a questão
     return questoes.map((questao) => (
-      <div key={questao.id}></div>
+      <div key={questao.id}></div>      
     ));
   };
 
@@ -281,7 +287,7 @@ function NovoProcesso({onClose}) {
                   <Questao
                     key={questao.id}
                     questao={questao}
-                    index={index}
+                    index={index}                    
                     handleEditarQuestao={handleEditarQuestao}
                     handleMoverQuestaoParaCima={handleMoverQuestaoParaCima}
                     handleMoverQuestaoParaBaixo={handleMoverQuestaoParaBaixo}

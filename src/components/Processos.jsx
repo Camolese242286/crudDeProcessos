@@ -28,6 +28,10 @@ const Processos = () => {
   }, []);
 
   useEffect(() => {
+    setProcessosFiltrados(processos);
+  }, [processos]);
+
+  useEffect(() => {
     const fetchProcessos = async () => {
       try {
         const response = await api.get("/processos");
@@ -65,16 +69,17 @@ const Processos = () => {
   };
 
   const handleNovoProcessoClick = () => {
+    setProcessoParaEditar(null);
+    setMostrarNovoProcesso(true);
+  }  
+
+  const handleEditarProcessoClick = (processo) => {
+    setProcessoParaEditar(processo);
     setMostrarNovoProcesso(true);
   }
 
   const handleFecharProcessoClick = () => {
     setMostrarNovoProcesso(false);
-  }
-
-  const handleEditarProcessoClick = (processo) => {
-    setProcessoParaEditar(processo);
-    setMostrarNovoProcesso(true);
   }
 
   const handleStatusChange = (processoId, novoStatus) => {
@@ -89,6 +94,18 @@ const Processos = () => {
     setProcessosFiltrados(novosProcessos);
     localStorage.setItem("processos", JSON.stringify(novosProcessos));
   };
+
+  const handleSalvarProcesso = (novoProcesso) => {
+    const processosAtualizados = processos.map((p) =>
+      p.id === novoProcesso.id ? novoProcesso : p
+    );
+    if (!processosAtualizados.find((p) => p.id === novoProcesso.id)) {
+      processosAtualizados.push(novoProcesso);
+    }
+    setProcessos(processosAtualizados);
+    localStorage.setItem('processos', JSON.stringify(processosAtualizados));
+    setMostrarNovoProcesso(false);
+  }
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -134,8 +151,11 @@ const Processos = () => {
               processosFiltrados.map((processo) => (
                 <tr key={processo.id}>
                   <td>
-                    <div>                      
-                      <Link to={`/editar-processo/${processo.id}`}>
+                    <div>
+                      {/*}<Link to={`/editar-processo/${processo.id}`}>
+                        <img src={IconOpen} alt="Go to Processo" />
+                      </Link>*/}
+                      <Link onClick={() => handleEditarProcessoClick(processo)}>
                         <img src={IconOpen} alt="Go to Processo" />
                       </Link>
                     </div>
@@ -203,7 +223,10 @@ const Processos = () => {
       {mostrarNovoProcesso && (
         <div className="desfoquefundo">
           <NovoProcesso
-            onClose={handleFecharProcessoClick} />
+            onClose={handleFecharProcessoClick} 
+            processo={processoParaEditar}
+            onSave={handleSalvarProcesso}
+          />
         </div>
       )}
     </div>
