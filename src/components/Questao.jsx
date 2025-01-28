@@ -63,7 +63,7 @@ const Questao = ({ questao, index, handleEditarQuestao, handleMoverQuestaoParaCi
               </div>              
             ))}         
             <button
-              className="btn-add-item"
+              className="btnAddItem"
               onClick={() => {
                 const atualizado = [...questao.itens, { text: "", checked: false }];
                 handleEditarQuestao(questao.id, { itens: atualizado });
@@ -91,7 +91,7 @@ const Questao = ({ questao, index, handleEditarQuestao, handleMoverQuestaoParaCi
               </div>
             ))}
             <button
-              className="btn-add-item"
+              className="btnAddItem"
               onClick={() => {
                 const atualizado = [...questao.opcoes, ""];
                 handleEditarQuestao(questao.id, { opcoes: atualizado });

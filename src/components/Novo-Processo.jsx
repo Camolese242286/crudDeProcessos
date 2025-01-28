@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Processos";
 import Questao from "./Questao";
-import EnviarProcesso from './Popup_Salvar_Enviar';
+import EnviarProcesso from "./Popup_Salvar_Enviar";
 import "../styles/novo-processo.css";
 
-function NovoProcesso({onClose, processo, onSave}) {
+function NovoProcesso({ onClose, processo, onSave }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [step, setStep] = useState(1);
-  const [currentView, setCurrentView] = useState('');
+  const [currentView, setCurrentView] = useState("");
   const [editandoNomeProcesso, setEditandoNomeProcesso] = useState(false);
   const [nomeProcesso, setNomeProcesso] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -18,25 +18,25 @@ function NovoProcesso({onClose, processo, onSave}) {
   const [questoesPorTipo, setQuestoesPorTipo] = useState({
     "Texto-aberto": [],
     "Upload-arquivo": [],
-    "CheckList": [],
+    CheckList: [],
     "Seletor-opcoes": [],
   });
 
-  const [SelectedOption, setSelectedOption] = useState(''); // Tipo de questão selecionado
+  const [SelectedOption, setSelectedOption] = useState(""); // Tipo de questão selecionado
   const [popupVisivel, setPopupVisivel] = useState(false);
 
   useEffect(() => {
-      if (processo) {
-        setNomeProcesso(processo.nome);
-        setPrioridade(processo.prioridades);
-        setDescricao(processo.descricao);
-        setQuestoes(processo.questoes || []); 
-      } else {
-        setNomeProcesso("");
-        setDescricao("");
-        setPrioridade("");
-        setQuestoes([]);
-      }
+    if (processo) {
+      setNomeProcesso(processo.nome);
+      setPrioridade(processo.prioridades);
+      setDescricao(processo.descricao);
+      setQuestoes(processo.questoes || []);
+    } else {
+      setNomeProcesso("");
+      setDescricao("");
+      setPrioridade("");
+      setQuestoes([]);
+    }
     //}
   }, [processo]);
 
@@ -74,12 +74,12 @@ function NovoProcesso({onClose, processo, onSave}) {
   };
 
   const handleCancelarClick = () => {
-    navigate("/processos");    
+    navigate("/processos");
   };
 
   const handleCancelarNovoProcesso = () => {
     setStep(1);
-  }
+  };
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
@@ -93,7 +93,7 @@ function NovoProcesso({onClose, processo, onSave}) {
     const novaQuestao = {
       id: questoes.length + 1,
       tipo: SelectedOption,
-      titulo: '',
+      titulo: "",
       resposta: SelectedOption === "Texto-aberto" ? "" : null,
       itens: SelectedOption === "CheckList" ? [] : null,
       opcoes: SelectedOption === "Seletor-opcoes" ? [] : null,
@@ -138,34 +138,15 @@ function NovoProcesso({onClose, processo, onSave}) {
   };
 
   const renderizarQuestao = () => {
-    return questoes.map((questao) => (
-      <div key={questao.id}></div>      
-    ));
+    return questoes.map((questao) => <div key={questao.id}></div>);
   };
 
   return (
     <div className="container-novo-processo">
-      <div className="popup-containe"
-        style={{
-          position: "fixed",
-          width: step === 1 ? "57em" : "90em",
-          height: step === 1 ? "29em" : "50em",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          background: "#fcfaff",
-          padding: "30px",
-          boxShadow: "10px 20px 30px rgba(0, 3, 0, 0.2)",
-          zIndex: 1000,
-          border: "none",
-          borderRadius: "10px",
-          transition: "all 0.5s ease",
-        }}
-      >
-
+      <div className="popupContainer">
         <div className="etapa-1">
           {step === 1 ? (
-            <div className="container-processo">
+            <div className="containerProcesso">
               <div className="container-titulo">
                 <input
                   className="texto"
@@ -181,7 +162,7 @@ function NovoProcesso({onClose, processo, onSave}) {
                     className="descricao"
                     placeholder="Adicione uma descrição para esse processo"
                     value={descricao}
-                    onChange={(e) => setDescricao(e.target.value)}                    
+                    onChange={(e) => setDescricao(e.target.value)}
                   />
                 </div>
               </div>
@@ -193,98 +174,90 @@ function NovoProcesso({onClose, processo, onSave}) {
                   value={prioridades}
                   onChange={(e) => setPrioridade(e.target.value)}
                 >
-                  <option value="" className="frase">Selecione a prioridade do processo</option>
+                  <option value="" className="frase">
+                    Selecione a prioridade do processo
+                  </option>
                   <option value="Alta">Alta</option>
                   <option value="Média">Média</option>
                   <option value="Baixa">Baixa</option>
                 </select>
-              </div>
-
-              <div className="proximo">
-                <button onClick={validarCampos}>
-                  Próximo
-                </button>
               </div>
 
               <div className="botoes-actions">
                 <button onClick={onClose} className="btn-cancelar-processo">
                   Cancelar
                 </button>
-                <button onClick={handleSalvarClick} className="btn-salvar-processo">
-                  Salvar
-                </button>
-                <button onClick={handleAbrirPopup} className="btn-salvar-enviar">
-                  Salvar e Enviar
+                <button onClick={validarCampos} className="btn-salvar-enviar">
+                  Próximo
                 </button>
               </div>
             </div>
-
           ) : (
-
             <div className="etapa-2">
-              <h3 className="colorProcess">{nomeProcesso}</h3>
-              <p className="colorDescription">{descricao}</p>
+              <div className="containerProcesso">
+                <div className="stageHeader">
+                  <h3 className="colorProcess">{nomeProcesso}</h3>
+                  <p className="colorDescription">{descricao}</p>
+                  <p>Prioridade:{prioridades}</p>
+                  <div className="selectQuestionOption">
+                    <p>Selecione o tipo da Questão:</p>
+                    <select
+                      className="selectOpcoes"
+                      value={SelectedOption}
+                      onChange={handleOptionChange}
+                    >
+                      <option value="">Selecione...</option>
+                      <option value="Texto-aberto">Texto Aberto</option>
+                      <option value="Upload-arquivo">Upload de arquivo</option>
+                      <option value="CheckList">Checklist</option>
+                      <option value="Seletor-opcoes">Seletor de opções</option>
+                    </select>
+                    <div className="btn-novaQuestao">
+                      <button
+                        onClick={handleAdicionarQuestao}
+                        className="add-btn"
+                      >
+                        + Nova Questão
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {renderizarQuestao()}
 
-              <div className="prioridade-step2">
-                <p>Prioridade</p>
-                <select
-                  className="selectPrioridade"
-                  value={prioridades}
-                  onChange={(e) => setPrioridade(e.target.value)}
-                >
-                  <option value="" className="frase">Selecione a prioridade do processo</option>
-                  <option value="Alta">Alta</option>
-                  <option value="Média">Média</option>
-                  <option value="Baixa">Baixa</option>
-                </select>
-              </div>
+                <div className="questoes-container">
+                  {questoes.map((questao, index) => (
+                    <Questao
+                      key={questao.id}
+                      questao={questao}
+                      index={index}
+                      handleEditarQuestao={handleEditarQuestao}
+                      handleMoverQuestaoParaCima={handleMoverQuestaoParaCima}
+                      handleMoverQuestaoParaBaixo={handleMoverQuestaoParaBaixo}
+                      handleRemoverQuestao={handleRemoverQuestao}
+                    />
+                  ))}
+                </div>
 
-              <div className="select-opcoes-questao">
-                <p>Selecione o tipo da Questão</p>
-                <select className="selectOpcoes" value={SelectedOption} onChange={handleOptionChange}>
-                  <option value="">Selecione...</option>
-                  <option value="Texto-aberto">Texto Aberto</option>
-                  <option value="Upload-arquivo">Upload de arquivo</option>
-                  <option value="CheckList">Checklist</option>
-                  <option value="Seletor-opcoes">Seletor de opções</option>
-                </select>
-              </div>
-
-              <div className="btn-novaQuestao">
-                <button onClick={handleAdicionarQuestao} className="add-btn">
-                  Adicionar Questão
-                </button>
-              </div>
-
-              {renderizarQuestao()}
-
-              <div className="questoes-container" style={{ maxHeight: "420px", overflowY: "auto" }}>
-                {questoes.map((questao, index) => (
-                  <Questao
-                    key={questao.id}
-                    questao={questao}
-                    index={index}                    
-                    handleEditarQuestao={handleEditarQuestao}
-                    handleMoverQuestaoParaCima={handleMoverQuestaoParaCima}
-                    handleMoverQuestaoParaBaixo={handleMoverQuestaoParaBaixo}
-                    handleRemoverQuestao={handleRemoverQuestao}
-                  />
-                ))}
-              </div>
-
-              <div className="botoes-actions">
-                <button
-                  onClick={handleCancelarNovoProcesso}
-                  className="btn-cancelar-processo"
-                >
-                  Cancelar
-                </button>
-                <button onClick={handleSalvarClick} className="btn-salvar-processo">
-                  Salvar
-                </button>
-                <button onClick={handleAbrirPopup} className="btn-salvar-enviar">
-                  Salvar e Enviar
-                </button>
+                <div className="botoes-actions">
+                  <button
+                    onClick={handleCancelarNovoProcesso}
+                    className="btn-cancelar-processo"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    onClick={handleSalvarClick}
+                    className="btn-salvar-processo"
+                  >
+                    Salvar
+                  </button>
+                  <button
+                    onClick={handleAbrirPopup}
+                    className="btn-salvar-enviar"
+                  >
+                    Salvar e Enviar
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -298,7 +271,7 @@ function NovoProcesso({onClose, processo, onSave}) {
           )}
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 export default NovoProcesso;
