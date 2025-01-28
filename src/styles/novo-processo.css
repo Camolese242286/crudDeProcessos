@@ -16,7 +16,7 @@
   background-color: #fcfaff;
   padding: 30px;
   box-shadow: 10px 20px 30px rgba(0, 3, 0, 0.2);
-  z-index: 1000;
+  z-index: 100;
   border: none;
   border-radius: 24px;
   transition: all 0.5s ease;
@@ -58,6 +58,10 @@
   display: flex;
   flex-direction: column;
   height: auto;
+}
+.container-titulo input{
+  border: none;
+  
 }
 .stageHeader {
   display: flex;
@@ -336,6 +340,7 @@
   width: 100%;
   min-height: 200px;
   margin-top: 200px;
+  margin-bottom: 40px;
   border-radius: 20px;
   border: solid 1px #ccc;
   padding: 10px;
@@ -348,7 +353,7 @@
   border: 1px solid #6800ff;
   border-radius: 8px;
   border-top: 10px solid #6800ff;
-  padding: 15px;
+  padding: 25px;
   background-color: #fcfaff;
   display: flex;
   flex-direction: column;
@@ -403,6 +408,7 @@
   display: flex;
   justify-content: end;
   color: #6800ff;
+  font-size: 25px;
   cursor: pointer;
 }
 
@@ -473,8 +479,8 @@
   cursor: pointer;
   font-size: 14px;
   position: absolute;
-  top: 50px;
-  right: 5px;
+  top: 60px;
+  right: 25px;
 }
 
 .btnAddItem:hover {
@@ -483,20 +489,13 @@
 
 .botoes-actions {
   display: flex;
-  position: fixed;
   justify-content: space-around;
-  justify-items: center;
-  align-items: center;
+  position: fixed;
   background-color: #fcfaff;
-  gap: 20px;
   width: 100%;
-  bottom: 30px;
   bottom: 0;
-  left: 0;
-  right: 0;
   z-index: 10;
   padding: 10px;
-  text-align: center;
 }
 
 .botoes-actions button {
@@ -504,14 +503,13 @@
   font-size: 18px;
   font-weight: 500;
   border-radius: 12px;
-  bottom: 5px;
+  /* bottom: 5px; */
 }
 
 .btn-cancelar-processo {
   background-color: #fcfaff;
   color: #6800ff;
   border: 1px solid #6800ff;
-
   padding: 5px;
   width: 110px;
   position: relative;

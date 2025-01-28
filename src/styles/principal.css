@@ -13,8 +13,8 @@ body {
 }
 
 .body-container {
-  margin-left: var(--menu-width);
-  margin-top: 150px;
+  margin-left: 120px;
+  margin-top: 120px;
 }
 
 .graficos {
