@@ -15,7 +15,7 @@ public class Areas {
 	private Long SubArea;
 	private String Status;
 	private String Descricao;
-	
+	private String acoes;
 	
 	
 	
@@ -60,4 +60,12 @@ public class Areas {
 	public void setDescricao(String descricao) {
 		Descricao = descricao;
 	}
+
+   public String getAcoes() {
+		return acoes;
+	}
+	public void setAcoes(String acoes) {
+		this.acoes = acoes;
+	}
+
 }
