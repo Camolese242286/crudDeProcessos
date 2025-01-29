@@ -1,0 +1,171 @@
+.desfoquefundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro translúcido */
+  backdrop-filter: blur(8px); /* Desfoque */
+  z-index: 999;
+}
+
+.processos-container {
+  margin-left: 120px;
+  margin-top: 120px;
+  justify-content: center;
+  padding: 20px;
+  display: flex;
+  max-width: calc(100vw - 110px);
+  flex-direction: column;
+  gap: 30px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.header h1 {
+  font-size: 38px;
+  color: #6800ff;
+  text-align: left;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.slProcessos {
+  width: 218px;
+  height: 48px;
+  padding: 10px;
+  border: 1px solid #6800ff;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6800ff;
+  outline: none;
+}
+.slProcessos:focus{
+  border: solid 2px #6800ff;
+}
+
+.TabelaProcesso table {
+  overflow-x: auto;
+  margin-top: 50px;
+  width: 100%;
+  border-radius: 20px;
+  background: #fcfaff;
+  color: #6800ff;
+  border-collapse: collapse;
+}
+
+
+.TabelaProcesso th {
+  padding: 10px;
+  background-color: #EDE1FF;
+  font-weight: bold;
+  text-align: left;
+  font-size: 16px;
+}
+
+.TabelaProcesso td {
+  padding: 10px;
+  color: #222222;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  border-bottom: 1px solid #BEB9C6;
+}
+
+td.empty {
+  border: 2px solid;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.acoes {
+  display: flex;
+  height: 65px;
+  justify-content: center;
+  align-items: center;
+}
+
+.acoes button {
+  /* margin: 0 5px; */
+  padding: 5px 10px;
+  border: 1px solid #6800ff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.acoes button:hover {
+  background: #6800ff;
+  color: white;
+}
+
+.componente_Search {
+  position: relative;
+  display: inline-block;
+  width: 338px;
+  height: 49px;
+  font-family: Open Sans;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.componente_Search input {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #6800ff;
+  border-radius: 15px;
+  font-size: 14px;
+}
+.status-container{
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+}
+.status-container select{
+  width: 200px;
+  outline: none;
+  border: solid 1px #6800ff;
+  border-radius: 16px;
+}
+.status-container select:focus{
+  border: solid 2px #6800ff;
+}
+.componente_Search input:focus {
+  border: 1px solid #6800ff;
+  box-shadow: 0 0 10px rgb(86, 100, 179);
+}
+
+.componente_Search .icon-search {
+  position: absolute;
+  right: 10px;
+  top: 20%;
+  color: #6800FF;
+  font-size: 18px;
+  pointer-events: none;
+}
+.botaoNovoProcesso{
+  text-align: end;
+}
+.botaoNovoProcesso button {
+  margin: 0 auto;
+  width: 209px;
+  height: 52px;
+  padding: 15px;
+  background-color: #6800ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  right: 5px;
+}
+
+.botaoNovoProcesso button:hover {
+  background-color: #5700cc;
+}

@@ -1,0 +1,111 @@
+:root {
+  --sidebar-bg: #f9f9f9;
+  --sidebar-color: #333;
+  --highlight-color: #6800ff;
+  --notification-color: red;
+  --font-family: "Open Sans", sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-container {
+  width: 100px;
+  height: 100vh;
+  background-color: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+
+.sidebar-header {
+  margin-top: 20px;
+}
+
+.sidebar-logo {
+  width: 80px;
+  height: auto;
+}
+
+.sidebar-menu {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-item {
+  display: flex;
+  margin: 20px 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: #BEB9C6;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Estilização para a legenda ficar visível somente quando o mouse passar por cima do ícone */
+.menu-item span {
+  visibility: hidden;
+  font-size: 0.6rem;
+  margin-top: 5px;
+  display: block;
+  text-align: center;
+  bottom: -20px;
+  opacity: 0;
+  color: #FFF;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-item:hover span {
+  visibility: visible;
+  opacity: 1;
+  width: auto;
+  height: 23px;
+  border-radius: 3px;
+  padding: 4px 8px 5px 8px;
+  position: absolute;
+  top: -15px;
+  left: 50px;
+  font-weight: bold;
+  background-color: #030303;
+}
+
+.menu-item:hover {
+  transform: scale(1.5);
+  color: var(--highlight-color);
+  background-color: #EDE1FF;
+  width: 64px;
+  height: 48px;
+  border-radius: 12px;
+}
+
+.notification-badge {
+  background-color: var(--notification-color);
+  color: white;
+  border-radius: 50%;
+}
+
+.sidebar-footer {
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--sidebar-color);
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar-footer:hover {
+  transform: scale(1.8);
+  color: var(--highlight-color);
+}

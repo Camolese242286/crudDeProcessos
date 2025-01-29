@@ -1,0 +1,275 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.popupOverlaySalvarEnviar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: auto;
+  padding: 20px;
+  background: #fcfaff;
+  box-shadow: 10px 20px 30px rgba(0, 3, 0, 0.2);
+  border-radius: 10px;
+  z-index: 9999;
+}
+
+.popupContentSalvarEnviar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fcfaff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  border: solid 1px #a466ff;
+  width: 100%;
+  min-height: 400px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.contentSalvarEnviar {
+  display: block;
+  justify-content: left;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* .popup-over .active {
+  display: block;
+} */
+
+.headerPopupSEContent{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: relative;
+  width: 100%;
+  align-items: start;
+}
+.headerPopupSEContent button{
+  position: relative;
+  background: none;
+  color: #6800ff;
+  font-size: 14px;
+  cursor: pointer;
+  border: 2px solid #a466ff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.headerPopupSE {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  padding: 10px;
+  align-items: start;
+  text-align: left;
+  height: auto;
+  gap: 10px;
+}
+.titlePopupSE {
+  font-size: 32px;
+  position: relative;
+  width: 100%;
+  font-family: "open sans";
+  font-weight: 500;
+  /* overflow: auto; */
+}
+.descricaoPopupSE {
+  font-size: 14px;
+  /* position: relative; */
+  font-weight: normal;
+  width: 100%;
+  font-family: "Open Sans";
+}
+
+.labelNomes {
+  font-weight: 600;
+  left: 20px;
+  font-family: "Open Sans";
+  font-size: 14px;
+}
+.selectRespon {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: start;
+  padding: 10px;
+  gap: 10px;
+  text-align: left;
+}
+.selectRespon input {
+  width: 100%;
+  height: 40px;
+  border: 2px solid #d8d5dd;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.botoesPopup {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  background-color: #fcfaff;
+  width: 90%;
+  bottom: 0;
+  z-index: 10;
+  padding: 10px;
+}
+.botoesPopup button {
+  height: 45px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 12px;
+}
+
+.fecharPop {
+  background-color: #fcfaff;
+  color: #6800ff;
+  border: 1px solid #6800ff;
+  padding: 5px;
+  width: 110px;
+  position: relative;
+  left: 10px;
+}
+
+.popupContentSalvarEnviar button.fecharPop:hover {
+  background-color: #f0e5ff;
+}
+
+.enviarPop {
+  background-color: #6800ff;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  width: 165px;
+  position: relative;
+  left: 25px;
+}
+
+.popup-container {
+  transform: height 0.3s ease-in-out;
+  max-height: 100vh;
+  /* overflow-y: auto; */
+}
+
+.dropdown {
+  top: 50%;
+  left: 30px;
+  background: #fcfaff;
+  border: 1px solid #f0e5ff;
+  border-radius: 12px;
+  box-shadow: 20px 30px 10px solid black;
+  width: 50%;
+  max-height: auto;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.dropdown li {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown li:hover {
+  background-color: #f0e5ff;
+}
+
+.tags-container {
+  /* max-height: calc(100vh - 200px); */
+  max-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 8px;
+  border: none;
+  background-color: none;
+  border-radius: 4px;
+}
+
+.tag {
+  margin: 0;
+  gap: 4px;
+  display: flex;
+  margin-left: 12px;
+  align-items: center;
+  background: #f0e5ff;
+  padding: 5px 8px;
+  border-radius: 20px;
+  font-size: 14px;
+  height: auto; /* Ajusta automaticamente a altura */
+  white-space: nowrap; /* Impede quebra de linha */
+  position: relative;
+  left: 20px;
+  font-family: "Open Sans";
+}
+
+.tag .remove-btn {
+  position: relative;
+  left: 0.2em;
+  background: none;
+  color: #a466ff;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid #a466ff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag .remover-btn:hover {
+  background-color: rgb(236, 32, 14);
+  color: wheat;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tag button {
+  margin-left: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions .cancel {
+  background: transparent;
+  border: 1px solid #a466ff;
+  padding: 10px 20px;
+  color: aquamarine;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.actions .send {
+  background: #a466ff;
+  color: #d8d5dd;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}

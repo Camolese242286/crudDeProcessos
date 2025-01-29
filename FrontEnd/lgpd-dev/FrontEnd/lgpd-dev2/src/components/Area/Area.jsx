@@ -1,0 +1,197 @@
+import React, { useState, useEffect } from "react";
+import StatusIndicator from "../StatusIndicator";
+import { useNavigate } from "react-router-dom";
+import Menu from "../Menu";
+import Header from "../Header";
+import Search from "./Search";
+import { Link } from "react-router-dom";
+import IconOpen from "../../images/iconOpen.png";
+import NovaArea from "./Nova-Area";
+
+import ExcluirPopupArea from "./Popup-excluir-area";
+
+import { PencilSimpleLine, Trash } from "phosphor-react";
+
+import "../../styles/StyleArea/area.css";
+
+function Area() {
+  const navigate = useNavigate();
+  const [statuses, setStatuses] = useState({});
+  const [areas, setAreas] = useState([]); // Estado com a lista de áreas
+  const [areasFiltrados, setAreasFiltrados] = useState([]);
+  const [mostrarNovaArea, setMostrarNovaArea] = useState(false);
+
+  /*useEffect(() => {
+    // Carrega as áreas salvas no localStorage
+    const areasSalvas = JSON.parse(localStorage.getItem("areas")) || [];
+    setAreas(areasSalvas);
+    setAreasFiltrados(areasSalvas);
+  }, []);
+*/
+  //Abrir outra página
+  /*const handleNovaArea = () => {
+    navigate("/Nova-Area");
+  };*/
+
+  //Os campos serão salvos na tabela após preencher na "Nova-Area"
+  useEffect(() => {
+    const areasSalvos = JSON.parse(localStorage.getItem("area")) || [];
+    setAreas(areasSalvos);
+    setAreasFiltrados(areasSalvos);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("area", JSON.stringify(areas));
+  }, [areas]);
+
+  //Excluir o id da area na tabela
+  const [idParaExcluir, setIdParaExcluir] = useState(null);
+  const [popupExclusao, setpopupExclusao] = useState(false);
+
+  //Editar o campo da área
+  const handleEditarArea = (id) => {
+    navigate(`/editar-area/${id}`);
+  };
+
+  //Excluir o id da area
+  const handleExluirArea = (id) => {
+    setIdParaExcluir(id);
+    setpopupExclusao(true);
+  };
+
+  //Confirmar a exclusão do id
+  const confirmarExclusaoArea = () => {
+    const novaAreas = areas.filter((area) => area.id !== idParaExcluir);
+    setAreas(novaAreas);
+    setAreasFiltrados(novaAreas);
+    localStorage.setItem("area", JSON.stringify(novaAreas));
+    localStorage.setItem("principal", JSON.stringify(novaAreas));
+    setpopupExclusao(false);
+  };
+
+  //Cancelar a exclusao do id
+  const cancelarExclusaoArea = () => {
+    setpopupExclusao(false);
+    setIdParaExcluir(null);
+  };
+
+  const handleNovaAreaClick = () => {
+    setMostrarNovaArea(true);
+  }
+
+  const handleFecharAreaClick = () => {
+    setMostrarNovaArea(false);
+  }
+
+  return (
+    <div className="container-page-area">
+      <Menu />
+      <Header />
+      <div className="container_area">
+        <div className="settings">
+          <div className="filters-area">
+            <select
+              className="slArea"
+              onChange={(e) => {
+                const filtro = e.target.value;
+                const filtrados = filtro
+                  ? areas.filter((area) => area.nome === filtro)
+                  : areas;
+                setAreasFiltrados(filtrados);
+              }}
+            >
+              <option value="">Todas as áreas</option>
+              {areas.map((area) => (
+                <option key={area.id} value={area.nome}>
+                  {area.nome}
+                </option>
+              ))}
+            </select>
+          </div>
+
+        </div>
+
+        <div className="TableArea">
+          <table>
+            <thead>
+              <tr className="table-names">
+                <th></th>
+                <th>Nome da área</th>
+                <th>Responsável</th>
+                <th># Sub-Áreas</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Aqui você pode mapear os dados filtrados */}
+              {areasFiltrados.length > 0 ? (
+                areasFiltrados.map((area) => (
+                  <tr key={area.id}>
+                    <td>
+                      <div>
+                        <Link to={(`/editar-area/${area.id}`)}>
+                          <img src={IconOpen} alt="Area de Empresa" />
+                        </Link>
+                      </div>
+                    </td>
+                    <td>{area.nome}</td>
+                    <td>{area.responsavel}</td>
+                    <td>{area.subArea}</td>
+                    <td><StatusIndicator status={statuses[area.status]} /></td>
+                    <td className="acoes">
+                      <div className="icon-acoes">
+                        {/* <button onClick={() => handleEditarArea(area.id)}>
+                          <PencilSimpleLine size={18} />
+                        </button> */}
+                        <button onClick={() => handleExluirArea(area.id)}>
+                          <Trash size={18} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4">Nenhuma área cadastrada</td>
+                </tr>
+              )}
+
+              {popupExclusao && (
+                <ExcluirPopupArea
+                  titleArea="Excluir área?"
+                  mensagem="Essa ação não pode ser desfeita"
+                  onConfirm={confirmarExclusaoArea}
+                  onCancel={cancelarExclusaoArea}
+                />
+              )}
+
+              {/* }{areasFiltrados.map((area) => (
+                <tr key={area.id}>
+                  <td>{area.nome}</td>
+                  <td>{area.responsavel}</td>
+                  <td>{area.subAreas}</td>
+                  <td>{area.status}</td>
+                </tr>
+              ))} */}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="btnNovaArea">
+          <button onClick={handleNovaAreaClick}>+ Nova Área</button>
+        </div>
+
+        {mostrarNovaArea && (
+          <div className="desfoquefundoArea">
+            <NovaArea onClose={handleFecharAreaClick} />
+            <NovaArea onClick={handleEditarArea}/>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+}
+
+export default Area;
