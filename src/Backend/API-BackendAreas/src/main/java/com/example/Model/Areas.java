@@ -14,6 +14,16 @@ public class Areas {
 	private String Responsavel;
 	private Long SubArea;
 	private String Status;
+	private String Descricao;
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -40,5 +50,14 @@ public class Areas {
 	public void setStatus(String status) {
 		Status = status;
 	}
+    
 
+	public String getDescricao() {
+		return Descricao;
+	}
+
+
+	public void setDescricao(String descricao) {
+		Descricao = descricao;
+	}
 }

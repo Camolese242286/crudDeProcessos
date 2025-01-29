@@ -25,7 +25,10 @@ public class Processos {
 	private String Prioridade;
     private String Status; 
 	private String CreatedBy;
-	
+	private String  Descricao;
+
+
+
 	@CreationTimestamp
     @Column(name = "created_at", updatable = false)
 	@JsonFormat(pattern ="dd/MM/yy")
@@ -103,5 +106,14 @@ public class Processos {
 	public void setCreatedBy(String createdBy) {
 		CreatedBy = createdBy;
 	}
+   
 
+   public String getDescricao() {
+		return Descricao;
+	}
+
+
+	public void setDescricao(String descricao) {
+		Descricao = descricao;
+	}
 }
