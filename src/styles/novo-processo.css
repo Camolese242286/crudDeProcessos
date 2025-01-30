@@ -8,8 +8,7 @@
 }
 .popupContainer {
   position: fixed;
-  width: 57em;
-  height: 29em;
+  width: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -20,6 +19,20 @@
   border: none;
   border-radius: 24px;
   transition: all 0.5s ease;
+}
+.etapa-1 {
+  width: 700px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+.etapa-2 {
+  width: 60%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
 }
 /* Alinhando o título fixo */
 .title-fixed {
@@ -38,8 +51,9 @@
 }
 
 .containerProcesso {
-  display: grid;
-  position: absolute;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
   top: 50%;
   left: 50%;
   width: 100%;
@@ -59,17 +73,15 @@
   flex-direction: column;
   height: auto;
 }
-.container-titulo input{
+.container-titulo input {
   border: none;
-  
 }
 .stageHeader {
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: relative;
   background-color: #fcfaff;
   border-bottom: 1px solid #ccc;
-  padding: 30px;
   width: 100%;
   height: auto;
   z-index: 1000;
@@ -95,28 +107,30 @@
   color: #a466ff;
 }
 
-.container-titulo .descricao::placeholder {
-  color: #beb9c6;
-}
-
 .container-titulo .texto:focus {
   outline: none;
 }
+.spanProcesso{
+  font-size: 20px;
+  color: #000;
+  font-weight: 500;
 
-.container-titulo .descricao {
+}
+.descricao {
   color: #222222;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 19.07px;
-  min-width: 600px;
-  max-width: 800px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 19px;
+  width: 100%;
   margin-top: 0;
   padding: 10px;
   font-family: "Open Sans";
   border: none;
   background-color: #fcfaff;
 }
-
+.container-titulo .descricao::placeholder {
+  color: #beb9c6;
+}
 .descricao:focus {
   outline: none;
 }
@@ -137,7 +151,6 @@
   font-size: 14px;
   line-height: 19.07px;
 }
-
 .selectPrioridade {
   width: 350px;
   height: 40px;
@@ -152,11 +165,11 @@
   font-weight: 400;
   line-height: 16.34px;
 }
-
 .selectPrioridade:focus {
   outline: none;
   border: solid 1px #6800ff;
 }
+
 
 .novaQuestao button {
   width: 150px;
@@ -171,14 +184,6 @@
   border: none;
   border-radius: 30px;
 }
-.etapa-1,
-.etapa-2 {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-}
 .etapa-2 .colorProcess {
   color: #6800ff;
   font-size: 30px;
@@ -186,11 +191,14 @@
   height: 50px;
 }
 
-.etapa-2 .colorDescription {
+.colorDescription {
   color: #222222;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 500;
   text-align: left;
   margin-top: 10px;
+  max-height: 150px;
+  overflow: auto;
 }
 
 .prioridade-step2 {
@@ -269,7 +277,7 @@
   display: grid;
   justify-content: center;
   width: 200px;
-  height: 3em;
+  height: 40px;
   border-radius: 12px;
   font-family: "Open Sans";
 }
@@ -285,7 +293,9 @@
   border: none;
   border-radius: 36px;
   cursor: pointer;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 180px;
   height: 41px;
 }
@@ -339,21 +349,21 @@
   flex-direction: column;
   width: 100%;
   min-height: 200px;
-  margin-top: 200px;
-  margin-bottom: 40px;
-  border-radius: 20px;
+  max-height: 50%;
+  margin: 0;
+  margin-bottom: 10px;
+  /* border-radius: 20px; */
   border: solid 1px #ccc;
   padding: 10px;
   overflow-y: auto;
 }
-
 
 /* Ajuste no item da questão */
 .questao-item {
   border: 1px solid #6800ff;
   border-radius: 8px;
   border-top: 10px solid #6800ff;
-  padding: 25px;
+  padding: 20px;
   background-color: #fcfaff;
   display: flex;
   flex-direction: column;
@@ -366,34 +376,39 @@
 
 .questao-conteudo {
   display: flex;
-  align-items: center;
+  align-items: left;
+  justify-content: left;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
 }
 
 .questao-conteudo input {
   display: flex;
   padding: 8px 18px;
+  outline: none;
   border: 1px solid #ccc;
   border-radius: 15px;
+  width: 100%;
+}
+.questao-conteudo input:focus {
+  border: solid 1px #6800ff;
+  width: 100%;
 }
 
 .header-questao {
   display: flex;
   flex-direction: row;
+  gap: 10px;
   justify-content: space-between;
   color: #6800ff;
   font-size: 24px;
   width: 100%;
 }
-.header-questao input {
-  width: 800px;
-}
 
 .numero-questao {
   display: flex;
   position: relative;
-  top: 33px;
   font-size: 20px;
 }
 
@@ -414,7 +429,7 @@
 
 .setas-flex {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
 .icone-excluir {
@@ -450,7 +465,8 @@
 .checklist-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  width: auto;
+  position: relative;
 }
 
 .checklist-item {
@@ -464,13 +480,25 @@
   padding: 5px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  outline: none;
+}
+.checklist-item input:focus {
+  border: solid 1px #6800ff;
+}
+.checklist-item input[type="checkbox"] {
+  flex-grow: 1;
+  /* padding: 5px; */
+  /* border-radius: 8px; */
+  /* border: 1px solid #ccc; */
 }
 
 .btnAddItem {
   display: flex;
   justify-content: end;
   align-self: start;
+  min-width: 125px;
   width: auto;
+  gap: 10px;
   background-color: #6800ff;
   color: white;
   border: none;
@@ -478,8 +506,8 @@
   border-radius: 14px;
   cursor: pointer;
   font-size: 14px;
-  position: absolute;
-  top: 60px;
+  position: relative;
+  top: 10px;
   right: 25px;
 }
 
@@ -489,56 +517,58 @@
 
 .botoes-actions {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   position: fixed;
   background-color: #fcfaff;
-  width: 100%;
+  width: 95%;
+  padding: 30px;
   bottom: 0;
   z-index: 10;
-  padding: 10px;
 }
 
 .botoes-actions button {
   height: 45px;
-  font-size: 18px;
+  width: auto;
+  font-size: 20px;
   font-weight: 500;
   border-radius: 12px;
-  /* bottom: 5px; */
+  position: relative;
 }
 
 .btn-cancelar-processo {
   background-color: #fcfaff;
   color: #6800ff;
   border: 1px solid #6800ff;
-  padding: 5px;
-  width: 110px;
+  padding: 0 20px;
+  width: auto;
   position: relative;
-  left: 10px;
 }
 
 .btn-salvar-processo {
   background-color: #fcfaff;
   color: #6800ff;
   border: 1px solid #6800ff;
-  padding: 5px;
-  width: 120px;
+  padding: 0 20px;
+  width: auto;
   position: relative;
-  left: 200px;
 }
 
 .btn-salvar-enviar {
   background-color: #6800ff;
   color: #fff;
   border: none;
-  padding: 5px;
-  width: 165px;
+  padding: 0 20px;
+  width: auto;
   position: relative;
-  left: 25px;
 }
 
 .input_file {
   opacity: 1;
   position: relative;
   z-index: 1;
-  width: 60px;
+  width: auto;
+}
+.input_file input button {
+  border: solid 4px #6800ff;
+  height: 40px;
 }

@@ -12,6 +12,7 @@ const Questao = ({ questao, index, handleEditarQuestao, handleMoverQuestaoParaCi
 
   const RenderizarQuestao = () => {
     switch (questao.tipo) {
+      // Questão do tipo Texto Aberto
       case tiposDeQuestao.TEXTO_ABERTO:
         return (
           <input
@@ -23,6 +24,7 @@ const Questao = ({ questao, index, handleEditarQuestao, handleMoverQuestaoParaCi
             placeholder="Digite sua resposta"
           />
         );
+        // Questão do tipo Upload
       case tiposDeQuestao.UPLOAD_ARQUIVO:
         return (
           <div className="input_file">
@@ -35,6 +37,7 @@ const Questao = ({ questao, index, handleEditarQuestao, handleMoverQuestaoParaCi
           </div>
 
         );
+        // Questão do tipo Checklist
       case tiposDeQuestao.CHECKLIST:
         return (         
           <div className='checklist-container'>            
@@ -73,6 +76,7 @@ const Questao = ({ questao, index, handleEditarQuestao, handleMoverQuestaoParaCi
             </button>   
           </div>
         );
+        // Questã do tipo Opçõe
       case tiposDeQuestao.SELETOR_OPCOES:
         return (
           <div>

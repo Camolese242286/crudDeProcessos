@@ -143,7 +143,11 @@ function NovoProcesso({ onClose, processo, onSave }) {
 
   return (
     <div className="container-novo-processo">
-      <div className="popupContainer">
+      <div className="popupContainer"
+      style={{
+        minWidth: step === 1 ? "45%" : "50%",
+        minHeight: step === 1 ? "50%" : "60%"
+      }}>
         <div className="etapa-1">
           {step === 1 ? (
             <div className="containerProcesso">
@@ -198,7 +202,7 @@ function NovoProcesso({ onClose, processo, onSave }) {
                 <div className="stageHeader">
                   <h3 className="colorProcess">{nomeProcesso}</h3>
                   <p className="colorDescription">{descricao}</p>
-                  <p>Prioridade:{prioridades}</p>
+                  <p>Prioridade: {prioridades}</p>
                   <div className="selectQuestionOption">
                     <p>Selecione o tipo da Questão:</p>
                     <select

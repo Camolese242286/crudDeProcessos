@@ -60,13 +60,22 @@
   border-collapse: collapse;
 }
 
-
+.TabelaProcesso{
+  border-radius: 10px;
+}
 .TabelaProcesso th {
   padding: 10px;
-  background-color: #EDE1FF;
+  top: 0;
+  background-color: #f0e5ff;
   font-weight: bold;
   text-align: left;
   font-size: 16px;
+}
+.TabelaProcesso th:first-child {
+  border-radius: 10px 0 0 0;
+}
+.TabelaProcesso th:last-child {
+  border-radius: 0 10px 0 0;
 }
 
 .TabelaProcesso td {
