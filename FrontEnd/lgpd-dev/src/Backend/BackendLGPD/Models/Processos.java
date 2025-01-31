@@ -47,7 +47,7 @@ public class Processos {
     
     @PreUpdate
     public void onUpdate() {
-    	setUpdatedAt(LocalDate.now());
+    	setupdatedDate(updatedDate)(LocalDate.now());
     
     }
 
