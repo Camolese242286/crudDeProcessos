@@ -1,0 +1,77 @@
+package com.Qintess.BackendLGPD.Services;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.Qintess.BackendLGPD.Models.Processos;
+import com.Qintess.BackendLGPD.Repository.ProcessosRepository;
+
+@Service
+public class Processoservice {
+
+	
+	 @Autowired
+		private ProcessosRepository repository;
+
+
+
+
+	 public List<Processos> listartodos(){
+			
+			return repository.findAll();
+		}
+		
+		
+		public Processos salvar(Processos processos) {
+		    if (processos.getCreatedDate() == null) {
+		        processos.setCreatedDate(LocalDate.now());
+		    }
+			
+			return  repository.save(processos);
+		}
+		
+		
+		
+		public Processos atualizar(Long id , Processos processoAtulizado) {
+			
+			
+			  if (processoAtulizado.getCreatedDate() == null) {
+			        processoAtulizado.setUpdatedDate(LocalDate.now());
+			    }
+			
+			if (repository.existsById(id)) {
+				 processoAtulizado.setId(id);
+			
+				
+				return repository.save( processoAtulizado);
+			}
+			return null;
+		}
+		
+		
+		 public Optional<Processos> getCompaniasById(Long id) {
+		        return repository.findById(id);
+		    }
+		
+		
+		
+		public void excluir(Long id) {
+			
+			 repository.deleteById(id);
+		}
+
+
+
+
+
+
+
+
+
+
+
+}
