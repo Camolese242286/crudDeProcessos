@@ -24,6 +24,9 @@ public class Pessoa {
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
 
+    @Column(name = "roles", length = 100)
+    private String roles;
+    
     public Pessoa() {}
 
     public Pessoa(String email, String emailre, String nome) {
