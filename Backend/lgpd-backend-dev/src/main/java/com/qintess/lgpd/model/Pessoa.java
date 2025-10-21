@@ -29,10 +29,11 @@ public class Pessoa {
     
     public Pessoa() {}
 
-    public Pessoa(String email, String emailre, String nome) {
+    public Pessoa(String email, String emailre, String nome,String roles) {
         this.email = email;
         this.emailre = emailre;
         this.nome = nome;
+        this.roles=roles;
     }
 
     public Pessoa(Long id, String email, String emailre, String nome) {
